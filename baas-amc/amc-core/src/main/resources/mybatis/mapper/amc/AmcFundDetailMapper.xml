@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcFundDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcFundDetail" >
+    <id column="serial_code" property="serialCode" jdbcType="VARCHAR" />
+    <result column="pay_serial_code" property="paySerialCode" jdbcType="VARCHAR" />
+    <result column="opt_type" property="optType" jdbcType="VARCHAR" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
+    <result column="acct_id" property="acctId" jdbcType="VARCHAR" />
+    <result column="book_id" property="bookId" jdbcType="BIGINT" />
+    <result column="subject_id" property="subjectId" jdbcType="BIGINT" />
+    <result column="balance_pre" property="balancePre" jdbcType="BIGINT" />
+    <result column="total_amount" property="totalAmount" jdbcType="BIGINT" />
+    <result column="trans_summary" property="transSummary" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="value_date" property="valueDate" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    serial_code, pay_serial_code, opt_type, cust_id, acct_id, book_id, subject_id, balance_pre, 
+    total_amount, trans_summary, remark, value_date, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundDetailCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_fund_detail_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundDetailCriteria" >
+    delete from amc_fund_detail_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundDetail" >
+    insert into amc_fund_detail_${tableMonth}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.serialCode != null" >
+        serial_code,
+      </if>
+      <if test="record.paySerialCode != null" >
+        pay_serial_code,
+      </if>
+      <if test="record.optType != null" >
+        opt_type,
+      </if>
+      <if test="record.custId != null" >
+        cust_id,
+      </if>
+      <if test="record.acctId != null" >
+        acct_id,
+      </if>
+      <if test="record.bookId != null" >
+        book_id,
+      </if>
+      <if test="record.subjectId != null" >
+        subject_id,
+      </if>
+      <if test="record.balancePre != null" >
+        balance_pre,
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="record.transSummary != null" >
+        trans_summary,
+      </if>
+      <if test="record.remark != null" >
+        remark,
+      </if>
+      <if test="record.valueDate != null" >
+        value_date,
+      </if>
+      <if test="record.createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.serialCode != null" >
+        #{record.serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paySerialCode != null" >
+        #{record.paySerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optType != null" >
+        #{record.optType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookId != null" >
+        #{record.bookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectId != null" >
+        #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.balancePre != null" >
+        #{record.balancePre,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalAmount != null" >
+        #{record.totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.transSummary != null" >
+        #{record.transSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueDate != null" >
+        #{record.valueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundDetailCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_fund_detail_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_fund_detail_${tableMonth}
+    <set >
+      <if test="record.serialCode != null" >
+        serial_code = #{record.serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paySerialCode != null" >
+        pay_serial_code = #{record.paySerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optType != null" >
+        opt_type = #{record.optType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        cust_id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        acct_id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookId != null" >
+        book_id = #{record.bookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subjectId != null" >
+        subject_id = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.balancePre != null" >
+        balance_pre = #{record.balancePre,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalAmount != null" >
+        total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.transSummary != null" >
+        trans_summary = #{record.transSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueDate != null" >
+        value_date = #{record.valueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_fund_detail_${tableMonth}
+    set serial_code = #{record.serialCode,jdbcType=VARCHAR},
+      pay_serial_code = #{record.paySerialCode,jdbcType=VARCHAR},
+      opt_type = #{record.optType,jdbcType=VARCHAR},
+      cust_id = #{record.custId,jdbcType=VARCHAR},
+      acct_id = #{record.acctId,jdbcType=VARCHAR},
+      book_id = #{record.bookId,jdbcType=BIGINT},
+      subject_id = #{record.subjectId,jdbcType=BIGINT},
+      balance_pre = #{record.balancePre,jdbcType=BIGINT},
+      total_amount = #{record.totalAmount,jdbcType=BIGINT},
+      trans_summary = #{record.transSummary,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      value_date = #{record.valueDate,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

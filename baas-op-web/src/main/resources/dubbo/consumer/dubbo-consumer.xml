@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	">
+
+	<bean id="dubboConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations" value="classpath:dubbo.properties" />
+	</bean>
+
+	<!-- 消费方 -->
+	<dubbo:application name="${dubbo.appname}" />
+	<dubbo:registry protocol="${dubbo.registry.protocol}"
+		address="${baas.dubbo.registry.address}" id="baasRegistry" />
+	<dubbo:protocol name="${dubbo.protocol}" port="${dubbo.protocol.port}" />
+	<dubbo:consumer timeout="${dubbo.provider.timeout}" />
+
+	<context:component-scan base-package="com.ai.baas" />
+	
+	<dubbo:reference id="iAccountManageSV" 
+		interface="com.ai.opt.uac.api.account.interfaces.IAccountManageSV" 
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iIndustryManageSV" 
+		interface="com.ai.opt.uac.api.account.interfaces.IIndustryManageSV" 
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iTenantManageSV" 
+		interface="com.ai.opt.uac.api.account.interfaces.ITenantManageSV" 
+		registry="baasRegistry" />
+
+	<dubbo:reference id="iPriceInfoSV"
+		interface="com.ai.baas.bmc.api.priceinfo.interfaces.IPriceInfoSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iGnSubjectQuerySV" 
+		interface="com.ai.opt.sys.api.gnsubject.interfaces.IGnSubjectQuerySV" 
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iGnSubjectManageSV" 
+		interface="com.ai.opt.sys.api.gnsubject.interfaces.IGnSubjectManageSV" 
+		registry="baasRegistry" />
+
+	<dubbo:reference id="iQueryProductSV"
+		interface="com.ai.baas.bmc.api.marktableproduct.interfaces.IQueryProductSV"
+		registry="baasRegistry" />
+
+	<dubbo:reference id="iProductManageSV"
+		interface="com.ai.baas.bmc.api.marktableproduct.interfaces.IProductManageSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iProferProductManageSV"
+		interface="com.ai.baas.bmc.api.proferentialprocuct.interfaces.IProferProductManageSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iQueryProferProductSV"
+		interface="com.ai.baas.bmc.api.proferentialprocuct.interfaces.IQueryProferProductSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iCreateSeqSV"
+		interface="com.ai.opt.uac.api.seq.interfaces.ICreateSeqSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="sMSServices"
+		interface="com.ai.runner.center.mmp.api.manager.interfaces.SMSServices"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iBillDiscountProductQuerySV"
+		interface="com.ai.baas.amc.api.billdiscountquery.interfaces.IBillDiscountProductQuerySV"
+		registry="baasRegistry" />
+	
+	<dubbo:reference id="iBaseInfoSV"
+		interface="com.ai.baas.bmc.api.baseInfo.interfaces.IBaseInfoSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iCustBalanceQuerySV"
+		interface="com.ai.baas.amc.api.custbalancequery.interfaces.ICustBalanceQuerySV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id ="iOmcRuleSV" 
+		interface="com.ai.baas.omc.api.rule.interfaces.IOmcRuleSV" 
+		registry="baasRegistry"/>
+		
+	<dubbo:reference id="iPaymentQuerySV"
+		interface="com.ai.baas.amc.api.paymentquery.interfaces.IPaymentQuerySV"
+		registry="baasRegistry"/>
+	
+	<dubbo:reference id="iOweInfoQuerySV"
+		interface="com.ai.baas.amc.api.oweinfoquery.interfaces.IOweInfoQuerySV"
+		registry="baasRegistry"/>
+	
+	<dubbo:reference id="iBillQuerySV"
+		interface="com.ai.baas.amc.api.billQuery.interfaces.IBillQuerySV"
+		registry="baasRegistry"/>
+		
+	<dubbo:reference id="iBillDiscountProductMaintainSV"
+		interface="com.ai.baas.amc.api.billdiscount.interfaces.IBillDiscountProductMaintainSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iQueryImportLogSV"
+		interface="com.ai.baas.smc.api.queryimportlog.interfaces.IQueryImportLogSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iStreamFileInputSV"
+		interface="com.ai.baas.smc.api.streamfilemanage.interfaces.IStreamFileInputSV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iBillDetailSV"
+		interface="com.ai.baas.smc.api.billdetail.interfaces.IBillDetailSV"
+		registry="baasRegistry" />
+			
+	<dubbo:reference id="iDetailBillQuerySV"
+		interface="com.ai.baas.bmc.api.detailbill.interfaces.IDetailBillQuerySV"
+		registry="baasRegistry" />
+		
+	<dubbo:reference id="iSmcSysParamCache"
+		interface="com.ai.baas.smc.api.sysparamcache.interfaces.ISmcSysParamCache"
+		registry="baasRegistry" />
+	
+	<dubbo:reference id="iPriceElementSV"
+			interface="com.ai.baas.prd.api.element.interfaces.IPriceElementSV"
+		 	registry="baasRegistry"/>
+		 	
+	<dubbo:reference id="iBillDiscountMaintainSV"
+			interface="com.ai.baas.dst.api.billsdiscount.interfaces.IBillDiscountMaintainSV"
+		 	registry="baasRegistry"/>
+	<dubbo:reference id="iBillDiscountQuerySV"
+			interface="com.ai.baas.dst.api.billsdiscount.interfaces.IBillDiscountQuerySV"
+		 	registry="baasRegistry"/>
+		
+	<dubbo:reference id="iCustInfoQuerySV"
+		interface="com.ai.baas.bmc.api.custInfo.interfaces.ICustInfoQuerySV"
+		registry="baasRegistry" />
+    <dubbo:reference id="iCouponSV"
+		interface="com.ai.baas.dst.api.coupon.interfaces.ICouponSV"
+		registry="baasRegistry" />
+    <dubbo:reference id="iProductDefineSV"
+			interface="com.ai.baas.prd.api.product.interfaces.IProductDefineSV"
+		 	registry="baasRegistry"/>
+	<dubbo:reference id="iProductConfigSV"
+			interface="com.ai.baas.prd.api.product.interfaces.IProductConfigSV"
+		 	registry="baasRegistry"/>	 	
+		 	 
+</beans>

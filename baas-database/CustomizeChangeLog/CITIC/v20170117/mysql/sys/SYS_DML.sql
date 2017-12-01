@@ -1,0 +1,3 @@
+INSERT INTO `gn_subject` (`tenant_id`, `industry_code`, `subject_id`, `subject_name`, `subject_desc`, `subject_type`, `unit_name`, `create_time`, `create_oper_id`, `chnl_id`, `tax_type`, `goods_type`, `res_subject_pri`) VALUES ('ECITIC', '01', '300013', 'ZBJZ', 'ZBJZ', '21', '11', '2016-01-17 00:00:00', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `gn_subject` (`tenant_id`, `industry_code`, `subject_id`, `subject_name`, `subject_desc`, `subject_type`, `unit_name`, `create_time`, `create_oper_id`, `chnl_id`, `tax_type`, `goods_type`, `res_subject_pri`) VALUES ('ECITIC', '01', '300014', 'CMSTOP', 'CMSTOP', '21', '11', '2016-01-17 00:00:00', NULL, NULL, NULL, NULL, NULL);
+commit;

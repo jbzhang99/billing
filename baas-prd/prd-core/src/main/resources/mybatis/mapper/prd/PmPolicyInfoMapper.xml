@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.prd.dao.mapper.interfaces.PmPolicyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfo" >
+    <id column="POLICY_ID" property="policyId" jdbcType="VARCHAR" />
+    <result column="POLICY_NAME" property="policyName" jdbcType="VARCHAR" />
+    <result column="POLICY_TYPE" property="policyType" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    POLICY_ID, POLICY_NAME, POLICY_TYPE, TENANT_ID, COMMENTS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from pm_policy_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pm_policy_info
+    where POLICY_ID = #{policyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pm_policy_info
+    where POLICY_ID = #{policyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfoCriteria" >
+    delete from pm_policy_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfo" >
+    insert into pm_policy_info (POLICY_ID, POLICY_NAME, POLICY_TYPE, 
+      TENANT_ID, COMMENTS)
+    values (#{policyId,jdbcType=VARCHAR}, #{policyName,jdbcType=VARCHAR}, #{policyType,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfo" >
+    insert into pm_policy_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="policyId != null" >
+        POLICY_ID,
+      </if>
+      <if test="policyName != null" >
+        POLICY_NAME,
+      </if>
+      <if test="policyType != null" >
+        POLICY_TYPE,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="comments != null" >
+        COMMENTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="policyId != null" >
+        #{policyId,jdbcType=VARCHAR},
+      </if>
+      <if test="policyName != null" >
+        #{policyName,jdbcType=VARCHAR},
+      </if>
+      <if test="policyType != null" >
+        #{policyType,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from pm_policy_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pm_policy_info
+    <set >
+      <if test="record.policyId != null" >
+        POLICY_ID = #{record.policyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyName != null" >
+        POLICY_NAME = #{record.policyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.policyType != null" >
+        POLICY_TYPE = #{record.policyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null" >
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pm_policy_info
+    set POLICY_ID = #{record.policyId,jdbcType=VARCHAR},
+      POLICY_NAME = #{record.policyName,jdbcType=VARCHAR},
+      POLICY_TYPE = #{record.policyType,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfo" >
+    update pm_policy_info
+    <set >
+      <if test="policyName != null" >
+        POLICY_NAME = #{policyName,jdbcType=VARCHAR},
+      </if>
+      <if test="policyType != null" >
+        POLICY_TYPE = #{policyType,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where POLICY_ID = #{policyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.prd.dao.mapper.bo.PmPolicyInfo" >
+    update pm_policy_info
+    set POLICY_NAME = #{policyName,jdbcType=VARCHAR},
+      POLICY_TYPE = #{policyType,jdbcType=VARCHAR},
+      TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR}
+    where POLICY_ID = #{policyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

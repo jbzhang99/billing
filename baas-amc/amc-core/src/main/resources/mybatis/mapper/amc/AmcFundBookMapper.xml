@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcFundBookMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcFundBook" >
+    <id column="book_id" property="bookId" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
+    <result column="acct_id" property="acctId" jdbcType="VARCHAR" />
+    <result column="subject_type" property="subjectType" jdbcType="VARCHAR" />
+    <result column="subject_id" property="subjectId" jdbcType="BIGINT" />
+    <result column="balance" property="balance" jdbcType="BIGINT" />
+    <result column="feature_code" property="featureCode" jdbcType="VARCHAR" />
+    <result column="book_status" property="bookStatus" jdbcType="VARCHAR" />
+    <result column="effect_date" property="effectDate" jdbcType="TIMESTAMP" />
+    <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="subs_freeze_id" property="subsFreezeId" jdbcType="BIGINT" />
+    <result column="subs_id" property="subsId" jdbcType="BIGINT" />
+    <result column="cust_name" property="custName" jdbcType="VARCHAR" />
+    <result column="cust_grade" property="custGrade" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    book_id, tenant_id, cust_id, acct_id, subject_type, subject_id, balance, feature_code, 
+    book_status, effect_date, expire_date, create_time, subs_freeze_id, subs_id, cust_name, 
+    cust_grade
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBookCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_fund_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from amc_fund_book
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from amc_fund_book
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBookCriteria" >
+    delete from amc_fund_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBook" >
+    insert into amc_fund_book (book_id, tenant_id, cust_id, 
+      acct_id, subject_type, subject_id, 
+      balance, feature_code, book_status, 
+      effect_date, expire_date, create_time, 
+      subs_freeze_id, subs_id, cust_name, 
+      cust_grade)
+    values (#{bookId,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{acctId,jdbcType=VARCHAR}, #{subjectType,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, 
+      #{balance,jdbcType=BIGINT}, #{featureCode,jdbcType=VARCHAR}, #{bookStatus,jdbcType=VARCHAR}, 
+      #{effectDate,jdbcType=TIMESTAMP}, #{expireDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{subsFreezeId,jdbcType=BIGINT}, #{subsId,jdbcType=BIGINT}, #{custName,jdbcType=VARCHAR}, 
+      #{custGrade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBook" >
+    insert into amc_fund_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="custId != null" >
+        cust_id,
+      </if>
+      <if test="acctId != null" >
+        acct_id,
+      </if>
+      <if test="subjectType != null" >
+        subject_type,
+      </if>
+      <if test="subjectId != null" >
+        subject_id,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="featureCode != null" >
+        feature_code,
+      </if>
+      <if test="bookStatus != null" >
+        book_status,
+      </if>
+      <if test="effectDate != null" >
+        effect_date,
+      </if>
+      <if test="expireDate != null" >
+        expire_date,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="subsFreezeId != null" >
+        subs_freeze_id,
+      </if>
+      <if test="subsId != null" >
+        subs_id,
+      </if>
+      <if test="custName != null" >
+        cust_name,
+      </if>
+      <if test="custGrade != null" >
+        cust_grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null" >
+        #{subjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="featureCode != null" >
+        #{featureCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subsFreezeId != null" >
+        #{subsFreezeId,jdbcType=BIGINT},
+      </if>
+      <if test="subsId != null" >
+        #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGrade != null" >
+        #{custGrade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBookCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_fund_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_fund_book
+    <set >
+      <if test="record.bookId != null" >
+        book_id = #{record.bookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        cust_id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        acct_id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectType != null" >
+        subject_type = #{record.subjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectId != null" >
+        subject_id = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.balance != null" >
+        balance = #{record.balance,jdbcType=BIGINT},
+      </if>
+      <if test="record.featureCode != null" >
+        feature_code = #{record.featureCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookStatus != null" >
+        book_status = #{record.bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectDate != null" >
+        effect_date = #{record.effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireDate != null" >
+        expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.subsFreezeId != null" >
+        subs_freeze_id = #{record.subsFreezeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subsId != null" >
+        subs_id = #{record.subsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.custName != null" >
+        cust_name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custGrade != null" >
+        cust_grade = #{record.custGrade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_fund_book
+    set book_id = #{record.bookId,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      cust_id = #{record.custId,jdbcType=VARCHAR},
+      acct_id = #{record.acctId,jdbcType=VARCHAR},
+      subject_type = #{record.subjectType,jdbcType=VARCHAR},
+      subject_id = #{record.subjectId,jdbcType=BIGINT},
+      balance = #{record.balance,jdbcType=BIGINT},
+      feature_code = #{record.featureCode,jdbcType=VARCHAR},
+      book_status = #{record.bookStatus,jdbcType=VARCHAR},
+      effect_date = #{record.effectDate,jdbcType=TIMESTAMP},
+      expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      subs_freeze_id = #{record.subsFreezeId,jdbcType=BIGINT},
+      subs_id = #{record.subsId,jdbcType=BIGINT},
+      cust_name = #{record.custName,jdbcType=VARCHAR},
+      cust_grade = #{record.custGrade,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBook" >
+    update amc_fund_book
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        cust_id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        acct_id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null" >
+        subject_type = #{subjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null" >
+        subject_id = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="featureCode != null" >
+        feature_code = #{featureCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bookStatus != null" >
+        book_status = #{bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        effect_date = #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subsFreezeId != null" >
+        subs_freeze_id = #{subsFreezeId,jdbcType=BIGINT},
+      </if>
+      <if test="subsId != null" >
+        subs_id = #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="custName != null" >
+        cust_name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGrade != null" >
+        cust_grade = #{custGrade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBook" >
+    update amc_fund_book
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      cust_id = #{custId,jdbcType=VARCHAR},
+      acct_id = #{acctId,jdbcType=VARCHAR},
+      subject_type = #{subjectType,jdbcType=VARCHAR},
+      subject_id = #{subjectId,jdbcType=BIGINT},
+      balance = #{balance,jdbcType=BIGINT},
+      feature_code = #{featureCode,jdbcType=VARCHAR},
+      book_status = #{bookStatus,jdbcType=VARCHAR},
+      effect_date = #{effectDate,jdbcType=TIMESTAMP},
+      expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      subs_freeze_id = #{subsFreezeId,jdbcType=BIGINT},
+      subs_id = #{subsId,jdbcType=BIGINT},
+      cust_name = #{custName,jdbcType=VARCHAR},
+      cust_grade = #{custGrade,jdbcType=VARCHAR}
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </update>
+  
+  <resultMap id="CustBalanceInfoResultMap" type="com.ai.baas.amc.dao.mapper.bo.CustBalanceInfo" >
+    <result column="cust_id" property="custId" />  
+    <result column="total_balance" property="totalBalance" />
+  </resultMap>    
+  <select id="getCustBalanceInfoListByPageInfo" resultMap="CustBalanceInfoResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBookCriteria">
+    select cust_id, sum(IFNULL(balance, 0)) total_balance from amc_fund_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    group by cust_id order by cust_id
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>     
+  </select>  
+  <select id="getCustBalanceInfoCount" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFundBookCriteria" resultType="java.lang.Integer" >
+    select count(1) from (
+	    select cust_id, sum(IFNULL(balance, 0)) total_balance from amc_fund_book
+	    <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if>
+	    group by cust_id order by cust_id       
+    ) t
+  </select>  
+</mapper>

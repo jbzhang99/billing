@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.pkgfee.dao.mapper.interfaces.CpPackageTaskLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLog" >
+    <id column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="package_id" property="packageId" jdbcType="BIGINT" />
+    <result column="account_period" property="accountPeriod" jdbcType="VARCHAR" />
+    <result column="fee" property="fee" jdbcType="DOUBLE" />
+    <result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+    <result column="acct_id" property="acctId" jdbcType="VARCHAR" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="CHAR" />
+    <result column="task_time" property="taskTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    task_id, tenant_id, package_id, account_period, fee, subject_code, acct_id, cust_id, 
+    result, task_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cp_package_task_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_package_task_log
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from cp_package_task_log
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLogCriteria" >
+    delete from cp_package_task_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLog" >
+    insert into cp_package_task_log (task_id, tenant_id, package_id, 
+      account_period, fee, subject_code, 
+      acct_id, cust_id, result, 
+      task_time)
+    values (#{taskId,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{packageId,jdbcType=BIGINT}, 
+      #{accountPeriod,jdbcType=VARCHAR}, #{fee,jdbcType=DOUBLE}, #{subjectCode,jdbcType=VARCHAR}, 
+      #{acctId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{result,jdbcType=CHAR}, 
+      #{taskTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLog" >
+    insert into cp_package_task_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="packageId != null" >
+        package_id,
+      </if>
+      <if test="accountPeriod != null" >
+        account_period,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="subjectCode != null" >
+        subject_code,
+      </if>
+      <if test="acctId != null" >
+        acct_id,
+      </if>
+      <if test="custId != null" >
+        cust_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="taskTime != null" >
+        task_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null" >
+        #{packageId,jdbcType=BIGINT},
+      </if>
+      <if test="accountPeriod != null" >
+        #{accountPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="subjectCode != null" >
+        #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=CHAR},
+      </if>
+      <if test="taskTime != null" >
+        #{taskTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from cp_package_task_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_package_task_log
+    <set >
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageId != null" >
+        package_id = #{record.packageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.accountPeriod != null" >
+        account_period = #{record.accountPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fee != null" >
+        fee = #{record.fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.subjectCode != null" >
+        subject_code = #{record.subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        acct_id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        cust_id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=CHAR},
+      </if>
+      <if test="record.taskTime != null" >
+        task_time = #{record.taskTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_package_task_log
+    set task_id = #{record.taskId,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      package_id = #{record.packageId,jdbcType=BIGINT},
+      account_period = #{record.accountPeriod,jdbcType=VARCHAR},
+      fee = #{record.fee,jdbcType=DOUBLE},
+      subject_code = #{record.subjectCode,jdbcType=VARCHAR},
+      acct_id = #{record.acctId,jdbcType=VARCHAR},
+      cust_id = #{record.custId,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=CHAR},
+      task_time = #{record.taskTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLog" >
+    update cp_package_task_log
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null" >
+        package_id = #{packageId,jdbcType=BIGINT},
+      </if>
+      <if test="accountPeriod != null" >
+        account_period = #{accountPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="subjectCode != null" >
+        subject_code = #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        acct_id = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        cust_id = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=CHAR},
+      </if>
+      <if test="taskTime != null" >
+        task_time = #{taskTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageTaskLog" >
+    update cp_package_task_log
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      package_id = #{packageId,jdbcType=BIGINT},
+      account_period = #{accountPeriod,jdbcType=VARCHAR},
+      fee = #{fee,jdbcType=DOUBLE},
+      subject_code = #{subjectCode,jdbcType=VARCHAR},
+      acct_id = #{acctId,jdbcType=VARCHAR},
+      cust_id = #{custId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=CHAR},
+      task_time = #{taskTime,jdbcType=TIMESTAMP}
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+</mapper>

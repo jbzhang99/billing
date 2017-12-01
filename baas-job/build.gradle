@@ -1,0 +1,110 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.7
+compileJava.dependsOn clean
+publish.dependsOn build
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+ext{
+	moduleName="baas-job-1.0-SNAPSHOT";	
+    publishUserName = "resdev"
+    publishUserPassword = "resdev"
+    publishURL="http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+    builtBy="gradle 2.2"
+    
+    runnerBaseVersion="1.0-SNAPSHOT"
+
+}
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+    exclude group: 'log4j', module: 'log4j'
+    exclude group: "org.slf4j", module: "slf4j-log4j12"
+}
+repositories {
+    maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
+}
+
+dependencies {
+//    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+//    compile 'log4j:log4j:1.2.17'
+//    compile "org.springframework:spring-context:4.1.6.RELEASE"
+//	compile "org.springframework:spring-tx:4.1.6.RELEASE"
+	compile "org.springframework:spring-jdbc:4.1.7.RELEASE"	
+//	compile "org.apache.commons:commons-dbcp2:2.1"
+	compile "mysql:mysql-connector-java:5.1.34"
+//	compile 'javax.servlet:javax.servlet-api:3.1.0'
+//	compile 'com.alibaba:fastjson:1.2.6'
+    compile ("com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT"){ exclude group:'org.jboss.netty', module:'netty' }
+//    compile 'org.apache.httpcomponents:httpclient:4.5'
+//    compile 'org.dom4j:dom4j:2.0.0'
+    testCompile(
+        "org.springframework:spring-test:4.1.7.RELEASE",
+        "junit:junit:4.12"
+    )
+//	compile "org.quartz-scheduler:quartz:2.2.1"
+    compile 'com.ai.baas:baas-dshm-sdk:2.0-SNAPSHOT'
+    compile 'com.ai.baas.dshm:dshmprocess:2.0-SNAPSHOT'
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'com.ai.baas.amc:oweinfo:1.0-SNAPSHOT'
+    compile 'com.ai.baas.amc:deposit:1.0-SNAPSHOT'
+}
+
+jar {
+    baseName moduleName
+    version version
+    include "com/ai/baas/job/*/**"
+	manifest {
+        attributes 'packageName': baseName, 'Built-By': builtBy,'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
+    }
+     destinationDir file("$buildDir/libs/core-libs") 
+}
+task copyChildConfig(type: Copy) { 
+        from fileTree(
+                dir: 'src/main/resources',
+                include: {
+                    'dubbo/*/**'
+                    '**.xml'
+                    '**.properties'
+                }
+        )
+        
+        destinationDir file("$buildDir/config") 
+}
+
+task copy3rdJars(type: Copy) { 
+        from configurations.runtime
+        destinationDir file("$buildDir/libs/3rd-libs") 
+}
+
+task cleanTempDir(type: Delete){
+	delete fileTree(dir: "$buildDir/libs")
+}
+task zipLibs(type: Zip) {
+	baseName "libs"
+    from "$buildDir/libs"
+}
+
+task zipConfig(type: Zip) {
+	baseName "config"
+    from "$buildDir/config"
+}
+
+build.dependsOn copy3rdJars, copyChildConfig, zipLibs, zipConfig
+publishing {
+    publications {
+        publishing.publications.create("${moduleName}", MavenPublication) {
+            groupId group
+            artifactId moduleName
+            version version
+            artifact jar           
+        }
+    }
+    repositories {
+
+    }
+}

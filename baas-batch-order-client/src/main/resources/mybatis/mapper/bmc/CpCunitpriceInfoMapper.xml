@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.batch.client.dao.interfaces.CpCunitpriceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="CUNIT_PRICE_CODE" property="cunitPriceCode" jdbcType="VARCHAR" />
+    <result column="PRICE_NAME" property="priceName" jdbcType="VARCHAR" />
+    <result column="PRICE_PRODUCT_TYPE" property="priceProductType" jdbcType="VARCHAR" />
+    <result column="UNIT_TYPE" property="unitType" jdbcType="VARCHAR" />
+    <result column="PRICE_VALUE" property="priceValue" jdbcType="DOUBLE" />
+    <result column="FACTOR_CODE" property="factorCode" jdbcType="VARCHAR" />
+    <result column="SUBJECT_CODE" property="subjectCode" jdbcType="VARCHAR" />
+    <result column="EXT_CODE" property="extCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CUNIT_PRICE_CODE, PRICE_NAME, PRICE_PRODUCT_TYPE, UNIT_TYPE, PRICE_VALUE, FACTOR_CODE, 
+    SUBJECT_CODE, EXT_CODE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cp_cunitprice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cp_cunitprice_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from cp_cunitprice_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfoCriteria" >
+    delete from cp_cunitprice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfo" >
+    insert into cp_cunitprice_info (ID, CUNIT_PRICE_CODE, PRICE_NAME, 
+      PRICE_PRODUCT_TYPE, UNIT_TYPE, PRICE_VALUE, 
+      FACTOR_CODE, SUBJECT_CODE, EXT_CODE
+      )
+    values (#{id,jdbcType=BIGINT}, #{cunitPriceCode,jdbcType=VARCHAR}, #{priceName,jdbcType=VARCHAR}, 
+      #{priceProductType,jdbcType=VARCHAR}, #{unitType,jdbcType=VARCHAR}, #{priceValue,jdbcType=DOUBLE}, 
+      #{factorCode,jdbcType=VARCHAR}, #{subjectCode,jdbcType=VARCHAR}, #{extCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfo" >
+    insert into cp_cunitprice_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="cunitPriceCode != null" >
+        CUNIT_PRICE_CODE,
+      </if>
+      <if test="priceName != null" >
+        PRICE_NAME,
+      </if>
+      <if test="priceProductType != null" >
+        PRICE_PRODUCT_TYPE,
+      </if>
+      <if test="unitType != null" >
+        UNIT_TYPE,
+      </if>
+      <if test="priceValue != null" >
+        PRICE_VALUE,
+      </if>
+      <if test="factorCode != null" >
+        FACTOR_CODE,
+      </if>
+      <if test="subjectCode != null" >
+        SUBJECT_CODE,
+      </if>
+      <if test="extCode != null" >
+        EXT_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cunitPriceCode != null" >
+        #{cunitPriceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceName != null" >
+        #{priceName,jdbcType=VARCHAR},
+      </if>
+      <if test="priceProductType != null" >
+        #{priceProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null" >
+        #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="priceValue != null" >
+        #{priceValue,jdbcType=DOUBLE},
+      </if>
+      <if test="factorCode != null" >
+        #{factorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="extCode != null" >
+        #{extCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from cp_cunitprice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_cunitprice_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cunitPriceCode != null" >
+        CUNIT_PRICE_CODE = #{record.cunitPriceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceName != null" >
+        PRICE_NAME = #{record.priceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceProductType != null" >
+        PRICE_PRODUCT_TYPE = #{record.priceProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitType != null" >
+        UNIT_TYPE = #{record.unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceValue != null" >
+        PRICE_VALUE = #{record.priceValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorCode != null" >
+        FACTOR_CODE = #{record.factorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectCode != null" >
+        SUBJECT_CODE = #{record.subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extCode != null" >
+        EXT_CODE = #{record.extCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_cunitprice_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      CUNIT_PRICE_CODE = #{record.cunitPriceCode,jdbcType=VARCHAR},
+      PRICE_NAME = #{record.priceName,jdbcType=VARCHAR},
+      PRICE_PRODUCT_TYPE = #{record.priceProductType,jdbcType=VARCHAR},
+      UNIT_TYPE = #{record.unitType,jdbcType=VARCHAR},
+      PRICE_VALUE = #{record.priceValue,jdbcType=DOUBLE},
+      FACTOR_CODE = #{record.factorCode,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{record.subjectCode,jdbcType=VARCHAR},
+      EXT_CODE = #{record.extCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfo" >
+    update cp_cunitprice_info
+    <set >
+      <if test="cunitPriceCode != null" >
+        CUNIT_PRICE_CODE = #{cunitPriceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceName != null" >
+        PRICE_NAME = #{priceName,jdbcType=VARCHAR},
+      </if>
+      <if test="priceProductType != null" >
+        PRICE_PRODUCT_TYPE = #{priceProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null" >
+        UNIT_TYPE = #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="priceValue != null" >
+        PRICE_VALUE = #{priceValue,jdbcType=DOUBLE},
+      </if>
+      <if test="factorCode != null" >
+        FACTOR_CODE = #{factorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="extCode != null" >
+        EXT_CODE = #{extCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.batch.client.dao.mapper.bo.CpCunitpriceInfo" >
+    update cp_cunitprice_info
+    set CUNIT_PRICE_CODE = #{cunitPriceCode,jdbcType=VARCHAR},
+      PRICE_NAME = #{priceName,jdbcType=VARCHAR},
+      PRICE_PRODUCT_TYPE = #{priceProductType,jdbcType=VARCHAR},
+      UNIT_TYPE = #{unitType,jdbcType=VARCHAR},
+      PRICE_VALUE = #{priceValue,jdbcType=DOUBLE},
+      FACTOR_CODE = #{factorCode,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR},
+      EXT_CODE = #{extCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

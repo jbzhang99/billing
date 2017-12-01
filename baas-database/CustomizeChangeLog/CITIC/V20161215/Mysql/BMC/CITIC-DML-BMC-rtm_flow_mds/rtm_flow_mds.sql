@@ -1,0 +1,1 @@
+INSERT INTO `rtm_flow_mds` VALUES ('BMC', 'SLB', 'baas_bmc_service_in_queue', null);

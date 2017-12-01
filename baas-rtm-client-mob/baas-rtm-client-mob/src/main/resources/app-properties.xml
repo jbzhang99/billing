@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd">
+		<context:component-scan base-package="com.ai.runner.center.ctp.rtm"/>
+		<!-- 后台扫描程序 -->
+		<bean id="filterRead" class="com.ai.runner.center.ctp.rtm.core.reader.SXFileReader">
+			<property name="compressPanth" value="F:\test\compressPanth"></property>
+		    <property name="backupath" value="F:\test\backupath"></property>
+		    <property name="appId" value="BYD0000"></property>
+		    <property name="httpClientPwd" value="BYD2016"></property>
+		    <property name="appKey" value="cab8f3b59531b44c5fc84b7a94905ccc"></property>
+		    <property name="sign" value="123456"></property>
+		    <property name="url" value="http://120.25.132.169:8090/occ/http/srv_viv_byd_bill_file_pwd"></property>
+		    <property name="dest" value="F:\test\dest"></property>
+			<property name="intervals" value="10"></property>
+			<property name="num" value="2"></property>
+			<property name="system_id" value="CLC"></property>
+			<property name="interval" value="2"></property>
+		</bean>
+		
+		<bean id="sendRest" class="com.ai.runner.center.ctp.rtm.core.util.SendRest">
+			<property name="address" value="http://10.1.130.84:10771/baasrtm/dataService/transResource"></property>
+		    <property name="tenant" value="VIV-BYD"></property>
+		    <property name="system" value="GPRS"></property>
+		    <property name="flow" value="123"></property>
+		    <property name="user" value="VIV"></property>
+		    <property name="passwd" value="123"></property>
+		    <property name="infoId" value="SXYD"></property>
+            <property name="num" value="50"></property>
+		</bean>
+		
+	
+		<!-- 任务调度器 -->
+		<bean id="rtmFlow" class="com.ai.runner.center.ctp.rtm.flow.RtmFlow">
+		<property name="reader" ref="filterRead" />
+		</bean>
+		
+		<!--  -->
+</beans>

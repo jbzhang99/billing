@@ -1,0 +1,51 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "mt-web-rc",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "mt-web-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "mt-web",
+          "labels":{
+                "app": "mt-web-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "mt-web",
+        "image": "biu-bj-baas-app3:5000/baas-mt-web:1.0",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 8080
+          }],
+         "env":[{
+             "name": "DUBBO_REGISTRY",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-mt-web"
+         },{
+             "name": "DUBBO_PROTOCOL",
+             "value":"dubbo"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-mt-web"
+         },{
+             "name": "ZK_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

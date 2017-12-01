@@ -1,0 +1,54 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "amc-rc",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "amc-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "amc",
+          "labels":{
+                "app": "amc-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "amc",
+        "image": "biu-bj-baas-app3:5000/baas-amc:1.0",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 10774
+          }],
+         "env":[{
+             "name": "REST_REGISTRY_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "REST_PORT",
+             "value":"10774"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-amc"
+         },{
+             "name": "PROTOCOL",
+             "value":"rest"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-amc"
+         },{
+             "name": "ZK_ADDRESS",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

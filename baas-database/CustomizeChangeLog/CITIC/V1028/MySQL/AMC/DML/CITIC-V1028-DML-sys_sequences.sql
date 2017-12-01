@@ -1,0 +1,1 @@
+INSERT INTO `sys_sequences` (`sequence_name`, `start_by`, `increment_by`, `last_number`, `jvm_step_by`) VALUES ('AMC_RES_BOOK$BOOK_ID$SEQ', 1, 1, 0, 20);

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcCcDetailYyyyddMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcCcDetailYyyydd" >
+    <result column="CC_DETAIL_SEQ" property="ccDetailSeq" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="COST_CENTER_ID" property="costCenterId" jdbcType="VARCHAR" />
+    <result column="SUBJECT_ID" property="subjectId" jdbcType="BIGINT" />
+    <result column="APPORTION_ACCT_ID" property="apportionAcctId" jdbcType="VARCHAR" />
+    <result column="APPORTION_METHOD" property="apportionMethod" jdbcType="VARCHAR" />
+    <result column="APPORTION_VALUE" property="apportionValue" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="BIGINT" />
+    <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="BIGINT" />
+    <result column="SUBS_ID" property="subsId" jdbcType="BIGINT" />
+    <result column="IS_APPORTION" property="isApportion" jdbcType="CHAR" />
+    <result column="DR_KEY" property="drKey" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CC_DETAIL_SEQ, TENANT_ID, COST_CENTER_ID, SUBJECT_ID, APPORTION_ACCT_ID, APPORTION_METHOD, 
+    APPORTION_VALUE, AMOUNT, ACCT_ID, CUST_ID, SUBS_ID, IS_APPORTION, DR_KEY, CREATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcCcDetailYyyyddCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_cc_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcCcDetailYyyyddCriteria" >
+    delete from amc_cc_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcCcDetailYyyydd" >
+    insert into amc_cc_detail_${billMonth} (CC_DETAIL_SEQ, TENANT_ID, COST_CENTER_ID, 
+      SUBJECT_ID, APPORTION_ACCT_ID, APPORTION_METHOD, 
+      APPORTION_VALUE, AMOUNT, ACCT_ID, 
+      CUST_ID, SUBS_ID, IS_APPORTION, 
+      DR_KEY, CREATE_DATE)
+    values (#{ccDetailSeq,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{costCenterId,jdbcType=VARCHAR}, 
+      #{subjectId,jdbcType=BIGINT}, #{apportionAcctId,jdbcType=VARCHAR}, #{apportionMethod,jdbcType=VARCHAR}, 
+      #{apportionValue,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, #{acctId,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=BIGINT}, #{subsId,jdbcType=BIGINT}, #{isApportion,jdbcType=CHAR}, 
+      #{drKey,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcCcDetailYyyydd" >
+    insert into amc_cc_detail_${billMonth}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ccDetailSeq != null" >
+        CC_DETAIL_SEQ,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="costCenterId != null" >
+        COST_CENTER_ID,
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID,
+      </if>
+      <if test="apportionAcctId != null" >
+        APPORTION_ACCT_ID,
+      </if>
+      <if test="apportionMethod != null" >
+        APPORTION_METHOD,
+      </if>
+      <if test="apportionValue != null" >
+        APPORTION_VALUE,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="subsId != null" >
+        SUBS_ID,
+      </if>
+      <if test="isApportion != null" >
+        IS_APPORTION,
+      </if>
+      <if test="drKey != null" >
+        DR_KEY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ccDetailSeq != null" >
+        #{ccDetailSeq,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenterId != null" >
+        #{costCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="apportionAcctId != null" >
+        #{apportionAcctId,jdbcType=VARCHAR},
+      </if>
+      <if test="apportionMethod != null" >
+        #{apportionMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="apportionValue != null" >
+        #{apportionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="subsId != null" >
+        #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="isApportion != null" >
+        #{isApportion,jdbcType=CHAR},
+      </if>
+      <if test="drKey != null" >
+        #{drKey,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcCcDetailYyyyddCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_cc_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_cc_detail_${record.billMonth}
+    <set >
+      <if test="record.ccDetailSeq != null" >
+        CC_DETAIL_SEQ = #{record.ccDetailSeq,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costCenterId != null" >
+        COST_CENTER_ID = #{record.costCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectId != null" >
+        SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.apportionAcctId != null" >
+        APPORTION_ACCT_ID = #{record.apportionAcctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apportionMethod != null" >
+        APPORTION_METHOD = #{record.apportionMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apportionValue != null" >
+        APPORTION_VALUE = #{record.apportionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        AMOUNT = #{record.amount,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subsId != null" >
+        SUBS_ID = #{record.subsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isApportion != null" >
+        IS_APPORTION = #{record.isApportion,jdbcType=CHAR},
+      </if>
+      <if test="record.drKey != null" >
+        DR_KEY = #{record.drKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_cc_detail_${record.billMonth}
+    set CC_DETAIL_SEQ = #{record.ccDetailSeq,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      COST_CENTER_ID = #{record.costCenterId,jdbcType=VARCHAR},
+      SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      APPORTION_ACCT_ID = #{record.apportionAcctId,jdbcType=VARCHAR},
+      APPORTION_METHOD = #{record.apportionMethod,jdbcType=VARCHAR},
+      APPORTION_VALUE = #{record.apportionValue,jdbcType=VARCHAR},
+      AMOUNT = #{record.amount,jdbcType=BIGINT},
+      ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=BIGINT},
+      SUBS_ID = #{record.subsId,jdbcType=BIGINT},
+      IS_APPORTION = #{record.isApportion,jdbcType=CHAR},
+      DR_KEY = #{record.drKey,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,35 @@
+dependencies {
+    compile project(":omc-api")
+    compile 'net.sourceforge.jeval:jeval:0.9.4'
+    //restful jars
+	//compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final'
+	//compile 'org.jboss.resteasy:resteasy-client:3.0.11.Final'
+	//compile 'org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final'
+	//compile 'org.apache.tomcat.embed:tomcat-embed-core:8.0.21'
+	//compile 'org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21'
+	compile 'javax.validation:validation-api:1.1.0.Final'
+	///compile 'org.apache.hbase:hbase-client:1.1.1'
+
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+    
+    compile 'org.mortbay.jetty:jetty:6.1.26'
+    
+    compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    compile 'com.ai.baas:baas-dshm-sdk:2.0-SNAPSHOT'
+    compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
+    compile 'com.ai.baas.dshm:dshmprocess:2.0-SNAPSHOT'
+    //compile 'com.ai.runner.center.dshm:dshmservice:1.0.1-SNAPSHOT'
+    compile 'org.hibernate:hibernate-validator:4.2.0.Final'
+    testCompile(
+            "org.springframework:spring-test:4.1.7.RELEASE",
+            "junit:junit:4.12"
+    )
+
+    compile 'com.ai:paas-mds-ex-auth:1.2.2-SNAPSHOT'
+    compile 'com.ai.baas.amc:oweinfo:1.0-SNAPSHOT'
+}
+ 

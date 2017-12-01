@@ -1,0 +1,54 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "pkgfee-RC",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "pkgfee-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "pkgfee",
+          "labels":{
+                "app": "pkgfee-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "pkgfee",
+        "image": "10.1.234.164:5000/pkgfee:0.1",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 10896
+          }],
+         "env":[{
+             "name": "REST_REGISTRY_ADDR",
+             "value":"10.1.130.84:39181"
+         },{
+             "name": "REST_PORT",
+             "value":"10896"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-pkgfee"
+         },{
+             "name": "PROTOCOL",
+             "value":"rest"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-pkgfee"
+         },{
+             "name": "ZK_ADDRESS",
+             "value":"10.1.130.84:39181"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

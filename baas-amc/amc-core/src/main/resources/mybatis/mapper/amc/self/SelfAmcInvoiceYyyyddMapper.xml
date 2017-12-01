@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.self.SelfAmcInvoiceYyyyddMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.model.AmcInvoiceSumYyyydd" >
+    <result column="INVOICE_SEQ" jdbcType="BIGINT" property="invoiceSeq" />
+    <result column="ACCT_ID" jdbcType="VARCHAR" property="acctId" />
+    <result column="SUBS_ID" jdbcType="BIGINT" property="subsId" />
+    <result column="SERVICE_ID" jdbcType="VARCHAR" property="serviceId" />
+    <result column="TOTAL_AMOUNT" jdbcType="BIGINT" property="totalAmount" />
+    <result column="ADJUST_AFTERWARDS" jdbcType="BIGINT" property="adjustAfterwards" />
+    <result column="DISC_TOTAL_AMOUNT" jdbcType="BIGINT" property="discTotalAmount" />
+    <result column="BALANCE" jdbcType="BIGINT" property="balance" />
+    <result column="PAY_STATUS" jdbcType="BIGINT" property="payStatus" />
+    <result column="LAST_PAY_DATE" jdbcType="TIMESTAMP" property="lastPayDate" />
+    <result column="PRINT_TIMES" jdbcType="BIGINT" property="printTimes" />
+    <result column="CUST_ID" jdbcType="BIGINT" property="custId" />
+    <result column="CUST_TYPE" jdbcType="BIGINT" property="custType" />
+    <result column="TENANT_ID" jdbcType="VARCHAR" property="tenantId" />
+    <result column="CUST_NAME" jdbcType="VARCHAR" property="custName" />
+    <result column="CUST_GRADE" jdbcType="VARCHAR" property="custGrade" />
+    <result column="TOTAL_AMOUNT_SUM" jdbcType="BIGINT" property="totalAmountSum"/>
+    <result column="ADJUST_AFTERWARDS_SUM" jdbcType="BIGINT" property="adjustAfterwardsSum"/>
+    <result column="DISC_TOTAL_AMOUNT_SUM" jdbcType="BIGINT" property="discTotalAmountSum"/>
+    <result column="BALANCE_SUM" jdbcType="BIGINT" property="balanceSum"/>    
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectByExampleSum" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceCriteria" >
+    select  TENANT_ID, INVOICE_SEQ, ACCT_ID, SUBS_ID, SERVICE_ID, TOTAL_AMOUNT, ADJUST_AFTERWARDS, 
+    DISC_TOTAL_AMOUNT, BALANCE, PAY_STATUS, LAST_PAY_DATE, PRINT_TIMES, CUST_ID, CUST_TYPE, CUST_NAME, CUST_GRADE,
+    sum(TOTAL_AMOUNT) as TOTAL_AMOUNT_SUM, sum(ADJUST_AFTERWARDS) as ADJUST_AFTERWARDS_SUM, 
+    sum(DISC_TOTAL_AMOUNT) as DISC_TOTAL_AMOUNT_SUM , sum(BALANCE) as BALANCE_SUM  
+    from amc_invoice_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    group by CUST_NAME, CUST_ID
+   <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  
+</mapper>

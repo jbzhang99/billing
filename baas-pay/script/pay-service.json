@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pay",
+    "namespace": "wocloud"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10886,
+          "targetPort": 10886,
+          "nodePort":30886
+      }],
+      "selector": {
+           "app": "pay-pod"
+      },
+      "type":"NodePort"
+  }
+}

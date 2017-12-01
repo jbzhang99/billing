@@ -1,0 +1,6 @@
+/**结算日志查询操作按钮增加样式**/
+.nav-tplist-table table tr td a.disable{ margin-right:10px; color:#d7d7d7;}
+.nav-tplist-table table tr td a.disable:hover{ color:#d7d7d7;}
+
+/**结算文件上传弹框大小**/
+.upload-pop{ width:auto;}

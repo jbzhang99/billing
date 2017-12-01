@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcFailureBillMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcFailureBill" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="service_type" property="serviceType" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="bsn" property="bsn" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="account_period" property="accountPeriod" jdbcType="TIMESTAMP" />
+    <result column="arrival_time" property="arrivalTime" jdbcType="TIMESTAMP" />
+    <result column="fail_step" property="failStep" jdbcType="VARCHAR" />
+    <result column="fail_code" property="failCode" jdbcType="VARCHAR" />
+    <result column="fail_date" property="failDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillWithBLOBs" extends="BaseResultMap" >
+    <result column="fail_reason" property="failReason" jdbcType="LONGVARCHAR" />
+    <result column="fail_packet" property="failPacket" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tenant_id, service_type, source, bsn, sn, account_period, arrival_time, fail_step, 
+    fail_code, fail_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    fail_reason, fail_packet
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from amc_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from amc_failure_bill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from amc_failure_bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillCriteria" >
+    delete from amc_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillWithBLOBs" >
+    insert into amc_failure_bill (id, tenant_id, service_type, 
+      source, bsn, sn, account_period, 
+      arrival_time, fail_step, fail_code, 
+      fail_date, fail_reason, fail_packet
+      )
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{bsn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{accountPeriod,jdbcType=TIMESTAMP}, 
+      #{arrivalTime,jdbcType=TIMESTAMP}, #{failStep,jdbcType=VARCHAR}, #{failCode,jdbcType=VARCHAR}, 
+      #{failDate,jdbcType=TIMESTAMP}, #{failReason,jdbcType=LONGVARCHAR}, #{failPacket,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillWithBLOBs" >
+    insert into amc_failure_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="serviceType != null" >
+        service_type,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="bsn != null" >
+        bsn,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="accountPeriod != null" >
+        account_period,
+      </if>
+      <if test="arrivalTime != null" >
+        arrival_time,
+      </if>
+      <if test="failStep != null" >
+        fail_step,
+      </if>
+      <if test="failCode != null" >
+        fail_code,
+      </if>
+      <if test="failDate != null" >
+        fail_date,
+      </if>
+      <if test="failReason != null" >
+        fail_reason,
+      </if>
+      <if test="failPacket != null" >
+        fail_packet,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null" >
+        #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="bsn != null" >
+        #{bsn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPeriod != null" >
+        #{accountPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalTime != null" >
+        #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failStep != null" >
+        #{failStep,jdbcType=VARCHAR},
+      </if>
+      <if test="failCode != null" >
+        #{failCode,jdbcType=VARCHAR},
+      </if>
+      <if test="failDate != null" >
+        #{failDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failReason != null" >
+        #{failReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="failPacket != null" >
+        #{failPacket,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_failure_bill
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceType != null" >
+        service_type = #{record.serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsn != null" >
+        bsn = #{record.bsn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sn != null" >
+        sn = #{record.sn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountPeriod != null" >
+        account_period = #{record.accountPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrivalTime != null" >
+        arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failStep != null" >
+        fail_step = #{record.failStep,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failCode != null" >
+        fail_code = #{record.failCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failDate != null" >
+        fail_date = #{record.failDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failReason != null" >
+        fail_reason = #{record.failReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.failPacket != null" >
+        fail_packet = #{record.failPacket,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update amc_failure_bill
+    set id = #{record.id,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      service_type = #{record.serviceType,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      bsn = #{record.bsn,jdbcType=VARCHAR},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      account_period = #{record.accountPeriod,jdbcType=TIMESTAMP},
+      arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      fail_step = #{record.failStep,jdbcType=VARCHAR},
+      fail_code = #{record.failCode,jdbcType=VARCHAR},
+      fail_date = #{record.failDate,jdbcType=TIMESTAMP},
+      fail_reason = #{record.failReason,jdbcType=LONGVARCHAR},
+      fail_packet = #{record.failPacket,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_failure_bill
+    set id = #{record.id,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      service_type = #{record.serviceType,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      bsn = #{record.bsn,jdbcType=VARCHAR},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      account_period = #{record.accountPeriod,jdbcType=TIMESTAMP},
+      arrival_time = #{record.arrivalTime,jdbcType=TIMESTAMP},
+      fail_step = #{record.failStep,jdbcType=VARCHAR},
+      fail_code = #{record.failCode,jdbcType=VARCHAR},
+      fail_date = #{record.failDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillWithBLOBs" >
+    update amc_failure_bill
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null" >
+        service_type = #{serviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="bsn != null" >
+        bsn = #{bsn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPeriod != null" >
+        account_period = #{accountPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalTime != null" >
+        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failStep != null" >
+        fail_step = #{failStep,jdbcType=VARCHAR},
+      </if>
+      <if test="failCode != null" >
+        fail_code = #{failCode,jdbcType=VARCHAR},
+      </if>
+      <if test="failDate != null" >
+        fail_date = #{failDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failReason != null" >
+        fail_reason = #{failReason,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="failPacket != null" >
+        fail_packet = #{failPacket,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBillWithBLOBs" >
+    update amc_failure_bill
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      bsn = #{bsn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      account_period = #{accountPeriod,jdbcType=TIMESTAMP},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      fail_step = #{failStep,jdbcType=VARCHAR},
+      fail_code = #{failCode,jdbcType=VARCHAR},
+      fail_date = #{failDate,jdbcType=TIMESTAMP},
+      fail_reason = #{failReason,jdbcType=LONGVARCHAR},
+      fail_packet = #{failPacket,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcFailureBill" >
+    update amc_failure_bill
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      service_type = #{serviceType,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      bsn = #{bsn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      account_period = #{accountPeriod,jdbcType=TIMESTAMP},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      fail_step = #{failStep,jdbcType=VARCHAR},
+      fail_code = #{failCode,jdbcType=VARCHAR},
+      fail_date = #{failDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

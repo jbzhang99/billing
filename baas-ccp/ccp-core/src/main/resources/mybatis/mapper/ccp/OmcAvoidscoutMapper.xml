@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.ccp.dao.mapper.interfaces.OmcAvoidscoutMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.ccp.dao.mapper.bo.OmcAvoidscout" >
+    <result column="AVOID_SEQ" property="avoidSeq" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="SYSTEM_ID" property="systemId" jdbcType="VARCHAR" />
+    <result column="OWNER_ID" property="ownerId" jdbcType="VARCHAR" />
+    <result column="OWNER_TYPE" property="ownerType" jdbcType="VARCHAR" />
+    <result column="SPE_TYPE" property="speType" jdbcType="VARCHAR" />
+    <result column="EFF_DATE" property="effDate" jdbcType="TIMESTAMP" />
+    <result column="EXP_DATE" property="expDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AVOID_SEQ, TENANT_ID, SYSTEM_ID, OWNER_ID, OWNER_TYPE, SPE_TYPE, EFF_DATE, EXP_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcAvoidscoutCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from omc_avoidscout
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcAvoidscoutCriteria" >
+    delete from omc_avoidscout
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcAvoidscout" >
+    insert into omc_avoidscout (AVOID_SEQ, TENANT_ID, SYSTEM_ID, 
+      OWNER_ID, OWNER_TYPE, SPE_TYPE, 
+      EFF_DATE, EXP_DATE)
+    values (#{avoidSeq,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, 
+      #{ownerId,jdbcType=VARCHAR}, #{ownerType,jdbcType=VARCHAR}, #{speType,jdbcType=VARCHAR}, 
+      #{effDate,jdbcType=TIMESTAMP}, #{expDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcAvoidscout" >
+    insert into omc_avoidscout
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="avoidSeq != null" >
+        AVOID_SEQ,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="systemId != null" >
+        SYSTEM_ID,
+      </if>
+      <if test="ownerId != null" >
+        OWNER_ID,
+      </if>
+      <if test="ownerType != null" >
+        OWNER_TYPE,
+      </if>
+      <if test="speType != null" >
+        SPE_TYPE,
+      </if>
+      <if test="effDate != null" >
+        EFF_DATE,
+      </if>
+      <if test="expDate != null" >
+        EXP_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="avoidSeq != null" >
+        #{avoidSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerType != null" >
+        #{ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="speType != null" >
+        #{speType,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcAvoidscoutCriteria" resultType="java.lang.Integer" >
+    select count(*) from omc_avoidscout
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update omc_avoidscout
+    <set >
+      <if test="record.avoidSeq != null" >
+        AVOID_SEQ = #{record.avoidSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemId != null" >
+        SYSTEM_ID = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerId != null" >
+        OWNER_ID = #{record.ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerType != null" >
+        OWNER_TYPE = #{record.ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speType != null" >
+        SPE_TYPE = #{record.speType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effDate != null" >
+        EFF_DATE = #{record.effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expDate != null" >
+        EXP_DATE = #{record.expDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update omc_avoidscout
+    set AVOID_SEQ = #{record.avoidSeq,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      SYSTEM_ID = #{record.systemId,jdbcType=VARCHAR},
+      OWNER_ID = #{record.ownerId,jdbcType=VARCHAR},
+      OWNER_TYPE = #{record.ownerType,jdbcType=VARCHAR},
+      SPE_TYPE = #{record.speType,jdbcType=VARCHAR},
+      EFF_DATE = #{record.effDate,jdbcType=TIMESTAMP},
+      EXP_DATE = #{record.expDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

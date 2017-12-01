@@ -1,0 +1,30 @@
+topology.name: "VOICEGeneralTopology"
+topology.workers: 2
+
+storm.cluster.mode: local
+
+jdbc.default: "{\"jdbc.driver\":\"com.mysql.jdbc.Driver\",\"jdbc.url\":\"jdbc:mysql://10.1.235.245:31306/dev_baas_bmc1?useUnicode=true&characterEncoding=UTF-8\",\"jdbc.username\":\"bmcusr01\",\"jdbc.password\":\"bmcusr01_123\"}"
+
+kafka.spout.consumer.addr: "10.1.130.84:49181,10.1.130.85:49181,10.1.236.122:49181"
+kafka.spout.topic: "bmckafka"
+kafka.spout.zk.server: "10.1.130.84,10.1.130.85,10.1.236.122"
+kafka.spout.zk.port: "49181"
+kafka.spout.parallel.num: 1
+
+hbase.param: "{\"hbase.zookeeper.property.clientPort\":\"49181\",\"hbase.master\":\"BIU-DEV-BaaS-app1\",\"hbase.zookeeper.quorum\":\"BIU-DEV-BaaS-app1,BIU-DEV-BaaS-app2,BIU-DEV-BaaS-app3\"}"
+
+bmc.gprs.bolt.output.field: {"unpacking":"service_id,tenant_id,sn,data","duplicate_checking":"data","rule_adapt":"data","billing":"data"}
+
+#ccs config
+ccs.appname: "aiopt-baas-dshm"
+ccs.zk_address: "10.1.130.84:39181"
+
+billing.output.mds.broker.list: "10.1.130.84:39091"
+billing.output.mds.credit.control.topic: ""
+billing.output.mds.credit.control.partition: "5"
+billing.output.mds.resourcebook.topic: ""
+billing.output.mds.resourcebook.partition: "5"
+billing.output.mds.account.topic: ""
+billing.output.mds.account.partition: "5"
+billing.output.mds.stats.topic: ""
+billing.output.mds.stats.partition: "5"

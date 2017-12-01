@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcSettleLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcSettleLog" >
+    <id column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <id column="SERIAL_CODE" property="serialCode" jdbcType="VARCHAR" />
+    <result column="BUSI_OPER_CODE" property="busiOperCode" jdbcType="VARCHAR" />
+    <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="SETTLE_MODE" property="settleMode" jdbcType="INTEGER" />
+    <result column="SETTLE_TYPE" property="settleType" jdbcType="INTEGER" />
+    <result column="TOTAL" property="total" jdbcType="BIGINT" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="LAST_STATUS_DATE" property="lastStatusDate" jdbcType="DATE" />
+    <result column="CANCEL_SERIAL_CODE" property="cancelSerialCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TENANT_ID, SERIAL_CODE, BUSI_OPER_CODE, ACCT_ID, SETTLE_MODE, SETTLE_TYPE, TOTAL, 
+    STATUS, LAST_STATUS_DATE, CANCEL_SERIAL_CODE, CREATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_settle_log_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLogKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from amc_settle_log_${billMonth}
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLogKey" >
+    delete from amc_settle_log_${billMonth}
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLogCriteria" >
+    delete from amc_settle_log_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLog" >
+    insert into amc_settle_log_${billMonth} (TENANT_ID, SERIAL_CODE, BUSI_OPER_CODE, 
+      ACCT_ID, SETTLE_MODE, SETTLE_TYPE, 
+      TOTAL, STATUS, LAST_STATUS_DATE, 
+      CANCEL_SERIAL_CODE, CREATE_TIME)
+    values (#{tenantId,jdbcType=VARCHAR}, #{serialCode,jdbcType=VARCHAR}, #{busiOperCode,jdbcType=VARCHAR}, 
+      #{acctId,jdbcType=VARCHAR}, #{settleMode,jdbcType=INTEGER}, #{settleType,jdbcType=INTEGER}, 
+      #{total,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{lastStatusDate,jdbcType=DATE}, 
+      #{cancelSerialCode,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLog" >
+    insert into amc_settle_log_${billMonth}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="serialCode != null" >
+        SERIAL_CODE,
+      </if>
+      <if test="busiOperCode != null" >
+        BUSI_OPER_CODE,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="settleMode != null" >
+        SETTLE_MODE,
+      </if>
+      <if test="settleType != null" >
+        SETTLE_TYPE,
+      </if>
+      <if test="total != null" >
+        TOTAL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="lastStatusDate != null" >
+        LAST_STATUS_DATE,
+      </if>
+      <if test="cancelSerialCode != null" >
+        CANCEL_SERIAL_CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="serialCode != null" >
+        #{serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiOperCode != null" >
+        #{busiOperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleMode != null" >
+        #{settleMode,jdbcType=INTEGER},
+      </if>
+      <if test="settleType != null" >
+        #{settleType,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastStatusDate != null" >
+        #{lastStatusDate,jdbcType=DATE},
+      </if>
+      <if test="cancelSerialCode != null" >
+        #{cancelSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_settle_log_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_settle_log_${billMonth}
+    <set >
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialCode != null" >
+        SERIAL_CODE = #{record.serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiOperCode != null" >
+        BUSI_OPER_CODE = #{record.busiOperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleMode != null" >
+        SETTLE_MODE = #{record.settleMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.settleType != null" >
+        SETTLE_TYPE = #{record.settleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.total != null" >
+        TOTAL = #{record.total,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastStatusDate != null" >
+        LAST_STATUS_DATE = #{record.lastStatusDate,jdbcType=DATE},
+      </if>
+      <if test="record.cancelSerialCode != null" >
+        CANCEL_SERIAL_CODE = #{record.cancelSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_settle_log_${billMonth}
+    set TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      SERIAL_CODE = #{record.serialCode,jdbcType=VARCHAR},
+      BUSI_OPER_CODE = #{record.busiOperCode,jdbcType=VARCHAR},
+      ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      SETTLE_MODE = #{record.settleMode,jdbcType=INTEGER},
+      SETTLE_TYPE = #{record.settleType,jdbcType=INTEGER},
+      TOTAL = #{record.total,jdbcType=BIGINT},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      LAST_STATUS_DATE = #{record.lastStatusDate,jdbcType=DATE},
+      CANCEL_SERIAL_CODE = #{record.cancelSerialCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLog" >
+    update amc_settle_log_${billMonth}
+    <set >
+      <if test="busiOperCode != null" >
+        BUSI_OPER_CODE = #{busiOperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="settleMode != null" >
+        SETTLE_MODE = #{settleMode,jdbcType=INTEGER},
+      </if>
+      <if test="settleType != null" >
+        SETTLE_TYPE = #{settleType,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        TOTAL = #{total,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastStatusDate != null" >
+        LAST_STATUS_DATE = #{lastStatusDate,jdbcType=DATE},
+      </if>
+      <if test="cancelSerialCode != null" >
+        CANCEL_SERIAL_CODE = #{cancelSerialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+    </set>
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleLog" >
+    update amc_settle_log_${billMonth}
+    set BUSI_OPER_CODE = #{busiOperCode,jdbcType=VARCHAR},
+      ACCT_ID = #{acctId,jdbcType=VARCHAR},
+      SETTLE_MODE = #{settleMode,jdbcType=INTEGER},
+      SETTLE_TYPE = #{settleType,jdbcType=INTEGER},
+      TOTAL = #{total,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=INTEGER},
+      LAST_STATUS_DATE = #{lastStatusDate,jdbcType=DATE},
+      CANCEL_SERIAL_CODE = #{cancelSerialCode,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=DATE}
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and SERIAL_CODE = #{serialCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

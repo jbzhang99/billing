@@ -1,0 +1,66 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "cust-rc",
+    "namespace": "wocloud"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "cust-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "cust",
+          "labels":{
+                "app": "cust-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "cust",
+        "image": "billing1:5000/baas-cust:0.1",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 10774
+          }],
+         "env":[{
+             "name": "REST_REGISTRY_ADDR",
+             "value":"172.20.2.139:2181"
+         },{
+             "name": "REST_PORT",
+             "value":"30774"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-cust"
+         },{
+             "name": "PROTOCOL",
+             "value":"rest"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-cust"
+         },{
+             "name": "ZK_ADDRESS",
+             "value":"172.20.2.191:28481"
+         },{
+             "name": "PAAS_AUTH_URL",
+             "value":"http://10.1.245.4:19811/service-portal-uac-web/service/auth"
+         },{
+             "name": "PAAS_AUTH_PID",
+             "value":"D14F7D708109471AB6F3084B2ABAE9A6"
+         },{
+             "name": "PAAS_CCS_ID",
+             "value":"CCS004"
+         },{
+             "name": "PAAS_CCS_PWD",
+             "value":"123456"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

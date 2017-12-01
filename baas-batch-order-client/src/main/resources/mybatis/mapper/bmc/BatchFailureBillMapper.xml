@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.batch.client.dao.interfaces.BatchFailureBillMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="fail_code" property="failCode" jdbcType="VARCHAR" />
+    <result column="instance_id" property="instanceId" jdbcType="VARCHAR" />
+    <result column="fail_reason" property="failReason" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="fail_time" property="failTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" extends="BaseResultMap" >
+    <result column="order_json" property="orderJson" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tenant_id, order_id, fail_code, instance_id, fail_reason, source, fail_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    order_json
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBillCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from batch_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBillCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from batch_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from batch_failure_bill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from batch_failure_bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBillCriteria" >
+    delete from batch_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" >
+    insert into batch_failure_bill (id, tenant_id, order_id, 
+      fail_code, instance_id, fail_reason, 
+      source, fail_time, order_json
+      )
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{failCode,jdbcType=VARCHAR}, #{instanceId,jdbcType=VARCHAR}, #{failReason,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{failTime,jdbcType=TIMESTAMP}, #{orderJson,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" >
+    insert into batch_failure_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="failCode != null" >
+        fail_code,
+      </if>
+      <if test="instanceId != null" >
+        instance_id,
+      </if>
+      <if test="failReason != null" >
+        fail_reason,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="failTime != null" >
+        fail_time,
+      </if>
+      <if test="orderJson != null" >
+        order_json,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="failCode != null" >
+        #{failCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceId != null" >
+        #{instanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="failReason != null" >
+        #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="failTime != null" >
+        #{failTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderJson != null" >
+        #{orderJson,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBillCriteria" resultType="java.lang.Integer" >
+    select count(*) from batch_failure_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update batch_failure_bill
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failCode != null" >
+        fail_code = #{record.failCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instanceId != null" >
+        instance_id = #{record.instanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failReason != null" >
+        fail_reason = #{record.failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failTime != null" >
+        fail_time = #{record.failTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderJson != null" >
+        order_json = #{record.orderJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update batch_failure_bill
+    set id = #{record.id,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      fail_code = #{record.failCode,jdbcType=VARCHAR},
+      instance_id = #{record.instanceId,jdbcType=VARCHAR},
+      fail_reason = #{record.failReason,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      fail_time = #{record.failTime,jdbcType=TIMESTAMP},
+      order_json = #{record.orderJson,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update batch_failure_bill
+    set id = #{record.id,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      fail_code = #{record.failCode,jdbcType=VARCHAR},
+      instance_id = #{record.instanceId,jdbcType=VARCHAR},
+      fail_reason = #{record.failReason,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      fail_time = #{record.failTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" >
+    update batch_failure_bill
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="failCode != null" >
+        fail_code = #{failCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instanceId != null" >
+        instance_id = #{instanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="failReason != null" >
+        fail_reason = #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="failTime != null" >
+        fail_time = #{failTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderJson != null" >
+        order_json = #{orderJson,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" >
+    update batch_failure_bill
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      fail_code = #{failCode,jdbcType=VARCHAR},
+      instance_id = #{instanceId,jdbcType=VARCHAR},
+      fail_reason = #{failReason,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      fail_time = #{failTime,jdbcType=TIMESTAMP},
+      order_json = #{orderJson,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.batch.client.dao.mapper.bo.BatchFailureBill" >
+    update batch_failure_bill
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      fail_code = #{failCode,jdbcType=VARCHAR},
+      instance_id = #{instanceId,jdbcType=VARCHAR},
+      fail_reason = #{failReason,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      fail_time = #{failTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

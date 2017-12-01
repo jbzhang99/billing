@@ -1,0 +1,72 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "pay-web-rc",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "pay-web-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "pay-web",
+          "labels":{
+                "app": "pay-web-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "pay-web",
+        "image": "10.1.234.164:5000/baas-pay-web:0.1",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 8080
+          }],
+         "env":[{
+             "name": "REST_REGISTRY_ADDR",
+             "value":"10.1.130.84:39181"
+         },{
+             "name": "REST_PORT",
+             "value":"10774"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-pay"
+         },{
+             "name": "PROTOCOL",
+             "value":"rest"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-pay"
+         },{
+             "name": "ZK_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "PAAS_AUTH_URL",
+             "value":"http://10.1.245.4:19811/service-portal-uac-web/service/auth"
+         },{
+             "name": "PAAS_AUTH_PID",
+             "value":"D14F7D708109471AB6F3084B2ABAE9A6"
+         },{
+             "name": "PAAS_CCS_ID",
+             "value":"CCS004"
+         },{
+             "name": "PAAS_CCS_PWD",
+             "value":"123456"
+         },{
+             "name": "VALIDATE_CERT_DIR",
+             "value":"/assets/tst/"
+         },{
+             "name": "ENCRYPT_CERT_PATH",
+             "value":"/assets/tst/acp_test_enc.cer"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

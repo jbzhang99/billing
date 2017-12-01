@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcOweInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcOweInfo" >
+    <id column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <id column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="BALANCE" property="balance" jdbcType="DECIMAL" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CONFIRM_TIME" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="CUST_GRADE" property="custGrade" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TENANT_ID, ACCT_ID, BALANCE, MONTH, CREATE_TIME, CONFIRM_TIME, CUST_NAME, CUST_GRADE, 
+    CUST_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_owe_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from amc_owe_info
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and ACCT_ID = #{acctId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfoKey" >
+    delete from amc_owe_info
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and ACCT_ID = #{acctId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfoCriteria" >
+    delete from amc_owe_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfo" >
+    insert into amc_owe_info (TENANT_ID, ACCT_ID, BALANCE, 
+      MONTH, CREATE_TIME, CONFIRM_TIME, 
+      CUST_NAME, CUST_GRADE, CUST_ID
+      )
+    values (#{tenantId,jdbcType=VARCHAR}, #{acctId,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, 
+      #{month,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}, 
+      #{custName,jdbcType=VARCHAR}, #{custGrade,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfo" >
+    insert into amc_owe_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="balance != null" >
+        BALANCE,
+      </if>
+      <if test="month != null" >
+        MONTH,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="confirmTime != null" >
+        CONFIRM_TIME,
+      </if>
+      <if test="custName != null" >
+        CUST_NAME,
+      </if>
+      <if test="custGrade != null" >
+        CUST_GRADE,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGrade != null" >
+        #{custGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_owe_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_owe_info
+    <set >
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null" >
+        BALANCE = #{record.balance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.month != null" >
+        MONTH = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.confirmTime != null" >
+        CONFIRM_TIME = #{record.confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.custName != null" >
+        CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custGrade != null" >
+        CUST_GRADE = #{record.custGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_owe_info
+    set TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      BALANCE = #{record.balance,jdbcType=DECIMAL},
+      MONTH = #{record.month,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CONFIRM_TIME = #{record.confirmTime,jdbcType=TIMESTAMP},
+      CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      CUST_GRADE = #{record.custGrade,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfo" >
+    update amc_owe_info
+    <set >
+      <if test="balance != null" >
+        BALANCE = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="month != null" >
+        MONTH = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null" >
+        CONFIRM_TIME = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custName != null" >
+        CUST_NAME = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGrade != null" >
+        CUST_GRADE = #{custGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and ACCT_ID = #{acctId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcOweInfo" >
+    update amc_owe_info
+    set BALANCE = #{balance,jdbcType=DECIMAL},
+      MONTH = #{month,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CONFIRM_TIME = #{confirmTime,jdbcType=TIMESTAMP},
+      CUST_NAME = #{custName,jdbcType=VARCHAR},
+      CUST_GRADE = #{custGrade,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR}
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and ACCT_ID = #{acctId,jdbcType=VARCHAR}
+  </update>
+  
+  <resultMap id="CustOweInfoResultMap" type="com.ai.baas.amc.dao.mapper.bo.CustOweInfo" >
+    <result column="CUST_ID" property="custId" />  
+    <result column="OWN_FEE" property="ownFee" />
+    <result column="UN_SETTLED_MONTH" property="unsettledMonth" />
+  </resultMap>  
+  <select id="getOweInfoListByPageInfo" resultMap="CustOweInfoResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.CustOweInfoQueryParam" >
+    select CUST_ID, sum(IFNULL(BALANCE, 0)) OWN_FEE, min(month) UN_SETTLED_MONTH 
+    from amc_owe_info 
+	where TENANT_ID = #{tenantId,jdbcType=VARCHAR} 
+	<![CDATA[and CUST_ID <> '']]> 
+      <if test="custGrade != null" >
+        and CUST_GRADE = #{custGrade}
+      </if>		
+      <if test="custName != null" >
+        and CUST_NAME like CONCAT('%','${custName}','%' ) 
+      </if>
+      <if test="startDate != null" >
+	      <![CDATA[
+	        and MONTH >= #{startDate}
+	      ]]>       
+      </if>
+      <if test="endDate != null" >
+	      <![CDATA[
+	        and MONTH <= #{endDate}
+	      ]]>     
+      </if>
+	group by CUST_ID 
+	<choose>
+		<when test="bottomBalance != null and topBalance != null" >
+			<![CDATA[
+			  having OWN_FEE >= #{bottomBalance} and OWN_FEE <= #{topBalance}
+			]]>  		
+		</when>
+		<when test="bottomBalance != null">
+	      <![CDATA[
+	        having OWN_FEE >= #{bottomBalance}
+	      ]]>    		
+		</when>
+		<when test="topBalance != null" >
+	      <![CDATA[
+	        having OWN_FEE <= #{topBalance}
+	      ]]>     		
+		</when>		
+		<otherwise>
+	      <![CDATA[
+	        having OWN_FEE > 0
+	      ]]>  		
+		</otherwise>
+	</choose>
+	order by CUST_ID
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>    
+  </select>  
+  <select id="getOweInfoCount" parameterType="com.ai.baas.amc.dao.mapper.bo.CustOweInfoQueryParam" resultType="java.lang.Integer" >
+    select count(1) from (
+	    select sum(IFNULL(BALANCE, 0)) OWN_FEE, min(month) UN_SETTLED_MONTH 
+	    from amc_owe_info 
+		where TENANT_ID = #{tenantId,jdbcType=VARCHAR} 
+		<![CDATA[and CUST_ID <> '']]> 
+	      <if test="custGrade != null" >
+	        and CUST_GRADE = #{custGrade}
+	      </if>		
+	      <if test="custName != null" >
+	        and CUST_NAME like CONCAT('%','${custName}','%' ) 
+	      </if>
+	      <if test="startDate != null" >
+		      <![CDATA[
+		        and MONTH >= #{startDate}
+		      ]]>       
+	      </if>
+	      <if test="endDate != null" >
+		      <![CDATA[
+		        and MONTH <= #{endDate}
+		      ]]>     
+	      </if>
+		group by CUST_ID 
+		<choose>
+			<when test="bottomBalance != null and topBalance != null" >
+				<![CDATA[
+				  having OWN_FEE >= #{bottomBalance} and OWN_FEE <= #{topBalance}
+				]]>  		
+			</when>
+			<when test="bottomBalance != null">
+		      <![CDATA[
+		        having OWN_FEE >= #{bottomBalance}
+		      ]]>    		
+			</when>
+			<when test="topBalance != null" >
+		      <![CDATA[
+		        having OWN_FEE <= #{topBalance}
+		      ]]>     		
+			</when>		
+			<otherwise>
+		      <![CDATA[
+		        having OWN_FEE > 0
+		      ]]>  		
+			</otherwise>
+		</choose>
+		order by CUST_ID    
+    ) t
+  </select> 
+  <select id="getCustOweInfo" resultMap="CustOweInfoResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.OweInfoQueryParam" >
+    select sum(IFNULL(BALANCE, 0)) OWN_FEE, min(month) UN_SETTLED_MONTH 
+    from amc_owe_info 
+	where TENANT_ID = #{tenantId,jdbcType=VARCHAR} 
+	and CUST_ID = #{custId,jdbcType=VARCHAR} 
+    <![CDATA[
+      having OWN_FEE > 0
+    ]]>  
+  </select>     
+</mapper>

@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "opt-sys",
+    "namespace": "unit-test"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10500,
+          "targetPort": 10500,
+          "nodePort":30500
+      }],
+      "selector": {
+           "app": "opt-sys-pod"
+      },
+      "type":"NodePort"
+  }
+}

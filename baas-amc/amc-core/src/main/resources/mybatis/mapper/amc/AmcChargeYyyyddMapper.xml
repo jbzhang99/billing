@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcChargeYyyyddMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcChargeYyyydd" >
+    <result column="CHARGE_SEQ" property="chargeSeq" jdbcType="BIGINT" />
+    <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="SUBS_ID" property="subsId" jdbcType="BIGINT" />
+    <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+    <result column="SUBJECT_ID" property="subjectId" jdbcType="BIGINT" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="BIGINT" />
+    <result column="ADJUST_AFTERWARDS" property="adjustAfterwards" jdbcType="BIGINT" />
+    <result column="DISC_TOTAL_AMOUNT" property="discTotalAmount" jdbcType="BIGINT" />
+    <result column="BALANCE" property="balance" jdbcType="BIGINT" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="BIGINT" />
+    <result column="LAST_PAY_DATE" property="lastPayDate" jdbcType="TIMESTAMP" />
+    <result column="CUST_ID" property="custId" jdbcType="BIGINT" />
+    <result column="CUST_TYPE" property="custType" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="DR_TOTAL_AMOUNT" property="drTotalAmount" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CHARGE_SEQ, ACCT_ID, SUBS_ID, SERVICE_ID, SUBJECT_ID, TOTAL_AMOUNT, ADJUST_AFTERWARDS, 
+    DISC_TOTAL_AMOUNT, BALANCE, PAY_STATUS, LAST_PAY_DATE, CUST_ID, CUST_TYPE, TENANT_ID, 
+    DR_TOTAL_AMOUNT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeYyyyddCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_charge_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeYyyyddCriteria" >
+    delete from amc_charge_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeYyyydd" >
+    insert into amc_charge_${billMonth} (CHARGE_SEQ, ACCT_ID, SUBS_ID, 
+      SERVICE_ID, SUBJECT_ID, TOTAL_AMOUNT, 
+      ADJUST_AFTERWARDS, DISC_TOTAL_AMOUNT, BALANCE, 
+      PAY_STATUS, LAST_PAY_DATE, CUST_ID, 
+      CUST_TYPE, TENANT_ID, DR_TOTAL_AMOUNT
+      )
+    values (#{chargeSeq,jdbcType=BIGINT}, #{acctId,jdbcType=VARCHAR}, #{subsId,jdbcType=BIGINT}, 
+      #{serviceId,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, #{totalAmount,jdbcType=BIGINT}, 
+      #{adjustAfterwards,jdbcType=BIGINT}, #{discTotalAmount,jdbcType=BIGINT}, #{balance,jdbcType=BIGINT}, 
+      #{payStatus,jdbcType=BIGINT}, #{lastPayDate,jdbcType=TIMESTAMP}, #{custId,jdbcType=BIGINT}, 
+      #{custType,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{drTotalAmount,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeYyyydd" >
+    insert into amc_charge_${billMonth}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chargeSeq != null" >
+        CHARGE_SEQ,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="subsId != null" >
+        SUBS_ID,
+      </if>
+      <if test="serviceId != null" >
+        SERVICE_ID,
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="adjustAfterwards != null" >
+        ADJUST_AFTERWARDS,
+      </if>
+      <if test="discTotalAmount != null" >
+        DISC_TOTAL_AMOUNT,
+      </if>
+      <if test="balance != null" >
+        BALANCE,
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS,
+      </if>
+      <if test="lastPayDate != null" >
+        LAST_PAY_DATE,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="custType != null" >
+        CUST_TYPE,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="drTotalAmount != null" >
+        DR_TOTAL_AMOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chargeSeq != null" >
+        #{chargeSeq,jdbcType=BIGINT},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="subsId != null" >
+        #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="adjustAfterwards != null" >
+        #{adjustAfterwards,jdbcType=BIGINT},
+      </if>
+      <if test="discTotalAmount != null" >
+        #{discTotalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=BIGINT},
+      </if>
+      <if test="lastPayDate != null" >
+        #{lastPayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=BIGINT},
+      </if>
+      <if test="custType != null" >
+        #{custType,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="drTotalAmount != null" >
+        #{drTotalAmount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeYyyyddCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_charge_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_charge_${billMonth}
+    <set >
+      <if test="record.chargeSeq != null" >
+        CHARGE_SEQ = #{record.chargeSeq,jdbcType=BIGINT},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subsId != null" >
+        SUBS_ID = #{record.subsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.serviceId != null" >
+        SERVICE_ID = #{record.serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectId != null" >
+        SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.totalAmount != null" >
+        TOTAL_AMOUNT = #{record.totalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.adjustAfterwards != null" >
+        ADJUST_AFTERWARDS = #{record.adjustAfterwards,jdbcType=BIGINT},
+      </if>
+      <if test="record.discTotalAmount != null" >
+        DISC_TOTAL_AMOUNT = #{record.discTotalAmount,jdbcType=BIGINT},
+      </if>
+      <if test="record.balance != null" >
+        BALANCE = #{record.balance,jdbcType=BIGINT},
+      </if>
+      <if test="record.payStatus != null" >
+        PAY_STATUS = #{record.payStatus,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastPayDate != null" >
+        LAST_PAY_DATE = #{record.lastPayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=BIGINT},
+      </if>
+      <if test="record.custType != null" >
+        CUST_TYPE = #{record.custType,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drTotalAmount != null" >
+        DR_TOTAL_AMOUNT = #{record.drTotalAmount,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_charge_${record.billMonth}
+    set CHARGE_SEQ = #{record.chargeSeq,jdbcType=BIGINT},
+      ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      SUBS_ID = #{record.subsId,jdbcType=BIGINT},
+      SERVICE_ID = #{record.serviceId,jdbcType=VARCHAR},
+      SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      TOTAL_AMOUNT = #{record.totalAmount,jdbcType=BIGINT},
+      ADJUST_AFTERWARDS = #{record.adjustAfterwards,jdbcType=BIGINT},
+      DISC_TOTAL_AMOUNT = #{record.discTotalAmount,jdbcType=BIGINT},
+      BALANCE = #{record.balance,jdbcType=BIGINT},
+      PAY_STATUS = #{record.payStatus,jdbcType=BIGINT},
+      LAST_PAY_DATE = #{record.lastPayDate,jdbcType=TIMESTAMP},
+      CUST_ID = #{record.custId,jdbcType=BIGINT},
+      CUST_TYPE = #{record.custType,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      DR_TOTAL_AMOUNT = #{record.drTotalAmount,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,51 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "op-web-rc",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "op-web-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "op-web",
+          "labels":{
+                "app": "op-web-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "op-web",
+        "image": "biu-bj-baas-app3:5000/baas-op-web:1.0",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 8080
+          }],
+         "env":[{
+             "name": "DUBBO_REGISTRY",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-op-web"
+         },{
+             "name": "DUBBO_PROTOCOL",
+             "value":"dubbo"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-op-web"
+         },{
+             "name": "ZK_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

@@ -1,0 +1,54 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "ccp-rc",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "ccp-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "ccp",
+          "labels":{
+                "app": "ccp-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "ccp",
+        "image": "biu-bj-baas-app3:5000/baas-ccp:1.0",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 10772
+          }],
+         "env":[{
+             "name": "REST_REGISTRY_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "REST_PORT",
+             "value":"30772"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-ccp"
+         },{
+             "name": "PROTOCOL",
+             "value":"rest"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-ccp"
+         },{
+             "name": "ZK_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

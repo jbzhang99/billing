@@ -1,0 +1,203 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.7
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+ext {
+	moduleName="ctp-rtm";
+	moduleVersion="1.0-SNAPSHOT"
+	publishUserName = "runnerdev"
+    publishUserPassword = "runnerdev"
+    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"    
+    //mavenPublicURL = "http://10.1.228.199:18081/nexus/content/groups/public/"
+	builtBy="gradle 2.2" 
+} 
+
+group = 'com.ai.runner.center.ctp.rtm'
+
+repositories {
+    maven{ url "http://10.1.228.199:18081/nexus/content/groups/public/"  }
+}
+
+dependencies{
+	compile 'commons-lang:commons-lang:2.6'
+	compile 'commons-dbutils:commons-dbutils:1.5'
+	compile 'mysql:mysql-connector-java:5.1.34';
+	compile 'commons-io:commons-io:2.3';
+	compile 'com.alibaba:fastjson:1.2.6';
+	compile 'org.slf4j:slf4j-log4j12:1.7.6';
+	compile 'sqlline:sqlline:1.1.9'
+	compile 'net.lingala.zip4j:zip4j:1.3.1'
+	
+	compile 'org.apache.kafka:kafka_2.10:0.8.2.1'
+	compile 'org.apache.commons:commons-collections4:4.0'
+	compile "org.apache.commons:commons-dbcp2:2.1"
+	compile 'commons-httpclient:commons-httpclient:3.0'
+    compile 'org.apache.httpcomponents:httpcore:4.4.3'
+    compile 'org.apache.httpcomponents:httpclient:4.5.1'
+    
+	
+//	compile 'org.apache.hbase:hbase-client:1.0.1.1'
+//	compile 'org.apache.hbase:hbase-common:1.1.1'
+//	compile 'org.apache.hadoop:hadoop-common:2.5.1'
+
+	
+	compile  'org.apache.hbase:hbase-client:1.1.2'
+	compile ('org.apache.hbase:hbase-common:1.1.2'){
+		exclude group: 'com.google.guava', module: 'guava'
+	}
+	compile ('org.apache.hadoop:hadoop-common:2.5.1'){
+		exclude group: 'com.google.guava', module: 'guava'
+	}
+	compile ('com.ai.runner.util:runner-util:1.0.2-SNAPSHOT'){
+		exclude group: 'com.google.guava', module: 'guava'
+	}
+	
+//	compile ('com.ai:ipaas-mds:0.2.5-SNAPSHOT'){
+ //   	exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+  // 	exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+   // 	exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j-impl'
+  //  	exclude group: 'org.apache.logging.log4j', module: 'log4j-api'
+ //   }
+    
+    compile 'redis.clients:jedis:3.0.0'
+    compile 'org.springframework:spring-context:4.1.6.RELEASE'
+    compile 'org.springframework:spring-context-support:4.1.6.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.6.RELEASE'
+	compile 'org.springframework:spring-test:4.1.6.RELEASE' 
+    compile 'org.quartz-scheduler:quartz:2.2.1'
+	
+	compile 'com.sun.xml.wss:xws-security:3.0'
+	
+        compile 'com.ai.baas.rtm:datacollect:1.0.0-SNAPSHOT'
+        compile 'com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT'
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ['src/main/java']}
+        resources { srcDirs = ['src/main/resources']}
+    }
+    test {
+        java { srcDirs = ['src/test/java']}
+        resources { srcDirs = ['src/test/resources']}
+    }
+}
+
+jar {
+    baseName baseName
+    version moduleVersion
+    destinationDir file("$buildDir/m-libs/")
+    manifest {
+        attributes 'packageName': baseName, 'Built-By': builtBy, 'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
+    }
+}
+/*
+task copyChildJar(type: jar) {
+    from fileTree(dir: '$buildDir/classes/main')
+    destinationDir file("$buildDir/")
+}
+*/
+
+task copy3rdJars(type: Copy) {
+	from configurations.runtime
+	destinationDir file("$buildDir/libs/3rd-libs")
+}
+task copySubProjectsJar(type: Copy) {
+   
+        from jar
+        destinationDir file("$buildDir/libs/core-libs")
+    
+}
+task copySubProjectsConfig(type: Copy) {
+    from fileTree(dir: 'src/main/resources')
+    destinationDir file("$buildDir/config")
+}
+
+/*
+task cleanTempDir(type: Delete) {
+    delete fileTree(dir: "$buildDir/libs", include: "com.ai.runner.center.ctp.rtm*")
+}
+*/
+
+build.dependsOn copy3rdJars,copySubProjectsConfig,copySubProjectsJar
+
+publishing {
+    publications {
+       publishing.publications.create("${moduleName}", MavenPublication) {
+            groupId group
+            artifactId moduleName
+            version moduleVersion
+            artifact  jar
+            pom.withXml {
+	            asNode().children().last() + {
+	                delegate.dependencies {
+	                /*
+	                	delegate.dependency {
+	                     	delegate.groupId("commons-lang")
+	                        delegate.artifactId("ipaas-mds")
+	                        delegate.version("0.2.4-SNAPSHOT")
+	                    }
+	                    
+	                    
+	                    
+	                	delegate.dependency {
+	                        delegate.groupId("org.apache.storm")
+	                        delegate.artifactId("storm-core")
+	                        delegate.version("0.9.3")
+							delegate.exclusions{
+								delegate.exclusion{
+									delegate.groupId("org.slf4j")
+									delegate.artifactId("slf4j-api")
+								}
+								delegate.exclusion{
+									delegate.groupId("log4j")
+									delegate.artifactId("log4j")
+								}
+								delegate.exclusion{
+									delegate.groupId("org.slf4j")
+									delegate.artifactId("log4j-over-slf4j")
+								}
+								delegate.exclusion{
+									delegate.groupId("javax.servlet")
+									delegate.artifactId("servlet-api")
+								}
+							}
+	                    }
+	                    delegate.dependency {
+	                     	delegate.groupId("com.ai")
+	                        delegate.artifactId("ipaas-mds")
+	                        delegate.version("0.2.4-SNAPSHOT")
+	                    }
+	                    delegate.dependency {
+	                     	delegate.groupId("com.ai")
+	                        delegate.artifactId("ipaas-ccs-inner")
+	                        delegate.version("0.2.1-SNAPSHOT")
+	                    }
+	                    delegate.dependency {
+							delegate.groupId("com.google.code.gson")
+							delegate.artifactId("gson")
+							delegate.version("1.7.2")
+						}
+						*/
+	                }
+	            }
+	        }
+        }
+    }
+    repositories {
+        maven {
+            url  publishURL
+            credentials {
+                username = publishUserName
+                password = publishUserPassword
+            }
+        }
+    }
+}
+
+
+

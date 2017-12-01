@@ -1,0 +1,47 @@
+version: '2.0'
+networks: { }
+services:
+  zk:
+    image: daocloud.io/daocloud/zookeeper
+    container_name: zk
+    ports:
+      - "32181:2181"
+  ui:
+    image: 10.1.234.164:5000/storm:0.9.6
+    environment:
+      - NIMBUS_HOST=nimbus
+      - ZKSERVER1=zk
+      - ui=ui
+    restart: always
+    container_name: ui
+    ports:
+      - 8080:8080
+    depends_on:
+      - nimbus
+  nimbus:
+    image: 10.1.234.164:5000/storm:0.9.6
+    restart: always
+    environment:
+      - NIMBUS_HOST=nimbus
+      - ZKSERVER1=zk
+      - nimbus=nimbus
+    container_name: nimbus
+    ports:
+      - 6627:6627
+  supervisor:
+    image: 10.1.234.164:5000/storm:0.9.6
+    restart: always
+    environment:
+      - NIMBUS_HOST=nimbus
+      - ZKSERVER1=zk
+      - supervisor=supervisor
+    depends_on:
+      - nimbus
+  topology:
+    image: baas-omc-topology:1.0
+    environment:
+      - NIMBUS_HOST=nimbus
+      - ZKSERVER1=zk
+      - topology= baas-omc-topology.jar com.ai.baas.omc.topoligy.core.flow.MainCalProcessFlow yaml.yaml
+    depends_on:
+      - nimbus

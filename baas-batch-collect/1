@@ -1,0 +1,40 @@
+# Pull base image
+FROM 10.1.234.164:5000/crontab:vim
+#FROM centos:7
+MAINTAINER gucl<gucl@asiainfo.com>
+#WORKDIR /
+#RUN yum install -y java-1.8.0-openjdk
+RUN echo "2 * * * *  /baas-batch-order-client.sh >> /crontab.log" >>  /var/spool/cron/crontabs/root
+RUN echo "* * * * *  /test.sh > /test.log" >> /var/spool/cron/crontabs/root
+RUN echo "* * * * *  echo "1111111" > /test1.log" >> /var/spool/cron/crontabs/root
+#RUN /etc/init.d/cron stop 
+RUN /etc/init.d/cron restart 
+#RUN echo '`service cron restart`' >> /opt/run.sh
+# deploy user dubbo service
+
+##set local time
+RUN cd /etc && rm -f localtime && ln -s  /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo "Etc/UTC+8" >/etc/timezone
+COPY ./build/libs /baas-batch-order-client/libs/
+COPY ./build/config /baas-batch-order-client/config/
+COPY ./TestDate.class /
+COPY ./clock /
+#mkdir logs path
+RUN cd /baas-batch-order-client && mkdir logs && cd /baas-batch-order-client/logs && mkdir opt-baas-logs
+
+## copy start script
+COPY ./script/baas-batch-order-client.sh /baas-batch-order-client.sh
+COPY ./script/batch.sh /batch.sh
+COPY ./script/baas-batch-amount-client.sh /baas-batch-amount-client.sh
+RUN chmod 755 /baas-batch-order-client.sh
+RUN chmod 755 /baas-batch-amount-client.sh
+RUN  chmod 755 /batch.sh
+# set start parameter for dubbo service
+ENV COMMON_LIB_HOME /baas-batch-order-client
+
+# Expose ports.
+EXPOSE 11221
+
+# Define default command.
+WORKDIR /
+#CMD ["service cron start && ./opt/run.sh"]

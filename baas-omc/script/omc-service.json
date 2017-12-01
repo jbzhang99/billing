@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "omc",
+    "namespace": "unit-test"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10773,
+          "targetPort": 10773,
+          "nodePort":30773
+      }],
+      "selector": {
+           "app": "omc-pod"
+      },
+      "type":"NodePort"
+  }
+}

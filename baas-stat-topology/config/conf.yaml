@@ -1,0 +1,19 @@
+topology.name: "StatTopology"
+topology.workers: 1
+topology.max.spout.pending: 2
+
+topology.enable.classloader: false
+
+storm.cluster.mode: local
+
+jdbc.default: "{\"jdbc.driver\":\"com.mysql.jdbc.Driver\",\"jdbc.url\":\"jdbc:mysql://10.1.235.245:31306/dev_baas_stat1?useUnicode=true&characterEncoding=UTF-8\",\"jdbc.username\":\"statusr01\",\"jdbc.password\":\"statusr01_123\",\"autoReconnect\":true}"
+
+kafka.spout.consumer.addr: "10.1.245.5:29181,10.1.245.6:29181,10.1.245.7:29181"
+kafka.spout.topic: "ECBCA29571714183B23A630E2311DD66_MDS032_1306048812"
+kafka.spout.zk.server: "10.1.245.5,10.1.245.6,10.1.245.7"
+kafka.spout.zk.port: "29181"
+kafka.spout.parallel.num: "1"
+
+hbase.param: "{\"hbase.zookeeper.property.clientPort\":\"49181\",\"hbase.master\":\"BIU-DEV-BaaS-app1\",\"hbase.zookeeper.quorum\":\"BIU-DEV-BaaS-app1,BIU-DEV-BaaS-app2,BIU-DEV-BaaS-app3\"}"
+
+bmc.gprs.bolt.output.field: {"unpacking":"service_id,tenant_id,sn,data","duplicate_checking":"data","rule_adapt":"data","billing":"data"}

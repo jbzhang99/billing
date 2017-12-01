@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcSettleDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetail" >
+    <result column="serial_code" property="serialCode" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="busi_oper_code" property="busiOperCode" jdbcType="VARCHAR" />
+    <result column="acct_id" property="acctId" jdbcType="BIGINT" />
+    <result column="settle_mode" property="settleMode" jdbcType="INTEGER" />
+    <result column="settle_type" property="settleType" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="BIGINT" />
+    <result column="subs_id" property="subsId" jdbcType="BIGINT" />
+    <result column="svc_type" property="svcType" jdbcType="INTEGER" />
+    <result column="fund_subject_id" property="fundSubjectId" jdbcType="BIGINT" />
+    <result column="cycle_month" property="cycleMonth" jdbcType="VARCHAR" />
+    <result column="invoice_seq" property="invoiceSeq" jdbcType="BIGINT" />
+    <result column="charge_seq" property="chargeSeq" jdbcType="BIGINT" />
+    <result column="fee_subject_id" property="feeSubjectId" jdbcType="BIGINT" />
+    <result column="total" property="total" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="last_status_date" property="lastStatusDate" jdbcType="TIMESTAMP" />
+    <result column="settle_order" property="settleOrder" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    serial_code, tenant_id, busi_oper_code, acct_id, settle_mode, settle_type, book_id, 
+    subs_id, svc_type, fund_subject_id, cycle_month, invoice_seq, charge_seq, fee_subject_id, 
+    total, create_time, status, last_status_date, settle_order
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetailCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_settle_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetailCriteria" >
+    delete from amc_settle_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetail" >
+    insert into amc_settle_detail_${billMonth} (serial_code, tenant_id, busi_oper_code, 
+      acct_id, settle_mode, settle_type, 
+      book_id, subs_id, svc_type, 
+      fund_subject_id, cycle_month, invoice_seq, 
+      charge_seq, fee_subject_id, total, 
+      create_time, status, last_status_date, 
+      settle_order)
+    values (#{serialCode,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{busiOperCode,jdbcType=VARCHAR}, 
+      #{acctId,jdbcType=BIGINT}, #{settleMode,jdbcType=INTEGER}, #{settleType,jdbcType=INTEGER}, 
+      #{bookId,jdbcType=BIGINT}, #{subsId,jdbcType=BIGINT}, #{svcType,jdbcType=INTEGER}, 
+      #{fundSubjectId,jdbcType=BIGINT}, #{cycleMonth,jdbcType=VARCHAR}, #{invoiceSeq,jdbcType=BIGINT}, 
+      #{chargeSeq,jdbcType=BIGINT}, #{feeSubjectId,jdbcType=BIGINT}, #{total,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{lastStatusDate,jdbcType=TIMESTAMP}, 
+      #{settleOrder,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetail" >
+    insert into amc_settle_detail_${billMonth}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialCode != null" >
+        serial_code,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="busiOperCode != null" >
+        busi_oper_code,
+      </if>
+      <if test="acctId != null" >
+        acct_id,
+      </if>
+      <if test="settleMode != null" >
+        settle_mode,
+      </if>
+      <if test="settleType != null" >
+        settle_type,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="subsId != null" >
+        subs_id,
+      </if>
+      <if test="svcType != null" >
+        svc_type,
+      </if>
+      <if test="fundSubjectId != null" >
+        fund_subject_id,
+      </if>
+      <if test="cycleMonth != null" >
+        cycle_month,
+      </if>
+      <if test="invoiceSeq != null" >
+        invoice_seq,
+      </if>
+      <if test="chargeSeq != null" >
+        charge_seq,
+      </if>
+      <if test="feeSubjectId != null" >
+        fee_subject_id,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastStatusDate != null" >
+        last_status_date,
+      </if>
+      <if test="settleOrder != null" >
+        settle_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialCode != null" >
+        #{serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiOperCode != null" >
+        #{busiOperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=BIGINT},
+      </if>
+      <if test="settleMode != null" >
+        #{settleMode,jdbcType=INTEGER},
+      </if>
+      <if test="settleType != null" >
+        #{settleType,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=BIGINT},
+      </if>
+      <if test="subsId != null" >
+        #{subsId,jdbcType=BIGINT},
+      </if>
+      <if test="svcType != null" >
+        #{svcType,jdbcType=INTEGER},
+      </if>
+      <if test="fundSubjectId != null" >
+        #{fundSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="cycleMonth != null" >
+        #{cycleMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceSeq != null" >
+        #{invoiceSeq,jdbcType=BIGINT},
+      </if>
+      <if test="chargeSeq != null" >
+        #{chargeSeq,jdbcType=BIGINT},
+      </if>
+      <if test="feeSubjectId != null" >
+        #{feeSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="lastStatusDate != null" >
+        #{lastStatusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settleOrder != null" >
+        #{settleOrder,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetailCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_settle_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_settle_detail_${billMonth}
+    <set >
+      <if test="record.serialCode != null" >
+        serial_code = #{record.serialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiOperCode != null" >
+        busi_oper_code = #{record.busiOperCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        acct_id = #{record.acctId,jdbcType=BIGINT},
+      </if>
+      <if test="record.settleMode != null" >
+        settle_mode = #{record.settleMode,jdbcType=INTEGER},
+      </if>
+      <if test="record.settleType != null" >
+        settle_type = #{record.settleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookId != null" >
+        book_id = #{record.bookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.subsId != null" >
+        subs_id = #{record.subsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.svcType != null" >
+        svc_type = #{record.svcType,jdbcType=INTEGER},
+      </if>
+      <if test="record.fundSubjectId != null" >
+        fund_subject_id = #{record.fundSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.cycleMonth != null" >
+        cycle_month = #{record.cycleMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceSeq != null" >
+        invoice_seq = #{record.invoiceSeq,jdbcType=BIGINT},
+      </if>
+      <if test="record.chargeSeq != null" >
+        charge_seq = #{record.chargeSeq,jdbcType=BIGINT},
+      </if>
+      <if test="record.feeSubjectId != null" >
+        fee_subject_id = #{record.feeSubjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.total != null" >
+        total = #{record.total,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastStatusDate != null" >
+        last_status_date = #{record.lastStatusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.settleOrder != null" >
+        settle_order = #{record.settleOrder,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_settle_detail_${billMonth}
+    set serial_code = #{record.serialCode,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      busi_oper_code = #{record.busiOperCode,jdbcType=VARCHAR},
+      acct_id = #{record.acctId,jdbcType=BIGINT},
+      settle_mode = #{record.settleMode,jdbcType=INTEGER},
+      settle_type = #{record.settleType,jdbcType=INTEGER},
+      book_id = #{record.bookId,jdbcType=BIGINT},
+      subs_id = #{record.subsId,jdbcType=BIGINT},
+      svc_type = #{record.svcType,jdbcType=INTEGER},
+      fund_subject_id = #{record.fundSubjectId,jdbcType=BIGINT},
+      cycle_month = #{record.cycleMonth,jdbcType=VARCHAR},
+      invoice_seq = #{record.invoiceSeq,jdbcType=BIGINT},
+      charge_seq = #{record.chargeSeq,jdbcType=BIGINT},
+      fee_subject_id = #{record.feeSubjectId,jdbcType=BIGINT},
+      total = #{record.total,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      last_status_date = #{record.lastStatusDate,jdbcType=TIMESTAMP},
+      settle_order = #{record.settleOrder,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectProceeds" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcSettleDetailCriteria" resultType="java.lang.Long" >
+    select SUM(total) from amc_settle_detail_${billMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+</mapper>

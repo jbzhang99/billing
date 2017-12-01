@@ -1,0 +1,550 @@
+group 'com.ai.opt.sdk'
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.7
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+configurations.all { 
+	    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+ 	}
+ext {
+    optBaseVersion="1.0.2-SNAPSHOT"
+    optPaaSZookeeperVersion="0.2.2-SNAPSHOT"
+    optPaaSMCSVersion="1.0-SNAPSHOT"
+    
+    dubboxVersion="2.8.3.1";
+    
+    ipaasUacVersion="0.3";
+    ipaasCcsVersion="0.3";
+    ipaasMcsVersion="0.3.1";
+    ipaasDssVersion="0.3";
+    ipaasMdsVersion="0.3";
+    ipaasSesVersion="0.3.3";
+    ipaasIdpsVersion="0.3";
+    ipaasI18nVersion="0.3.3";
+    ipaasCommonVersion="0.3.1";
+    hikariCPVersion="2.4.9";
+    
+    elasticjobVersion="2.0.0";
+
+    appName="opt-sdk"
+    moduleVersion='2.2.1-SNAPSHOT'
+    builtBy="gradle 2.2"
+    publishUserName = "runnerdev"
+    publishUserPassword = "runnerdev"
+    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+    //publishURL = "http://10.1.228.199:18081/nexus/content/repositories/releases/"
+}
+
+repositories { maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" } }
+
+dependencies {
+
+	compile "com.ai:ipaas-uac:${ipaasUacVersion}"
+    compile "com.ai:ipaas-ccs:${ipaasCcsVersion}"
+    compile "com.ai:ipaas-mcs-base:${ipaasMcsVersion}"
+    compile "com.ai:ipaas-mcs:${ipaasMcsVersion}"
+    compile "com.ai:ipaas-mcs-comp:${ipaasMcsVersion}"
+    compile "com.ai:ipaas-dss:${ipaasDssVersion}"
+    compile "com.ai:ipaas-mds:${ipaasMdsVersion}"
+    compile "com.ai:ipaas-mds-comp:${ipaasMdsVersion}"
+    compile "com.ai:ipaas-ses:${ipaasSesVersion}"
+    compile "com.ai:ipaas-ses-base:${ipaasSesVersion}"
+    compile "com.ai:ipaas-idps:${ipaasIdpsVersion}"
+    compile "com.ai:ipaas-idps-comp:${ipaasIdpsVersion}"
+    compile "com.ai:ipaas-i18n-spring:${ipaasI18nVersion}"  
+    compile "com.ai:ipaas-common:${ipaasCommonVersion}"
+    
+    //elasticjob  
+    compile ("com.dangdang:elastic-job-lite-core:${elasticjobVersion}"){
+    	exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+        exclude group: 'com.sun.jersey', module: 'jersey-servlet'
+        
+        exclude group: 'org.eclipse.jetty.aggregate', module: 'jetty-all-server'
+    }  
+    compile ("com.dangdang:elastic-job-lite-spring:${elasticjobVersion}"){
+    	exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+        exclude group: 'com.sun.jersey', module: 'jersey-servlet'
+        
+        exclude group: 'org.eclipse.jetty.aggregate', module: 'jetty-all-server'
+    }  
+    
+    
+    compile "com.ai.opt:opt-base:${optBaseVersion}"
+    compile "javax.validation:validation-api:1.1.0.Final"
+	compile "org.hibernate:hibernate-validator:5.2.0.Final"
+    compile 'com.alibaba:fastjson:1.2.6'
+    compile 'com.google.code.gson:gson:2.3.1'
+
+    compile "org.springframework:spring-context:4.1.7.RELEASE"
+    compile "org.aspectj:aspectjrt:1.8.5"
+    compile "org.aspectj:aspectjweaver:1.8.5"
+
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-io:commons-io:2.4'
+    compile 'commons-beanutils:commons-beanutils:1.9.2'
+    compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    compile 'org.quartz-scheduler:quartz:2.2.1'
+    compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.3'
+    
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
+
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1'
+
+    compile ("com.alibaba:dubbox:${dubboxVersion}") {
+        exclude group: 'org.springframework', module: 'spring'
+    }
+    compile 'org.jboss.netty:netty:3.2.10.Final'
+    compile "org.javassist:javassist:3.15.0-GA"
+    compile ("com.101tec:zkclient:0.5") {
+        exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+    }
+
+
+    compile 'junit:junit:4.12'
+    compile 'log4j:log4j:1.2.17'
+
+    compile "com.zaxxer:HikariCP-java7:${hikariCPVersion}"
+    compile 'org.apache.curator:curator-framework:2.9.0'
+
+
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+    
+    //apache mail
+    compile	'org.apache.commons:commons-email:1.4'
+    compile 'org.dom4j:dom4j:2.0.0'
+    
+    //excel
+    compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+    compile 'org.apache.poi:poi:3.13'
+    compile 'org.apache.poi:poi-ooxml:3.13'
+    compile 'org.apache.poi:poi-ooxml-schemas:3.13'
+    
+    //httpclient
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+    
+    //htmlparser
+    compile 'org.htmlparser:htmlparser:2.1'
+    
+    //servlet
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
+    
+    //restful jars
+	compile ("org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final") {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+	compile 'org.jboss.resteasy:resteasy-client:3.0.11.Final'
+	compile 'org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final'
+	compile 'org.apache.tomcat.embed:tomcat-embed-core:8.0.21'
+	compile 'org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21'
+	compile "javax.el:javax.el-api:2.2.4"
+	
+	//mysql
+	compile 'mysql:mysql-connector-java:5.1.36'
+	
+	//compile 'com.ai:dubbo-ext:0.3'
+}
+jar {
+    baseName appName
+    version moduleVersion
+//    include "com/ai/opt/sdk/*/**"
+    manifest {
+        attributes 'packageName': baseName, 'Built-By': builtBy,'create-date': new Date().format('yyyy-MM-dd HH:mm:ss'), 'Manifest-Version': version
+    }
+}
+
+publishing {
+    publications {
+        publishing.publications.create("${appName}", MavenPublication) {
+            groupId group
+            artifactId appName
+            version moduleVersion
+            artifact jar
+            pom.withXml {
+                asNode().children().last() + {
+                    delegate.dependencies {
+                        delegate.dependency {
+                            delegate.groupId("com.ai.opt")
+                            delegate.artifactId("opt-base")
+                            delegate.version("${optBaseVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.zaxxer")
+                            delegate.artifactId("HikariCP-java7")
+                            delegate.version("${hikariCPVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-uac")
+                            delegate.version("${ipaasUacVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-ccs")
+                            delegate.version("${ipaasCcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mcs-base")
+                            delegate.version("${ipaasMcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mcs")
+                            delegate.version("${ipaasMcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mcs-comp")
+                            delegate.version("${ipaasMcsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-dss")
+                            delegate.version("${ipaasDssVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mds")
+                            delegate.version("${ipaasMdsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-mds-comp")
+                            delegate.version("${ipaasMdsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-ses")
+                            delegate.version("${ipaasSesVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-ses-base")
+                            delegate.version("${ipaasSesVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-idps")
+                            delegate.version("${ipaasIdpsVersion}")
+                            /*delegate.exclusions{
+                                delegate.exclusion{
+                                    delegate.groupId("commons-httpclient")
+                                    delegate.artifactId("commons-httpclient")
+                                }
+                            }*/
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-idps-comp")
+                            delegate.version("${ipaasIdpsVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-i18n-spring")
+                            delegate.version("${ipaasI18nVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.ai")
+                            delegate.artifactId("ipaas-common")
+                            delegate.version("${ipaasCommonVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.springframework")
+                            delegate.artifactId("spring-context")
+                            delegate.version("4.1.7.RELEASE")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("javax.ws.rs")
+                            delegate.artifactId("javax.ws.rs-api")
+                            delegate.version("2.0.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.alibaba")
+                            delegate.artifactId("fastjson")
+                            delegate.version("1.2.6")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.google.code.gson")
+                            delegate.artifactId("gson")
+                            delegate.version("2.3.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.aspectj")
+                            delegate.artifactId("aspectjrt")
+                            delegate.version("1.8.5")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("commons-lang")
+                            delegate.artifactId("commons-lang")
+                            delegate.version("2.6")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("commons-io")
+                            delegate.artifactId("commons-io")
+                            delegate.version("2.4")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("commons-beanutils")
+                            delegate.artifactId("commons-beanutils")
+                            delegate.version("1.9.2")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-api")
+                            delegate.version("2.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-core")
+                            delegate.version("2.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-jcl")
+                            delegate.version("2.3")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.slf4j")
+                            delegate.artifactId("slf4j-api")
+                            delegate.version("1.7.12")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-slf4j-impl")
+                            delegate.version("2.4")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.commons")
+                            delegate.artifactId("commons-dbcp2")
+                            delegate.version("2.1")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.alibaba")
+                            delegate.artifactId("dubbox")
+                            delegate.version("${dubboxVersion}")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.jboss.netty")
+                            delegate.artifactId("netty")
+                            delegate.version("3.2.10.Final")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.javassist")
+                            delegate.artifactId("javassist")
+                            delegate.version("3.15.0-GA")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("com.101tec")
+                            delegate.artifactId("zkclient")
+                            delegate.version("0.5")
+                        }                        
+                        delegate.dependency {
+                            delegate.groupId("org.postgresql")
+                            delegate.artifactId("postgresql")
+                            delegate.version("9.4-1201-jdbc41")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.logging.log4j")
+                            delegate.artifactId("log4j-slf4j-impl")
+                            delegate.version("2.4")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("log4j")
+                            delegate.artifactId("log4j")
+                            delegate.version("1.2.17")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("net.sf.json-lib")
+                            delegate.artifactId("json-lib")
+                            delegate.version("2.4")
+                            delegate.classifier("jdk15")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.commons")
+                            delegate.artifactId("commons-email")
+                            delegate.version("1.4")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.dom4j")
+                            delegate.artifactId("dom4j")
+                            delegate.version("2.0.0")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("javax.validation")
+                            delegate.artifactId("validation-api")
+                            delegate.version("1.1.0.Final")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.hibernate")
+                            delegate.artifactId("hibernate-validator")
+                            delegate.version("5.2.0.Final")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("net.sourceforge.jexcelapi")
+                            delegate.artifactId("jxl")
+                            delegate.version("2.6.12")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.poi")
+                            delegate.artifactId("poi")
+                            delegate.version("3.13")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.poi")
+                            delegate.artifactId("poi-ooxml")
+                            delegate.version("3.13")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("org.apache.poi")
+                            delegate.artifactId("poi-ooxml-schemas")
+                            delegate.version("3.13")
+                        }
+                        //httpclient
+                        delegate.dependency {
+                            delegate.groupId("org.apache.httpcomponents")
+                            delegate.artifactId("httpclient")
+                            delegate.version("4.5")
+                        }
+                        //htmlparser
+                        delegate.dependency {
+                            delegate.groupId("org.htmlparser")
+                            delegate.artifactId("htmlparser")
+                            delegate.version("2.1")
+                        }
+                        //servlet
+                        delegate.dependency {
+                            delegate.groupId("javax.servlet")
+                            delegate.artifactId("javax.servlet-api")
+                            delegate.version("3.1.0")
+                        }
+                        delegate.dependency {
+                            delegate.groupId("javax.servlet.jsp")
+                            delegate.artifactId("javax.servlet.jsp-api")
+                            delegate.version("2.3.1")
+                        }
+                        delegate.dependency {
+                                delegate.groupId("org.jboss.resteasy")
+                                delegate.artifactId("resteasy-jaxrs")
+                                delegate.version("3.0.11.Final")
+                                delegate.exclusions{
+	                                delegate.exclusion{
+	                                    delegate.groupId("org.apache.httpcomponents")
+	                                    delegate.artifactId("httpclient")
+	                                }
+	                            }
+                        }    
+                    	delegate.dependency {
+                                delegate.groupId("org.jboss.resteasy")
+                                delegate.artifactId("resteasy-client")
+                                delegate.version("3.0.11.Final")
+                        } 
+                    	delegate.dependency {
+                                delegate.groupId("org.jboss.resteasy")
+                                delegate.artifactId("resteasy-jackson-provider")
+                                delegate.version("3.0.11.Final")
+                        }                        
+                    	delegate.dependency {
+                                delegate.groupId("org.apache.tomcat.embed")
+                                delegate.artifactId("tomcat-embed-core")
+                                delegate.version("8.0.21")
+                        }   
+                    	delegate.dependency {
+                                delegate.groupId("org.apache.tomcat.embed")
+                                delegate.artifactId("tomcat-embed-logging-juli")
+                                delegate.version("8.0.21")
+                        } 
+                        delegate.dependency {
+                                delegate.groupId("org.quartz-scheduler")
+                                delegate.artifactId("quartz")
+                                delegate.version("2.2.1")
+                        }
+                        //elasticjob
+                        delegate.dependency {
+                            delegate.groupId("com.dangdang")
+                            delegate.artifactId("elastic-job-lite-core")
+                            delegate.version("${elasticjobVersion}")
+                            delegate.exclusions{
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-core")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-json")
+                                }
+                                 
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-server")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-servlet")
+                                }
+                                
+                                delegate.exclusion{
+                                    delegate.groupId("org.eclipse.jetty.aggregate")
+                                    delegate.artifactId("jetty-all-server")
+                                }
+                            }
+                        } 
+                        delegate.dependency {
+                            delegate.groupId("com.dangdang")
+                            delegate.artifactId("elastic-job-lite-spring")
+                            delegate.version("${elasticjobVersion}")
+                            delegate.exclusions{
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-core")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-json")
+                                }
+                                 
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-server")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("com.sun.jersey")
+                                    delegate.artifactId("jersey-servlet")
+                                }
+                                delegate.exclusion{
+                                    delegate.groupId("org.eclipse.jetty.aggregate")
+                                    delegate.artifactId("jetty-all-server")
+                                }
+                            }
+                        }      
+                    	                                                                                                       
+ 			
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url publishURL
+            credentials {
+                username = publishUserName
+                password = publishUserPassword
+            }
+        }
+    }
+}

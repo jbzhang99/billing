@@ -1,0 +1,27 @@
+dependencies { 
+    compile project(":mmp-api") 
+ 
+    compile 'org.mybatis:mybatis:3.3.0' 
+    compile 'org.mybatis:mybatis-spring:1.2.3' 
+    compile 'mysql:mysql-connector-java:5.1.36' 
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE' 
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE' 
+	//compile 'com.ai:eBilling-baseOmc:0.1-SNAPSHOT'
+
+ 
+//    compile ('com.ai.runner.util:runner-util:1.0.7-SNAPSHOT' ){
+//    	exclude group: 'com.ai.runner', module: 'runner-sdk'
+//    }
+    compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
+    
+ 	compile 'com.google.code.gson:gson:2.2.4'
+ 	compile 'org.apache.logging.log4j:log4j-core:2.3'
+ 	//compile 'net.sf.json-lib:json-lib:2.4'
+	
+    testCompile( 
+            "org.springframework:spring-test:4.1.7.RELEASE", 
+            "junit:junit:4.12" 
+    ) 
+} 
+ 
+ 

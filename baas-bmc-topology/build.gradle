@@ -1,0 +1,88 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.7
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+
+repositories {
+    maven{ url "http://10.1.228.199:18081/nexus/content/groups/public/"  }
+}
+
+configurations {
+   provided
+   compile.extendsFrom provided
+}
+
+configurations.all {
+	resolutionStrategy.cacheChangingModulesFor 1, 'minutes'
+}
+
+dependencies{
+    // 单包，无第三方依赖  
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'mysql:mysql-connector-java:5.1.34'
+    compile 'log4j:log4j:1.2.17'
+    
+    // 框架级依赖
+    compile 'org.apache.kafka:kafka_2.10:0.8.2.1'
+    compile 'org.apache.storm:storm-kafka:0.9.6'
+    compile 'com.ai.baas.storm:baas-storm:0.2-SNAPSHOT'
+    compile 'commons-dbutils:commons-dbutils:1.5'
+    compile 'com.ai.baas:baas-dshm-sdk:2.0-SNAPSHOT'
+    compile ('com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT'){
+    	exclude group: 'org.springframework', module: 'spring-context'
+    	exclude group: 'org.springframework', module: 'spring-context'
+    	exclude group: 'org.postgresql', module: 'postgresql'
+    	exclude group: 'org.apache.commons', module: 'commons-email'
+    	exclude group: 'org.hibernate', module: 'hibernate-validator'
+    	exclude group: 'org.jboss.netty', module: 'netty'
+    	exclude group: 'com.alibaba', module: 'dubbox'
+    	exclude group: 'com.ai', module: 'ipaas-dss'
+    	exclude group: 'com.ai', module: 'ipaas-ses'
+    }
+    //compile 'com.ai:paas-mds-ex-auth:1.2.2-SNAPSHOT'
+    compile 'org.apache.hbase:hbase-client:1.1.2'
+    
+   // compile 'com.ai:ipaas-rcs:0.2.4.13-SNAPSHOT'
+    //compile 'com.ai:ipaas-mds:0.3-SNAPSHOT'
+   // compile 'com.ai:ipaas-mcs:0.2.2.1-SNAPSHOT'
+    
+    // 不打包依赖
+    provided 'org.apache.storm:storm-core:0.9.6'
+    provided 'org.apache.logging.log4j:log4j:2.4'
+    provided 'org.apache.logging.log4j:log4j-slf4j-impl:2.4'
+    provided 'org.slf4j:slf4j-api:1.7.12'
+    provided 'org.slf4j:slf4j-log4j12:1.7.6'
+    provided 'org.apache.logging.log4j:log4j-api:2.4'
+    provided 'org.apache.logging.log4j:log4j-jcl:2.3'
+    provided 'org.apache.logging.log4j:log4j-core:2.3'
+}
+
+jar {
+    dependsOn configurations.runtime
+    from {
+        (configurations.runtime - configurations.provided).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    {
+    	exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+          
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ['src/main/java']}
+        resources { srcDirs = ['src/main/resources']}
+    }
+    test {
+        java { srcDirs = ['src/test/java']}
+        resources { srcDirs = ['src/test/resources']}
+    }
+}

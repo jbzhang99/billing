@@ -1,0 +1,8 @@
+<property>
+    <name>hbase.rootdir</name>
+    <value>file:///data/thrdsoft01/tools/hbase</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>/home/testuser/zookeeper</value>
+  </property>

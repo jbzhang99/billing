@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.ccp.dao.mapper.interfaces.OmcScoutActionDefineMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.ccp.dao.mapper.bo.OmcScoutActionDefine" >
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="scout_type" property="scoutType" jdbcType="VARCHAR" />
+    <result column="business_code" property="businessCode" jdbcType="VARCHAR" />
+    <result column="scout_rule" property="scoutRule" jdbcType="VARCHAR" />
+    <result column="inf_commond" property="infCommond" jdbcType="VARCHAR" />
+    <result column="sms_template" property="smsTemplate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tenant_id, scout_type, business_code, scout_rule, inf_commond, sms_template
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutActionDefineCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from omc_scout_action_define
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutActionDefineCriteria" >
+    delete from omc_scout_action_define
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutActionDefine" >
+    insert into omc_scout_action_define (tenant_id, scout_type, business_code, 
+      scout_rule, inf_commond, sms_template
+      )
+    values (#{tenantId,jdbcType=VARCHAR}, #{scoutType,jdbcType=VARCHAR}, #{businessCode,jdbcType=VARCHAR}, 
+      #{scoutRule,jdbcType=VARCHAR}, #{infCommond,jdbcType=VARCHAR}, #{smsTemplate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutActionDefine" >
+    insert into omc_scout_action_define
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="scoutType != null" >
+        scout_type,
+      </if>
+      <if test="businessCode != null" >
+        business_code,
+      </if>
+      <if test="scoutRule != null" >
+        scout_rule,
+      </if>
+      <if test="infCommond != null" >
+        inf_commond,
+      </if>
+      <if test="smsTemplate != null" >
+        sms_template,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoutType != null" >
+        #{scoutType,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null" >
+        #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="scoutRule != null" >
+        #{scoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="infCommond != null" >
+        #{infCommond,jdbcType=VARCHAR},
+      </if>
+      <if test="smsTemplate != null" >
+        #{smsTemplate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutActionDefineCriteria" resultType="java.lang.Integer" >
+    select count(*) from omc_scout_action_define
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update omc_scout_action_define
+    <set >
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoutType != null" >
+        scout_type = #{record.scoutType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessCode != null" >
+        business_code = #{record.businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoutRule != null" >
+        scout_rule = #{record.scoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infCommond != null" >
+        inf_commond = #{record.infCommond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsTemplate != null" >
+        sms_template = #{record.smsTemplate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update omc_scout_action_define
+    set tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      scout_type = #{record.scoutType,jdbcType=VARCHAR},
+      business_code = #{record.businessCode,jdbcType=VARCHAR},
+      scout_rule = #{record.scoutRule,jdbcType=VARCHAR},
+      inf_commond = #{record.infCommond,jdbcType=VARCHAR},
+      sms_template = #{record.smsTemplate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

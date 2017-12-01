@@ -1,0 +1,35 @@
+dependencies {
+    compile project(":amc-api")
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+    
+    compile ('com.ai.baas.storm:baas-storm:0.1.2-SNAPSHOT'){
+        exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+        exclude group: 'com.sun.jersey', module: 'jersey-core'
+        exclude group: 'com.sun.jersey', module: 'jersey-json'
+        exclude group: 'com.sun.jersey', module: 'jersey-server'
+    }
+    compile 'com.ai.baas:baas-dshm-sdk:2.0-SNAPSHOT'
+    compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
+//    compile 'com.ai.opt.sdk:opt-sdk:1.0-SNAPSHOT'
+    compile 'com.ai.opt.sys:subject:1.0.0-SNAPSHOT'
+    compile 'com.ai.opt.sys:gnsubject:1.0.1-SNAPSHOT'
+    //中信公共服务调用
+    compile 'com.ai.opt.sys:citicrestcommon:2.0-SNAPSHOT'
+    
+    compile 'com.ai.baas.bmc:queryidinfo:2.0-SNAPSHOT'
+    compile 'com.ai.baas.bmc:baseInfo:2.0-SNAPSHOT'
+    
+    testCompile(
+            "org.springframework:spring-test:4.1.7.RELEASE",
+            "junit:junit:4.12"
+    )
+
+    
+
+
+
+}

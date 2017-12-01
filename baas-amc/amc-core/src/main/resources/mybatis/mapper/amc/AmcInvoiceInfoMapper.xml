@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcInvoiceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfo" >
+    <id column="INVOICE_INFO_ID" property="invoiceInfoId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="ISSUE_TYPE" property="issueType" jdbcType="INTEGER" />
+    <result column="INVOICE_TYPE" property="invoiceType" jdbcType="INTEGER" />
+    <result column="LINK_NAME" property="linkName" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="POST_CODE" property="postCode" jdbcType="VARCHAR" />
+    <result column="MOBILE_NO" property="mobileNo" jdbcType="VARCHAR" />
+    <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="TAX_REG_NO" property="taxRegNo" jdbcType="VARCHAR" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="BANK_ACCT_NO" property="bankAcctNo" jdbcType="VARCHAR" />
+    <result column="REG_ADDRESS" property="regAddress" jdbcType="VARCHAR" />
+    <result column="REG_PHONE" property="regPhone" jdbcType="VARCHAR" />
+    <result column="LICENSE_ATTACH_ID" property="licenseAttachId" jdbcType="VARCHAR" />
+    <result column="LICENSE_ATTACH_TYPE" property="licenseAttachType" jdbcType="VARCHAR" />
+    <result column="TAX_REG_ATTACH_ID" property="taxRegAttachId" jdbcType="VARCHAR" />
+    <result column="TAX_REG_ATTACH_TYPE" property="taxRegAttachType" jdbcType="VARCHAR" />
+    <result column="TAXPAYER_ATTACH_ID" property="taxpayerAttachId" jdbcType="VARCHAR" />
+    <result column="TAXPAYER_ATTACH_TYPE" property="taxpayerAttachType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    INVOICE_INFO_ID, TENANT_ID, ACCT_ID, CUST_ID, TITLE, ISSUE_TYPE, INVOICE_TYPE, LINK_NAME, 
+    ADDRESS, POST_CODE, MOBILE_NO, PHONE_NO, EMAIL, TAX_REG_NO, BANK_NAME, BANK_ACCT_NO, 
+    REG_ADDRESS, REG_PHONE, LICENSE_ATTACH_ID, LICENSE_ATTACH_TYPE, TAX_REG_ATTACH_ID, 
+    TAX_REG_ATTACH_TYPE, TAXPAYER_ATTACH_ID, TAXPAYER_ATTACH_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_invoice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from amc_invoice_info
+    where INVOICE_INFO_ID = #{invoiceInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from amc_invoice_info
+    where INVOICE_INFO_ID = #{invoiceInfoId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfoCriteria" >
+    delete from amc_invoice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfo" >
+    insert into amc_invoice_info (INVOICE_INFO_ID, TENANT_ID, ACCT_ID, 
+      CUST_ID, TITLE, ISSUE_TYPE, 
+      INVOICE_TYPE, LINK_NAME, ADDRESS, 
+      POST_CODE, MOBILE_NO, PHONE_NO, 
+      EMAIL, TAX_REG_NO, BANK_NAME, 
+      BANK_ACCT_NO, REG_ADDRESS, REG_PHONE, 
+      LICENSE_ATTACH_ID, LICENSE_ATTACH_TYPE, TAX_REG_ATTACH_ID, 
+      TAX_REG_ATTACH_TYPE, TAXPAYER_ATTACH_ID, TAXPAYER_ATTACH_TYPE
+      )
+    values (#{invoiceInfoId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{acctId,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{issueType,jdbcType=INTEGER}, 
+      #{invoiceType,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{postCode,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{taxRegNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{bankAcctNo,jdbcType=VARCHAR}, #{regAddress,jdbcType=VARCHAR}, #{regPhone,jdbcType=VARCHAR}, 
+      #{licenseAttachId,jdbcType=VARCHAR}, #{licenseAttachType,jdbcType=VARCHAR}, #{taxRegAttachId,jdbcType=VARCHAR}, 
+      #{taxRegAttachType,jdbcType=VARCHAR}, #{taxpayerAttachId,jdbcType=VARCHAR}, #{taxpayerAttachType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfo" >
+    insert into amc_invoice_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceInfoId != null" >
+        INVOICE_INFO_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="issueType != null" >
+        ISSUE_TYPE,
+      </if>
+      <if test="invoiceType != null" >
+        INVOICE_TYPE,
+      </if>
+      <if test="linkName != null" >
+        LINK_NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="postCode != null" >
+        POST_CODE,
+      </if>
+      <if test="mobileNo != null" >
+        MOBILE_NO,
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="taxRegNo != null" >
+        TAX_REG_NO,
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME,
+      </if>
+      <if test="bankAcctNo != null" >
+        BANK_ACCT_NO,
+      </if>
+      <if test="regAddress != null" >
+        REG_ADDRESS,
+      </if>
+      <if test="regPhone != null" >
+        REG_PHONE,
+      </if>
+      <if test="licenseAttachId != null" >
+        LICENSE_ATTACH_ID,
+      </if>
+      <if test="licenseAttachType != null" >
+        LICENSE_ATTACH_TYPE,
+      </if>
+      <if test="taxRegAttachId != null" >
+        TAX_REG_ATTACH_ID,
+      </if>
+      <if test="taxRegAttachType != null" >
+        TAX_REG_ATTACH_TYPE,
+      </if>
+      <if test="taxpayerAttachId != null" >
+        TAXPAYER_ATTACH_ID,
+      </if>
+      <if test="taxpayerAttachType != null" >
+        TAXPAYER_ATTACH_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceInfoId != null" >
+        #{invoiceInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="issueType != null" >
+        #{issueType,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceType != null" >
+        #{invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegNo != null" >
+        #{taxRegNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcctNo != null" >
+        #{bankAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddress != null" >
+        #{regAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="regPhone != null" >
+        #{regPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseAttachId != null" >
+        #{licenseAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseAttachType != null" >
+        #{licenseAttachType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegAttachId != null" >
+        #{taxRegAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegAttachType != null" >
+        #{taxRegAttachType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxpayerAttachId != null" >
+        #{taxpayerAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxpayerAttachType != null" >
+        #{taxpayerAttachType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_invoice_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_invoice_info
+    <set >
+      <if test="record.invoiceInfoId != null" >
+        INVOICE_INFO_ID = #{record.invoiceInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issueType != null" >
+        ISSUE_TYPE = #{record.issueType,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoiceType != null" >
+        INVOICE_TYPE = #{record.invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkName != null" >
+        LINK_NAME = #{record.linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postCode != null" >
+        POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileNo != null" >
+        MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNo != null" >
+        PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxRegNo != null" >
+        TAX_REG_NO = #{record.taxRegNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAcctNo != null" >
+        BANK_ACCT_NO = #{record.bankAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regAddress != null" >
+        REG_ADDRESS = #{record.regAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regPhone != null" >
+        REG_PHONE = #{record.regPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseAttachId != null" >
+        LICENSE_ATTACH_ID = #{record.licenseAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseAttachType != null" >
+        LICENSE_ATTACH_TYPE = #{record.licenseAttachType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxRegAttachId != null" >
+        TAX_REG_ATTACH_ID = #{record.taxRegAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxRegAttachType != null" >
+        TAX_REG_ATTACH_TYPE = #{record.taxRegAttachType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxpayerAttachId != null" >
+        TAXPAYER_ATTACH_ID = #{record.taxpayerAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxpayerAttachType != null" >
+        TAXPAYER_ATTACH_TYPE = #{record.taxpayerAttachType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_invoice_info
+    set INVOICE_INFO_ID = #{record.invoiceInfoId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      ISSUE_TYPE = #{record.issueType,jdbcType=INTEGER},
+      INVOICE_TYPE = #{record.invoiceType,jdbcType=INTEGER},
+      LINK_NAME = #{record.linkName,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      POST_CODE = #{record.postCode,jdbcType=VARCHAR},
+      MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      TAX_REG_NO = #{record.taxRegNo,jdbcType=VARCHAR},
+      BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      BANK_ACCT_NO = #{record.bankAcctNo,jdbcType=VARCHAR},
+      REG_ADDRESS = #{record.regAddress,jdbcType=VARCHAR},
+      REG_PHONE = #{record.regPhone,jdbcType=VARCHAR},
+      LICENSE_ATTACH_ID = #{record.licenseAttachId,jdbcType=VARCHAR},
+      LICENSE_ATTACH_TYPE = #{record.licenseAttachType,jdbcType=VARCHAR},
+      TAX_REG_ATTACH_ID = #{record.taxRegAttachId,jdbcType=VARCHAR},
+      TAX_REG_ATTACH_TYPE = #{record.taxRegAttachType,jdbcType=VARCHAR},
+      TAXPAYER_ATTACH_ID = #{record.taxpayerAttachId,jdbcType=VARCHAR},
+      TAXPAYER_ATTACH_TYPE = #{record.taxpayerAttachType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfo" >
+    update amc_invoice_info
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="issueType != null" >
+        ISSUE_TYPE = #{issueType,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceType != null" >
+        INVOICE_TYPE = #{invoiceType,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null" >
+        LINK_NAME = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        POST_CODE = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null" >
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegNo != null" >
+        TAX_REG_NO = #{taxRegNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcctNo != null" >
+        BANK_ACCT_NO = #{bankAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="regAddress != null" >
+        REG_ADDRESS = #{regAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="regPhone != null" >
+        REG_PHONE = #{regPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseAttachId != null" >
+        LICENSE_ATTACH_ID = #{licenseAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseAttachType != null" >
+        LICENSE_ATTACH_TYPE = #{licenseAttachType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegAttachId != null" >
+        TAX_REG_ATTACH_ID = #{taxRegAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegAttachType != null" >
+        TAX_REG_ATTACH_TYPE = #{taxRegAttachType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxpayerAttachId != null" >
+        TAXPAYER_ATTACH_ID = #{taxpayerAttachId,jdbcType=VARCHAR},
+      </if>
+      <if test="taxpayerAttachType != null" >
+        TAXPAYER_ATTACH_TYPE = #{taxpayerAttachType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where INVOICE_INFO_ID = #{invoiceInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcInvoiceInfo" >
+    update amc_invoice_info
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      ACCT_ID = #{acctId,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      ISSUE_TYPE = #{issueType,jdbcType=INTEGER},
+      INVOICE_TYPE = #{invoiceType,jdbcType=INTEGER},
+      LINK_NAME = #{linkName,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POST_CODE = #{postCode,jdbcType=VARCHAR},
+      MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      TAX_REG_NO = #{taxRegNo,jdbcType=VARCHAR},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      BANK_ACCT_NO = #{bankAcctNo,jdbcType=VARCHAR},
+      REG_ADDRESS = #{regAddress,jdbcType=VARCHAR},
+      REG_PHONE = #{regPhone,jdbcType=VARCHAR},
+      LICENSE_ATTACH_ID = #{licenseAttachId,jdbcType=VARCHAR},
+      LICENSE_ATTACH_TYPE = #{licenseAttachType,jdbcType=VARCHAR},
+      TAX_REG_ATTACH_ID = #{taxRegAttachId,jdbcType=VARCHAR},
+      TAX_REG_ATTACH_TYPE = #{taxRegAttachType,jdbcType=VARCHAR},
+      TAXPAYER_ATTACH_ID = #{taxpayerAttachId,jdbcType=VARCHAR},
+      TAXPAYER_ATTACH_TYPE = #{taxpayerAttachType,jdbcType=VARCHAR}
+    where INVOICE_INFO_ID = #{invoiceInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

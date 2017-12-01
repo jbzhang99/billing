@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.bmc.resdeposit.dao.interfaces.FailMsgLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLog" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SYSTEM_ID" property="systemId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="MSG" property="msg" jdbcType="VARCHAR" />
+    <result column="ERROR_MSG" property="errorMsg" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="DATE" property="date" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SYSTEM_ID, TENANT_ID, MSG, ERROR_MSG, TYPE, STATUS, DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from fail_msg_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fail_msg_log
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Integer" >
+    delete from fail_msg_log
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLogCriteria" >
+    delete from fail_msg_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLog" >
+    insert into fail_msg_log (ID, SYSTEM_ID, TENANT_ID, 
+      MSG, ERROR_MSG, TYPE, 
+      STATUS, DATE)
+    values (#{id,jdbcType=INTEGER}, #{systemId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=VARCHAR}, #{errorMsg,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLog" >
+    insert into fail_msg_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="systemId != null" >
+        SYSTEM_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="msg != null" >
+        MSG,
+      </if>
+      <if test="errorMsg != null" >
+        ERROR_MSG,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="date != null" >
+        DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from fail_msg_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fail_msg_log
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.systemId != null" >
+        SYSTEM_ID = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msg != null" >
+        MSG = #{record.msg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorMsg != null" >
+        ERROR_MSG = #{record.errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        DATE = #{record.date,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fail_msg_log
+    set ID = #{record.id,jdbcType=INTEGER},
+      SYSTEM_ID = #{record.systemId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      MSG = #{record.msg,jdbcType=VARCHAR},
+      ERROR_MSG = #{record.errorMsg,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      DATE = #{record.date,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLog" >
+    update fail_msg_log
+    <set >
+      <if test="systemId != null" >
+        SYSTEM_ID = #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        MSG = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null" >
+        ERROR_MSG = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        DATE = #{date,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.runner.center.bmc.resdeposit.dao.mapper.bo.FailMsgLog" >
+    update fail_msg_log
+    set SYSTEM_ID = #{systemId,jdbcType=VARCHAR},
+      TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      MSG = #{msg,jdbcType=VARCHAR},
+      ERROR_MSG = #{errorMsg,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      DATE = #{date,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

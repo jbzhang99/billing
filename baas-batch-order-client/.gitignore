@@ -1,0 +1,11 @@
+/build/
+/bin/
+.classpath
+.gradle
+.project
+.settings
+/logs/
+/baas-batch-dubbo-registry.cache
+/baas-batch-dubbo-registry.cache.lock
+/baas-bmc-dubbo-registry.cache
+/baas-bmc-dubbo-registry.cache.lock

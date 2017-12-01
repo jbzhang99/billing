@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.abm.dao.mapper.interfaces.AmcResBookMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.abm.dao.mapper.bo.AmcResBook" >
+    <id column="BOOK_ID" property="bookId" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="OWNER_ID" property="ownerId" jdbcType="BIGINT" />
+    <result column="OWNER_TYPE" property="ownerType" jdbcType="INTEGER" />
+    <result column="SUBJECT_ID" property="subjectId" jdbcType="VARCHAR" />
+    <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR" />
+    <result column="RESOURCE_TYPE" property="resourceType" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="EFFECT_TIME" property="effectTime" jdbcType="TIMESTAMP" />
+    <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="DEDUCT_AMOUNT" property="deductAmount" jdbcType="DECIMAL" />
+    <result column="PRESENT_AMOUNT" property="presentAmount" jdbcType="DECIMAL" />
+    <result column="EXCHANGE_AMOUNT" property="exchangeAmount" jdbcType="DECIMAL" />
+    <result column="BOOK_STATUS" property="bookStatus" jdbcType="VARCHAR" />
+    <result column="ALLOW_PRESENT" property="allowPresent" jdbcType="INTEGER" />
+    <result column="ALLOW_CONVERT" property="allowConvert" jdbcType="INTEGER" />
+    <result column="ALLOW_CLEAR" property="allowClear" jdbcType="INTEGER" />
+    <result column="SOURCE_TYPE" property="sourceType" jdbcType="INTEGER" />
+    <result column="SOURCE_ID" property="sourceId" jdbcType="VARCHAR" />
+    <result column="BALANCE" property="balance" jdbcType="DECIMAL" />
+    <result column="ACCT_MONTH" property="acctMonth" jdbcType="VARCHAR" />
+    <result column="USE_VERSION" property="useVersion" jdbcType="BIGINT" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BOOK_ID, TENANT_ID, OWNER_ID, OWNER_TYPE, SUBJECT_ID, GOODS_TYPE, RESOURCE_TYPE, 
+    CREATE_TIME, EFFECT_TIME, EXPIRE_TIME, TOTAL_AMOUNT, DEDUCT_AMOUNT, PRESENT_AMOUNT, 
+    EXCHANGE_AMOUNT, BOOK_STATUS, ALLOW_PRESENT, ALLOW_CONVERT, ALLOW_CLEAR, SOURCE_TYPE, 
+    SOURCE_ID, BALANCE, ACCT_MONTH, USE_VERSION, LAST_UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBookCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_res_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from amc_res_book
+    where BOOK_ID = #{bookId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from amc_res_book
+    where BOOK_ID = #{bookId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBookCriteria" >
+    delete from amc_res_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBook" >
+    insert into amc_res_book (BOOK_ID, TENANT_ID, OWNER_ID, 
+      OWNER_TYPE, SUBJECT_ID, GOODS_TYPE, 
+      RESOURCE_TYPE, CREATE_TIME, EFFECT_TIME, 
+      EXPIRE_TIME, TOTAL_AMOUNT, DEDUCT_AMOUNT, 
+      PRESENT_AMOUNT, EXCHANGE_AMOUNT, BOOK_STATUS, 
+      ALLOW_PRESENT, ALLOW_CONVERT, ALLOW_CLEAR, 
+      SOURCE_TYPE, SOURCE_ID, BALANCE, 
+      ACCT_MONTH, USE_VERSION, LAST_UPDATE_TIME
+      )
+    values (#{bookId,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{ownerId,jdbcType=BIGINT}, 
+      #{ownerType,jdbcType=INTEGER}, #{subjectId,jdbcType=VARCHAR}, #{goodsType,jdbcType=VARCHAR}, 
+      #{resourceType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{effectTime,jdbcType=TIMESTAMP}, 
+      #{expireTime,jdbcType=TIMESTAMP}, #{totalAmount,jdbcType=DECIMAL}, #{deductAmount,jdbcType=DECIMAL}, 
+      #{presentAmount,jdbcType=DECIMAL}, #{exchangeAmount,jdbcType=DECIMAL}, #{bookStatus,jdbcType=VARCHAR}, 
+      #{allowPresent,jdbcType=INTEGER}, #{allowConvert,jdbcType=INTEGER}, #{allowClear,jdbcType=INTEGER}, 
+      #{sourceType,jdbcType=INTEGER}, #{sourceId,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, 
+      #{acctMonth,jdbcType=VARCHAR}, #{useVersion,jdbcType=BIGINT}, #{lastUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBook" >
+    insert into amc_res_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        BOOK_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="ownerId != null" >
+        OWNER_ID,
+      </if>
+      <if test="ownerType != null" >
+        OWNER_TYPE,
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID,
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE,
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="effectTime != null" >
+        EFFECT_TIME,
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="deductAmount != null" >
+        DEDUCT_AMOUNT,
+      </if>
+      <if test="presentAmount != null" >
+        PRESENT_AMOUNT,
+      </if>
+      <if test="exchangeAmount != null" >
+        EXCHANGE_AMOUNT,
+      </if>
+      <if test="bookStatus != null" >
+        BOOK_STATUS,
+      </if>
+      <if test="allowPresent != null" >
+        ALLOW_PRESENT,
+      </if>
+      <if test="allowConvert != null" >
+        ALLOW_CONVERT,
+      </if>
+      <if test="allowClear != null" >
+        ALLOW_CLEAR,
+      </if>
+      <if test="sourceType != null" >
+        SOURCE_TYPE,
+      </if>
+      <if test="sourceId != null" >
+        SOURCE_ID,
+      </if>
+      <if test="balance != null" >
+        BALANCE,
+      </if>
+      <if test="acctMonth != null" >
+        ACCT_MONTH,
+      </if>
+      <if test="useVersion != null" >
+        USE_VERSION,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="ownerType != null" >
+        #{ownerType,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectTime != null" >
+        #{effectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductAmount != null" >
+        #{deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="presentAmount != null" >
+        #{presentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="exchangeAmount != null" >
+        #{exchangeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="allowPresent != null" >
+        #{allowPresent,jdbcType=INTEGER},
+      </if>
+      <if test="allowConvert != null" >
+        #{allowConvert,jdbcType=INTEGER},
+      </if>
+      <if test="allowClear != null" >
+        #{allowClear,jdbcType=INTEGER},
+      </if>
+      <if test="sourceType != null" >
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="acctMonth != null" >
+        #{acctMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="useVersion != null" >
+        #{useVersion,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBookCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_res_book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_res_book
+    <set >
+      <if test="record.bookId != null" >
+        BOOK_ID = #{record.bookId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerId != null" >
+        OWNER_ID = #{record.ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.ownerType != null" >
+        OWNER_TYPE = #{record.ownerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.subjectId != null" >
+        SUBJECT_ID = #{record.subjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsType != null" >
+        GOODS_TYPE = #{record.goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceType != null" >
+        RESOURCE_TYPE = #{record.resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.effectTime != null" >
+        EFFECT_TIME = #{record.effectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireTime != null" >
+        EXPIRE_TIME = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalAmount != null" >
+        TOTAL_AMOUNT = #{record.totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deductAmount != null" >
+        DEDUCT_AMOUNT = #{record.deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.presentAmount != null" >
+        PRESENT_AMOUNT = #{record.presentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.exchangeAmount != null" >
+        EXCHANGE_AMOUNT = #{record.exchangeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bookStatus != null" >
+        BOOK_STATUS = #{record.bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allowPresent != null" >
+        ALLOW_PRESENT = #{record.allowPresent,jdbcType=INTEGER},
+      </if>
+      <if test="record.allowConvert != null" >
+        ALLOW_CONVERT = #{record.allowConvert,jdbcType=INTEGER},
+      </if>
+      <if test="record.allowClear != null" >
+        ALLOW_CLEAR = #{record.allowClear,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceType != null" >
+        SOURCE_TYPE = #{record.sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceId != null" >
+        SOURCE_ID = #{record.sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null" >
+        BALANCE = #{record.balance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.acctMonth != null" >
+        ACCT_MONTH = #{record.acctMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useVersion != null" >
+        USE_VERSION = #{record.useVersion,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_res_book
+    set BOOK_ID = #{record.bookId,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      OWNER_ID = #{record.ownerId,jdbcType=BIGINT},
+      OWNER_TYPE = #{record.ownerType,jdbcType=INTEGER},
+      SUBJECT_ID = #{record.subjectId,jdbcType=VARCHAR},
+      GOODS_TYPE = #{record.goodsType,jdbcType=VARCHAR},
+      RESOURCE_TYPE = #{record.resourceType,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      EFFECT_TIME = #{record.effectTime,jdbcType=TIMESTAMP},
+      EXPIRE_TIME = #{record.expireTime,jdbcType=TIMESTAMP},
+      TOTAL_AMOUNT = #{record.totalAmount,jdbcType=DECIMAL},
+      DEDUCT_AMOUNT = #{record.deductAmount,jdbcType=DECIMAL},
+      PRESENT_AMOUNT = #{record.presentAmount,jdbcType=DECIMAL},
+      EXCHANGE_AMOUNT = #{record.exchangeAmount,jdbcType=DECIMAL},
+      BOOK_STATUS = #{record.bookStatus,jdbcType=VARCHAR},
+      ALLOW_PRESENT = #{record.allowPresent,jdbcType=INTEGER},
+      ALLOW_CONVERT = #{record.allowConvert,jdbcType=INTEGER},
+      ALLOW_CLEAR = #{record.allowClear,jdbcType=INTEGER},
+      SOURCE_TYPE = #{record.sourceType,jdbcType=INTEGER},
+      SOURCE_ID = #{record.sourceId,jdbcType=VARCHAR},
+      BALANCE = #{record.balance,jdbcType=DECIMAL},
+      ACCT_MONTH = #{record.acctMonth,jdbcType=VARCHAR},
+      USE_VERSION = #{record.useVersion,jdbcType=BIGINT},
+      LAST_UPDATE_TIME = #{record.lastUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBook" >
+    update amc_res_book
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        OWNER_ID = #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="ownerType != null" >
+        OWNER_TYPE = #{ownerType,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID = #{subjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        RESOURCE_TYPE = #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effectTime != null" >
+        EFFECT_TIME = #{effectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null" >
+        EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deductAmount != null" >
+        DEDUCT_AMOUNT = #{deductAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="presentAmount != null" >
+        PRESENT_AMOUNT = #{presentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="exchangeAmount != null" >
+        EXCHANGE_AMOUNT = #{exchangeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="bookStatus != null" >
+        BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="allowPresent != null" >
+        ALLOW_PRESENT = #{allowPresent,jdbcType=INTEGER},
+      </if>
+      <if test="allowConvert != null" >
+        ALLOW_CONVERT = #{allowConvert,jdbcType=INTEGER},
+      </if>
+      <if test="allowClear != null" >
+        ALLOW_CLEAR = #{allowClear,jdbcType=INTEGER},
+      </if>
+      <if test="sourceType != null" >
+        SOURCE_TYPE = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null" >
+        SOURCE_ID = #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        BALANCE = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="acctMonth != null" >
+        ACCT_MONTH = #{acctMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="useVersion != null" >
+        USE_VERSION = #{useVersion,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BOOK_ID = #{bookId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.abm.dao.mapper.bo.AmcResBook" >
+    update amc_res_book
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      OWNER_ID = #{ownerId,jdbcType=BIGINT},
+      OWNER_TYPE = #{ownerType,jdbcType=INTEGER},
+      SUBJECT_ID = #{subjectId,jdbcType=VARCHAR},
+      GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      RESOURCE_TYPE = #{resourceType,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      EFFECT_TIME = #{effectTime,jdbcType=TIMESTAMP},
+      EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      DEDUCT_AMOUNT = #{deductAmount,jdbcType=DECIMAL},
+      PRESENT_AMOUNT = #{presentAmount,jdbcType=DECIMAL},
+      EXCHANGE_AMOUNT = #{exchangeAmount,jdbcType=DECIMAL},
+      BOOK_STATUS = #{bookStatus,jdbcType=VARCHAR},
+      ALLOW_PRESENT = #{allowPresent,jdbcType=INTEGER},
+      ALLOW_CONVERT = #{allowConvert,jdbcType=INTEGER},
+      ALLOW_CLEAR = #{allowClear,jdbcType=INTEGER},
+      SOURCE_TYPE = #{sourceType,jdbcType=INTEGER},
+      SOURCE_ID = #{sourceId,jdbcType=VARCHAR},
+      BALANCE = #{balance,jdbcType=DECIMAL},
+      ACCT_MONTH = #{acctMonth,jdbcType=VARCHAR},
+      USE_VERSION = #{useVersion,jdbcType=BIGINT},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where BOOK_ID = #{bookId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getTableNum" resultType="java.lang.Integer" parameterType="String" >
+    select count(1) from (
+	select TABLE_NAME from INFORMATION_SCHEMA.TABLES where 
+	TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+	) a
+  </select>
+  
+  <update id="createResBookBakTable" parameterType="String">  
+     CREATE TABLE ${tableName} (
+  		  `BOOK_ID` bigint(10) NOT NULL,
+  		  `TENANT_ID` varchar(32) COLLATE utf8_bin NOT NULL,
+		  `OWNER_ID` bigint(32) NOT NULL,
+		  `OWNER_TYPE` int(2) NOT NULL,
+		  `SUBJECT_ID` varchar(8) COLLATE utf8_bin DEFAULT NULL,
+		  `GOODS_TYPE` varchar(8) COLLATE utf8_bin DEFAULT NULL,
+		  `RESOURCE_TYPE` int(3) DEFAULT NULL,
+		  `CREATE_TIME` datetime NOT NULL,
+		  `EFFECT_TIME` datetime DEFAULT NULL,
+		  `EXPIRE_TIME` datetime DEFAULT NULL,
+		  `TOTAL_AMOUNT` decimal(15,6) NOT NULL,
+		  `DEDUCT_AMOUNT` decimal(15,6) DEFAULT NULL,
+		  `PRESENT_AMOUNT` decimal(15,6) DEFAULT NULL,
+		  `EXCHANGE_AMOUNT` decimal(15,6) DEFAULT NULL,
+		  `BOOK_STATUS` varchar(2) COLLATE utf8_bin DEFAULT NULL,
+		  `ALLOW_PRESENT` int(2) DEFAULT NULL,
+		  `ALLOW_CONVERT` int(2) DEFAULT NULL,
+		  `ALLOW_CLEAR` int(2) DEFAULT NULL,
+		  `SOURCE_TYPE` int(2) DEFAULT NULL,
+		  `SOURCE_ID` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+		  `BALANCE` decimal(15,6) DEFAULT NULL,
+		  `ACCT_MONTH` varchar(6) COLLATE utf8_bin DEFAULT NULL,
+		  `USE_VERSION` bigint(10) DEFAULT NULL,
+		  `LAST_UPDATE_TIME` datetime DEFAULT NULL,
+		  `OP_TIME` datetime NOT NULL,
+		  PRIMARY KEY (`BOOK_ID`),
+		  KEY `idx_owner_id` (`OWNER_ID`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  </update>  
+  
+  <insert id="insertResBookBak" parameterType="map" >
+    insert into ${tableName} (BOOK_ID, TENANT_ID, OWNER_ID, 
+      OWNER_TYPE, SUBJECT_ID, GOODS_TYPE, 
+      RESOURCE_TYPE, CREATE_TIME, EFFECT_TIME, 
+      EXPIRE_TIME, TOTAL_AMOUNT, DEDUCT_AMOUNT, 
+      PRESENT_AMOUNT, EXCHANGE_AMOUNT, BOOK_STATUS, 
+      ALLOW_PRESENT, ALLOW_CONVERT, ALLOW_CLEAR, 
+      SOURCE_TYPE, SOURCE_ID, BALANCE, 
+      ACCT_MONTH, USE_VERSION, LAST_UPDATE_TIME, OP_TIME
+      )
+    values (#{record.bookId,jdbcType=BIGINT}, #{record.tenantId,jdbcType=VARCHAR}, #{record.ownerId,jdbcType=BIGINT}, 
+      #{record.ownerType,jdbcType=INTEGER}, #{record.subjectId,jdbcType=VARCHAR}, #{record.goodsType,jdbcType=VARCHAR}, 
+      #{record.resourceType,jdbcType=INTEGER}, #{record.createTime,jdbcType=TIMESTAMP}, #{record.effectTime,jdbcType=TIMESTAMP}, 
+      #{record.expireTime,jdbcType=TIMESTAMP}, #{record.totalAmount,jdbcType=DECIMAL}, #{record.deductAmount,jdbcType=DECIMAL}, 
+      #{record.presentAmount,jdbcType=DECIMAL}, #{record.exchangeAmount,jdbcType=DECIMAL}, #{record.bookStatus,jdbcType=VARCHAR}, 
+      #{record.allowPresent,jdbcType=INTEGER}, #{record.allowConvert,jdbcType=INTEGER}, #{record.allowClear,jdbcType=INTEGER}, 
+      #{record.sourceType,jdbcType=INTEGER}, #{record.sourceId,jdbcType=VARCHAR}, #{record.balance,jdbcType=DECIMAL}, 
+      #{record.acctMonth,jdbcType=VARCHAR}, #{record.useVersion,jdbcType=BIGINT}, #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      #{record.opTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+</mapper>

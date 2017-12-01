@@ -1,0 +1,1 @@
+INSERT INTO `rtm_src_info` VALUES ('ECITIC', 'SLB', '', '', '', null);

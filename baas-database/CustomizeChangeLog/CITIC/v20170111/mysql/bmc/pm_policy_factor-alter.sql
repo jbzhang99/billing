@@ -1,0 +1,1 @@
+alter table `pm_policy_factor` change `VAR_VALUE` `FACTOR_VALUE` varchar(64);

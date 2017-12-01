@@ -1,0 +1,1524 @@
+:dependencies
+
+------------------------------------------------------------
+Root project
+------------------------------------------------------------
+
+archives - Configuration for archive artifacts.
+No dependencies
+
+compile - Compile classpath for source set 'main'.
+Download http://10.1.228.199:18081/nexus/content/groups/public/com/ai/runner/center/mmp/manager/1.0.0-SNAPSHOT/manager-1.0.0-20160810.092700-9.pom
+Download http://10.1.228.199:18081/nexus/content/groups/public/com/ai/opt/uni/session/opt-uni-session/2.0-SNAPSHOT/opt-uni-session-2.0-20160818.095803-11.pom
+Download http://10.1.228.199:18081/nexus/content/groups/public/com/ai/opt/sdk/opt-sdk/2.1-SNAPSHOT/opt-sdk-2.1-20160810.050133-2.pom
+Download http://10.1.228.199:18081/nexus/content/groups/public/com/ai/baas/citic/uac/citicuser/1.0-SNAPSHOT/citicuser-1.0-20160705.063958-4.pom
++--- javax.servlet:javax.servlet-api:3.1.0
++--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
++--- org.json:json:20140107
++--- commons-codec:commons-codec:1.5 -> 1.9
++--- jstl:jstl:1.2
++--- com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final
+|         +--- org.jboss.resteasy:jaxrs-api:3.0.11.Final
+|         +--- org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec:1.0.1.Final
+|         +--- javax.activation:activation:1.1 -> 1.1.1
+|         +--- org.apache.httpcomponents:httpclient:4.2.6 -> 4.5
+|         |    +--- org.apache.httpcomponents:httpcore:4.4.1
+|         |    +--- commons-logging:commons-logging:1.2
+|         |    \--- commons-codec:commons-codec:1.9
+|         +--- commons-io:commons-io:2.1 -> 2.4
+|         \--- net.jcip:jcip-annotations:1.0
++--- org.javassist:javassist:3.19.0-GA
++--- com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT
+|    +--- org.slf4j:slf4j-api:1.7.12
+|    +--- commons-logging:commons-logging:1.2
+|    +--- commons-lang:commons-lang:2.6
+|    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    +--- javax.servlet:javax.servlet-api:3.1.0
+|    +--- org.owasp.antisamy:antisamy:1.5.3
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- net.sourceforge.nekohtml:nekohtml:1.9.16
+|    |    |    \--- xerces:xercesImpl:2.9.1 -> 2.10.0
+|    |    |         \--- xml-apis:xml-apis:1.4.01
+|    |    \--- commons-httpclient:commons-httpclient:3.1
+|    |         +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    \--- com.alibaba:fastjson:1.2.6
++--- com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT
+|    \--- org.jasig.cas.client:cas-client-core:3.3.3
+|         +--- org.opensaml:opensaml:2.5.1-1
+|         |    +--- org.opensaml:openws:1.4.2-1
+|         |    |    +--- org.opensaml:xmltooling:1.3.2-1
+|         |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:log4j-over-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:jul-to-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- joda-time:joda-time:1.6.2
+|         |    |    |    +--- org.bouncycastle:bcprov-jdk15:1.45
+|         |    |    |    +--- org.apache.santuario:xmlsec:1.4.4
+|         |    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|         |    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1 (*)
+|         |    |    |    +--- net.jcip:jcip-annotations:1.0
+|         |    |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    |    \--- xalan:xalan:2.7.1
+|         |    |    |         \--- xalan:serializer:2.7.1
+|         |    |    |              \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|         |    |    +--- commons-codec:commons-codec:1.3 -> 1.9
+|         |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|         |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    \--- xalan:xalan:2.7.1 (*)
+|         |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    +--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- velocity:velocity:1.5
+|         |    |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    |    \--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- org.owasp.esapi:esapi:2.0GA
+|         |    +--- xml-apis:xml-apis:1.4.01
+|         |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    +--- xml-resolver:xml-resolver:1.2
+|         |    \--- xalan:xalan:2.7.1 (*)
+|         \--- org.slf4j:slf4j-api:1.7.1 -> 1.7.12
++--- com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT
+|    +--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT
+|    |    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    |    +--- com.zaxxer:HikariCP:2.4.0
+|    |    |    \--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- com.ai:ipaas-uac:0.3
+|    |    |    \--- com.ai:ipaas-common:0.3
+|    |    |         +--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-slf4j-impl:2.2 -> 2.4
+|    |    |         |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-1.2-api:2.2
+|    |    |         |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |         |    \--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3 (*)
+|    |    |         +--- com.google.code.gson:gson:2.6.2
+|    |    |         +--- com.esotericsoftware.kryo:kryo:2.24.0
+|    |    |         |    +--- com.esotericsoftware.minlog:minlog:1.2
+|    |    |         |    \--- org.objenesis:objenesis:2.1
+|    |    |         +--- de.javakaffee:kryo-serializers:0.27
+|    |    |         |    \--- com.esotericsoftware.kryo:kryo:2.24.0 (*)
+|    |    |         +--- commons-beanutils:commons-beanutils:1.9.2
+|    |    |         |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |         |    \--- commons-collections:commons-collections:3.2.1
+|    |    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |    |         +--- org.apache.curator:curator-client:2.7.1 -> 2.10.0
+|    |    |         |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |         |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |         |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6
+|    |    |         |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |         |    |    |    \--- log4j:log4j:1.2.17
+|    |    |         |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |         |    |    +--- jline:jline:0.9.94
+|    |    |         |    |    |    \--- junit:junit:3.8.1
+|    |    |         |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |         |    \--- com.google.guava:guava:16.0.1
+|    |    |         +--- org.apache.curator:curator-framework:2.7.1 -> 2.10.0
+|    |    |         |    \--- org.apache.curator:curator-client:2.10.0 (*)
+|    |    |         +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |         +--- org.apache.commons:commons-pool2:2.2 -> 2.4.2
+|    |    |         \--- org.apache.curator:curator-recipes:2.7.1 -> 2.10.0
+|    |    |              \--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    +--- com.ai:ipaas-ccs:0.3
+|    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3
+|    |    |    |    +--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    |    |    \--- org.apache.curator:curator-recipes:2.10.0 (*)
+|    |    |    \--- com.ai:ipaas-uac:0.3 (*)
+|    |    +--- com.ai:ipaas-mcs:0.3
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3
+|    |    |    |    \--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3
+|    |    |         +--- com.ai:ipaas-common:0.3 (*)
+|    |    |         +--- redis.clients:jedis:2.8.1
+|    |    |         |    \--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         +--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mcs-comp:0.3
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3 (*)
+|    |    +--- com.ai:ipaas-dss:0.3
+|    |    |    +--- com.ai:ipaas-dss-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |    |    \--- org.mongodb:mongodb-driver:3.0.2
+|    |    |    |         +--- org.mongodb:bson:3.0.2
+|    |    |    |         \--- org.mongodb:mongodb-driver-core:3.0.2
+|    |    |    |              \--- org.mongodb:bson:3.0.2
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- redis.clients:jedis:2.8.1 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mds:0.3
+|    |    |    +--- com.ai:ipaas-mds-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    |    \--- org.apache.kafka:kafka_2.10:0.9.0.1
+|    |    |    |         +--- com.101tec:zkclient:0.7
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |    |         |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6 (*)
+|    |    |    |         |    +--- log4j:log4j:1.2.15 -> 1.2.17
+|    |    |    |         |    \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |         +--- org.apache.kafka:kafka-clients:0.9.0.1
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |    |         |    +--- org.xerial.snappy:snappy-java:1.1.1.7
+|    |    |    |         |    \--- net.jpountz.lz4:lz4:1.2.0
+|    |    |    |         +--- com.yammer.metrics:metrics-core:2.2.0
+|    |    |    |         |    \--- org.slf4j:slf4j-api:1.7.2 -> 1.7.12
+|    |    |    |         +--- org.scala-lang:scala-library:2.10.5
+|    |    |    |         +--- net.sf.jopt-simple:jopt-simple:3.2
+|    |    |    |         +--- org.slf4j:slf4j-log4j12:1.7.6 (*)
+|    |    |    |         \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- com.ai:ipaas-mds-comp:0.3
+|    |    |    \--- com.ai:ipaas-mds-base:0.3 (*)
+|    |    +--- com.ai:ipaas-ses:0.2.6.1
+|    |    |    +--- org.elasticsearch:elasticsearch:1.7.1
+|    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-highlighter:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-queryparser:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-sandbox:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-sandbox:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-suggest:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4 (*)
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4
+|    |    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-join:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-grouping:4.10.4
+|    |    |    |    |         +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-grouping:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-spatial:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- com.spatial4j:spatial4j:0.4.1
+|    |    |    |    +--- org.antlr:antlr-runtime:3.5
+|    |    |    |    +--- org.ow2.asm:asm:4.1
+|    |    |    |    +--- org.ow2.asm:asm-commons:4.1
+|    |    |    |    \--- org.yaml:snakeyaml:1.12
+|    |    |    +--- com.ai:ipaas-common:0.3-SNAPSHOT -> 0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.2 -> 0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.2 -> 0.3 (*)
+|    |    +--- com.ai:ipaas-idps:0.3
+|    |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    |    +--- commons-codec:commons-codec:1.9
+|    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- javax.ws.rs:javax.ws.rs-api:2.0.1
+|    |    +--- com.alibaba:fastjson:1.2.6
+|    |    +--- com.google.code.gson:gson:2.3.1 -> 2.6.2
+|    |    +--- org.aspectj:aspectjrt:1.8.5
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-beanutils:commons-beanutils:1.9.2 (*)
+|    |    +--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.apache.logging.log4j:log4j-core:2.3 (*)
+|    |    +--- org.apache.logging.log4j:log4j-jcl:2.3
+|    |    |    +--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- org.apache.logging.log4j:log4j-slf4j-impl:2.4 (*)
+|    |    +--- org.apache.commons:commons-dbcp2:2.1
+|    |    |    +--- org.apache.commons:commons-pool2:2.3 -> 2.4.2
+|    |    |    \--- commons-logging:commons-logging:1.2
+|    |    +--- com.alibaba:dubbox:2.8.3.1
+|    |    +--- org.jboss.netty:netty:3.2.10.Final
+|    |    +--- org.javassist:javassist:3.15.0-GA -> 3.19.0-GA
+|    |    +--- com.101tec:zkclient:0.5 -> 0.7 (*)
+|    |    +--- org.postgresql:postgresql:9.4-1201-jdbc41
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.sf.json-lib:json-lib:2.4
+|    |    |    +--- commons-beanutils:commons-beanutils:1.8.0 -> 1.9.2 (*)
+|    |    |    +--- commons-collections:commons-collections:3.2.1
+|    |    |    +--- commons-lang:commons-lang:2.5 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    \--- net.sf.ezmorph:ezmorph:1.0.6
+|    |    |         \--- commons-lang:commons-lang:2.3 -> 2.6
+|    |    +--- org.apache.commons:commons-email:1.4
+|    |    |    +--- com.sun.mail:javax.mail:1.5.2
+|    |    |    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    |    |    \--- javax.activation:activation:1.1.1
+|    |    +--- org.dom4j:dom4j:2.0.0
+|    |    |    \--- jaxen:jaxen:1.1.6
+|    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    +--- org.hibernate:hibernate-validator:4.2.0.Final
+|    |    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    +--- net.sourceforge.jexcelapi:jxl:2.6.12
+|    |    |    \--- log4j:log4j:1.2.14 -> 1.2.17
+|    |    +--- org.apache.poi:poi:3.13
+|    |    |    \--- commons-codec:commons-codec:1.9
+|    |    +--- org.apache.poi:poi-ooxml:3.13
+|    |    |    +--- org.apache.poi:poi:3.13 (*)
+|    |    |    \--- org.apache.poi:poi-ooxml-schemas:3.13
+|    |    |         \--- org.apache.xmlbeans:xmlbeans:2.6.0
+|    |    |              \--- stax:stax-api:1.0.1
+|    |    +--- org.apache.poi:poi-ooxml-schemas:3.13 (*)
+|    |    +--- org.apache.httpcomponents:httpclient:4.5 (*)
+|    |    +--- org.htmlparser:htmlparser:2.1
+|    |    |    \--- org.htmlparser:htmllexer:2.1
+|    |    +--- javax.servlet:javax.servlet-api:3.1.0
+|    |    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    |    +--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-client:3.0.11.Final
+|    |    |    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.12
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    |    \--- org.codehaus.jackson:jackson-xc:1.9.12
+|    |    |         +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |         \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.21
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21
+|    \--- javax.servlet:javax.servlet-api:3.1.0
++--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT (*)
+\--- com.ai.baas.citic.uac:citicuser:1.0-SNAPSHOT
+     +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+     \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+
+default - Configuration for default artifacts.
++--- javax.servlet:javax.servlet-api:3.1.0
++--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
++--- org.json:json:20140107
++--- commons-codec:commons-codec:1.5 -> 1.9
++--- jstl:jstl:1.2
++--- com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final
+|         +--- org.jboss.resteasy:jaxrs-api:3.0.11.Final
+|         +--- org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec:1.0.1.Final
+|         +--- javax.activation:activation:1.1 -> 1.1.1
+|         +--- org.apache.httpcomponents:httpclient:4.2.6 -> 4.5
+|         |    +--- org.apache.httpcomponents:httpcore:4.4.1
+|         |    +--- commons-logging:commons-logging:1.2
+|         |    \--- commons-codec:commons-codec:1.9
+|         +--- commons-io:commons-io:2.1 -> 2.4
+|         \--- net.jcip:jcip-annotations:1.0
++--- org.javassist:javassist:3.19.0-GA
++--- com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT
+|    +--- org.slf4j:slf4j-api:1.7.12
+|    +--- commons-logging:commons-logging:1.2
+|    +--- commons-lang:commons-lang:2.6
+|    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    +--- javax.servlet:javax.servlet-api:3.1.0
+|    +--- org.owasp.antisamy:antisamy:1.5.3
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- net.sourceforge.nekohtml:nekohtml:1.9.16
+|    |    |    \--- xerces:xercesImpl:2.9.1 -> 2.10.0
+|    |    |         \--- xml-apis:xml-apis:1.4.01
+|    |    \--- commons-httpclient:commons-httpclient:3.1
+|    |         +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    \--- com.alibaba:fastjson:1.2.6
++--- com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT
+|    \--- org.jasig.cas.client:cas-client-core:3.3.3
+|         +--- org.opensaml:opensaml:2.5.1-1
+|         |    +--- org.opensaml:openws:1.4.2-1
+|         |    |    +--- org.opensaml:xmltooling:1.3.2-1
+|         |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:log4j-over-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:jul-to-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- joda-time:joda-time:1.6.2
+|         |    |    |    +--- org.bouncycastle:bcprov-jdk15:1.45
+|         |    |    |    +--- org.apache.santuario:xmlsec:1.4.4
+|         |    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|         |    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1 (*)
+|         |    |    |    +--- net.jcip:jcip-annotations:1.0
+|         |    |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    |    \--- xalan:xalan:2.7.1
+|         |    |    |         \--- xalan:serializer:2.7.1
+|         |    |    |              \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|         |    |    +--- commons-codec:commons-codec:1.3 -> 1.9
+|         |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|         |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    \--- xalan:xalan:2.7.1 (*)
+|         |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    +--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- velocity:velocity:1.5
+|         |    |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    |    \--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- org.owasp.esapi:esapi:2.0GA
+|         |    +--- xml-apis:xml-apis:1.4.01
+|         |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    +--- xml-resolver:xml-resolver:1.2
+|         |    \--- xalan:xalan:2.7.1 (*)
+|         \--- org.slf4j:slf4j-api:1.7.1 -> 1.7.12
++--- com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT
+|    +--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT
+|    |    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    |    +--- com.zaxxer:HikariCP:2.4.0
+|    |    |    \--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- com.ai:ipaas-uac:0.3
+|    |    |    \--- com.ai:ipaas-common:0.3
+|    |    |         +--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-slf4j-impl:2.2 -> 2.4
+|    |    |         |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-1.2-api:2.2
+|    |    |         |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |         |    \--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3 (*)
+|    |    |         +--- com.google.code.gson:gson:2.6.2
+|    |    |         +--- com.esotericsoftware.kryo:kryo:2.24.0
+|    |    |         |    +--- com.esotericsoftware.minlog:minlog:1.2
+|    |    |         |    \--- org.objenesis:objenesis:2.1
+|    |    |         +--- de.javakaffee:kryo-serializers:0.27
+|    |    |         |    \--- com.esotericsoftware.kryo:kryo:2.24.0 (*)
+|    |    |         +--- commons-beanutils:commons-beanutils:1.9.2
+|    |    |         |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |         |    \--- commons-collections:commons-collections:3.2.1
+|    |    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |    |         +--- org.apache.curator:curator-client:2.7.1 -> 2.10.0
+|    |    |         |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |         |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |         |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6
+|    |    |         |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |         |    |    |    \--- log4j:log4j:1.2.17
+|    |    |         |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |         |    |    +--- jline:jline:0.9.94
+|    |    |         |    |    |    \--- junit:junit:3.8.1
+|    |    |         |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |         |    \--- com.google.guava:guava:16.0.1
+|    |    |         +--- org.apache.curator:curator-framework:2.7.1 -> 2.10.0
+|    |    |         |    \--- org.apache.curator:curator-client:2.10.0 (*)
+|    |    |         +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |         +--- org.apache.commons:commons-pool2:2.2 -> 2.4.2
+|    |    |         \--- org.apache.curator:curator-recipes:2.7.1 -> 2.10.0
+|    |    |              \--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    +--- com.ai:ipaas-ccs:0.3
+|    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3
+|    |    |    |    +--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    |    |    \--- org.apache.curator:curator-recipes:2.10.0 (*)
+|    |    |    \--- com.ai:ipaas-uac:0.3 (*)
+|    |    +--- com.ai:ipaas-mcs:0.3
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3
+|    |    |    |    \--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3
+|    |    |         +--- com.ai:ipaas-common:0.3 (*)
+|    |    |         +--- redis.clients:jedis:2.8.1
+|    |    |         |    \--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         +--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mcs-comp:0.3
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3 (*)
+|    |    +--- com.ai:ipaas-dss:0.3
+|    |    |    +--- com.ai:ipaas-dss-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |    |    \--- org.mongodb:mongodb-driver:3.0.2
+|    |    |    |         +--- org.mongodb:bson:3.0.2
+|    |    |    |         \--- org.mongodb:mongodb-driver-core:3.0.2
+|    |    |    |              \--- org.mongodb:bson:3.0.2
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- redis.clients:jedis:2.8.1 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mds:0.3
+|    |    |    +--- com.ai:ipaas-mds-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    |    \--- org.apache.kafka:kafka_2.10:0.9.0.1
+|    |    |    |         +--- com.101tec:zkclient:0.7
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |    |         |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6 (*)
+|    |    |    |         |    +--- log4j:log4j:1.2.15 -> 1.2.17
+|    |    |    |         |    \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |         +--- org.apache.kafka:kafka-clients:0.9.0.1
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |    |         |    +--- org.xerial.snappy:snappy-java:1.1.1.7
+|    |    |    |         |    \--- net.jpountz.lz4:lz4:1.2.0
+|    |    |    |         +--- com.yammer.metrics:metrics-core:2.2.0
+|    |    |    |         |    \--- org.slf4j:slf4j-api:1.7.2 -> 1.7.12
+|    |    |    |         +--- org.scala-lang:scala-library:2.10.5
+|    |    |    |         +--- net.sf.jopt-simple:jopt-simple:3.2
+|    |    |    |         +--- org.slf4j:slf4j-log4j12:1.7.6 (*)
+|    |    |    |         \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- com.ai:ipaas-mds-comp:0.3
+|    |    |    \--- com.ai:ipaas-mds-base:0.3 (*)
+|    |    +--- com.ai:ipaas-ses:0.2.6.1
+|    |    |    +--- org.elasticsearch:elasticsearch:1.7.1
+|    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-highlighter:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-queryparser:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-sandbox:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-sandbox:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-suggest:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4 (*)
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4
+|    |    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-join:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-grouping:4.10.4
+|    |    |    |    |         +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-grouping:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-spatial:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- com.spatial4j:spatial4j:0.4.1
+|    |    |    |    +--- org.antlr:antlr-runtime:3.5
+|    |    |    |    +--- org.ow2.asm:asm:4.1
+|    |    |    |    +--- org.ow2.asm:asm-commons:4.1
+|    |    |    |    \--- org.yaml:snakeyaml:1.12
+|    |    |    +--- com.ai:ipaas-common:0.3-SNAPSHOT -> 0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.2 -> 0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.2 -> 0.3 (*)
+|    |    +--- com.ai:ipaas-idps:0.3
+|    |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    |    +--- commons-codec:commons-codec:1.9
+|    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- javax.ws.rs:javax.ws.rs-api:2.0.1
+|    |    +--- com.alibaba:fastjson:1.2.6
+|    |    +--- com.google.code.gson:gson:2.3.1 -> 2.6.2
+|    |    +--- org.aspectj:aspectjrt:1.8.5
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-beanutils:commons-beanutils:1.9.2 (*)
+|    |    +--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.apache.logging.log4j:log4j-core:2.3 (*)
+|    |    +--- org.apache.logging.log4j:log4j-jcl:2.3
+|    |    |    +--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- org.apache.logging.log4j:log4j-slf4j-impl:2.4 (*)
+|    |    +--- org.apache.commons:commons-dbcp2:2.1
+|    |    |    +--- org.apache.commons:commons-pool2:2.3 -> 2.4.2
+|    |    |    \--- commons-logging:commons-logging:1.2
+|    |    +--- com.alibaba:dubbox:2.8.3.1
+|    |    +--- org.jboss.netty:netty:3.2.10.Final
+|    |    +--- org.javassist:javassist:3.15.0-GA -> 3.19.0-GA
+|    |    +--- com.101tec:zkclient:0.5 -> 0.7 (*)
+|    |    +--- org.postgresql:postgresql:9.4-1201-jdbc41
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.sf.json-lib:json-lib:2.4
+|    |    |    +--- commons-beanutils:commons-beanutils:1.8.0 -> 1.9.2 (*)
+|    |    |    +--- commons-collections:commons-collections:3.2.1
+|    |    |    +--- commons-lang:commons-lang:2.5 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    \--- net.sf.ezmorph:ezmorph:1.0.6
+|    |    |         \--- commons-lang:commons-lang:2.3 -> 2.6
+|    |    +--- org.apache.commons:commons-email:1.4
+|    |    |    +--- com.sun.mail:javax.mail:1.5.2
+|    |    |    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    |    |    \--- javax.activation:activation:1.1.1
+|    |    +--- org.dom4j:dom4j:2.0.0
+|    |    |    \--- jaxen:jaxen:1.1.6
+|    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    +--- org.hibernate:hibernate-validator:4.2.0.Final
+|    |    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    +--- net.sourceforge.jexcelapi:jxl:2.6.12
+|    |    |    \--- log4j:log4j:1.2.14 -> 1.2.17
+|    |    +--- org.apache.poi:poi:3.13
+|    |    |    \--- commons-codec:commons-codec:1.9
+|    |    +--- org.apache.poi:poi-ooxml:3.13
+|    |    |    +--- org.apache.poi:poi:3.13 (*)
+|    |    |    \--- org.apache.poi:poi-ooxml-schemas:3.13
+|    |    |         \--- org.apache.xmlbeans:xmlbeans:2.6.0
+|    |    |              \--- stax:stax-api:1.0.1
+|    |    +--- org.apache.poi:poi-ooxml-schemas:3.13 (*)
+|    |    +--- org.apache.httpcomponents:httpclient:4.5 (*)
+|    |    +--- org.htmlparser:htmlparser:2.1
+|    |    |    \--- org.htmlparser:htmllexer:2.1
+|    |    +--- javax.servlet:javax.servlet-api:3.1.0
+|    |    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    |    +--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-client:3.0.11.Final
+|    |    |    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.12
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    |    \--- org.codehaus.jackson:jackson-xc:1.9.12
+|    |    |         +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |         \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.21
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21
+|    \--- javax.servlet:javax.servlet-api:3.1.0
++--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT (*)
+\--- com.ai.baas.citic.uac:citicuser:1.0-SNAPSHOT
+     +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+     \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+
+providedCompile - Additional compile classpath for libraries that should not be part of the WAR archive.
+No dependencies
+
+providedRuntime - Additional runtime classpath for libraries that should not be part of the WAR archive.
+No dependencies
+
+runtime - Runtime classpath for source set 'main'.
++--- javax.servlet:javax.servlet-api:3.1.0
++--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
++--- org.json:json:20140107
++--- commons-codec:commons-codec:1.5 -> 1.9
++--- jstl:jstl:1.2
++--- com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final
+|         +--- org.jboss.resteasy:jaxrs-api:3.0.11.Final
+|         +--- org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec:1.0.1.Final
+|         +--- javax.activation:activation:1.1 -> 1.1.1
+|         +--- org.apache.httpcomponents:httpclient:4.2.6 -> 4.5
+|         |    +--- org.apache.httpcomponents:httpcore:4.4.1
+|         |    +--- commons-logging:commons-logging:1.2
+|         |    \--- commons-codec:commons-codec:1.9
+|         +--- commons-io:commons-io:2.1 -> 2.4
+|         \--- net.jcip:jcip-annotations:1.0
++--- org.javassist:javassist:3.19.0-GA
++--- com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT
+|    +--- org.slf4j:slf4j-api:1.7.12
+|    +--- commons-logging:commons-logging:1.2
+|    +--- commons-lang:commons-lang:2.6
+|    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    +--- javax.servlet:javax.servlet-api:3.1.0
+|    +--- org.owasp.antisamy:antisamy:1.5.3
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- net.sourceforge.nekohtml:nekohtml:1.9.16
+|    |    |    \--- xerces:xercesImpl:2.9.1 -> 2.10.0
+|    |    |         \--- xml-apis:xml-apis:1.4.01
+|    |    \--- commons-httpclient:commons-httpclient:3.1
+|    |         +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    \--- com.alibaba:fastjson:1.2.6
++--- com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT
+|    \--- org.jasig.cas.client:cas-client-core:3.3.3
+|         +--- org.opensaml:opensaml:2.5.1-1
+|         |    +--- org.opensaml:openws:1.4.2-1
+|         |    |    +--- org.opensaml:xmltooling:1.3.2-1
+|         |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:log4j-over-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:jul-to-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- joda-time:joda-time:1.6.2
+|         |    |    |    +--- org.bouncycastle:bcprov-jdk15:1.45
+|         |    |    |    +--- org.apache.santuario:xmlsec:1.4.4
+|         |    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|         |    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1 (*)
+|         |    |    |    +--- net.jcip:jcip-annotations:1.0
+|         |    |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    |    \--- xalan:xalan:2.7.1
+|         |    |    |         \--- xalan:serializer:2.7.1
+|         |    |    |              \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|         |    |    +--- commons-codec:commons-codec:1.3 -> 1.9
+|         |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|         |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    \--- xalan:xalan:2.7.1 (*)
+|         |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    +--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- velocity:velocity:1.5
+|         |    |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    |    \--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- org.owasp.esapi:esapi:2.0GA
+|         |    +--- xml-apis:xml-apis:1.4.01
+|         |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    +--- xml-resolver:xml-resolver:1.2
+|         |    \--- xalan:xalan:2.7.1 (*)
+|         \--- org.slf4j:slf4j-api:1.7.1 -> 1.7.12
++--- com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT
+|    +--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT
+|    |    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    |    +--- com.zaxxer:HikariCP:2.4.0
+|    |    |    \--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- com.ai:ipaas-uac:0.3
+|    |    |    \--- com.ai:ipaas-common:0.3
+|    |    |         +--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-slf4j-impl:2.2 -> 2.4
+|    |    |         |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-1.2-api:2.2
+|    |    |         |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |         |    \--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3 (*)
+|    |    |         +--- com.google.code.gson:gson:2.6.2
+|    |    |         +--- com.esotericsoftware.kryo:kryo:2.24.0
+|    |    |         |    +--- com.esotericsoftware.minlog:minlog:1.2
+|    |    |         |    \--- org.objenesis:objenesis:2.1
+|    |    |         +--- de.javakaffee:kryo-serializers:0.27
+|    |    |         |    \--- com.esotericsoftware.kryo:kryo:2.24.0 (*)
+|    |    |         +--- commons-beanutils:commons-beanutils:1.9.2
+|    |    |         |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |         |    \--- commons-collections:commons-collections:3.2.1
+|    |    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |    |         +--- org.apache.curator:curator-client:2.7.1 -> 2.10.0
+|    |    |         |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |         |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |         |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6
+|    |    |         |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |         |    |    |    \--- log4j:log4j:1.2.17
+|    |    |         |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |         |    |    +--- jline:jline:0.9.94
+|    |    |         |    |    |    \--- junit:junit:3.8.1
+|    |    |         |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |         |    \--- com.google.guava:guava:16.0.1
+|    |    |         +--- org.apache.curator:curator-framework:2.7.1 -> 2.10.0
+|    |    |         |    \--- org.apache.curator:curator-client:2.10.0 (*)
+|    |    |         +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |         +--- org.apache.commons:commons-pool2:2.2 -> 2.4.2
+|    |    |         \--- org.apache.curator:curator-recipes:2.7.1 -> 2.10.0
+|    |    |              \--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    +--- com.ai:ipaas-ccs:0.3
+|    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3
+|    |    |    |    +--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    |    |    \--- org.apache.curator:curator-recipes:2.10.0 (*)
+|    |    |    \--- com.ai:ipaas-uac:0.3 (*)
+|    |    +--- com.ai:ipaas-mcs:0.3
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3
+|    |    |    |    \--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3
+|    |    |         +--- com.ai:ipaas-common:0.3 (*)
+|    |    |         +--- redis.clients:jedis:2.8.1
+|    |    |         |    \--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         +--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mcs-comp:0.3
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3 (*)
+|    |    +--- com.ai:ipaas-dss:0.3
+|    |    |    +--- com.ai:ipaas-dss-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |    |    \--- org.mongodb:mongodb-driver:3.0.2
+|    |    |    |         +--- org.mongodb:bson:3.0.2
+|    |    |    |         \--- org.mongodb:mongodb-driver-core:3.0.2
+|    |    |    |              \--- org.mongodb:bson:3.0.2
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- redis.clients:jedis:2.8.1 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mds:0.3
+|    |    |    +--- com.ai:ipaas-mds-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    |    \--- org.apache.kafka:kafka_2.10:0.9.0.1
+|    |    |    |         +--- com.101tec:zkclient:0.7
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |    |         |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6 (*)
+|    |    |    |         |    +--- log4j:log4j:1.2.15 -> 1.2.17
+|    |    |    |         |    \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |         +--- org.apache.kafka:kafka-clients:0.9.0.1
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |    |         |    +--- org.xerial.snappy:snappy-java:1.1.1.7
+|    |    |    |         |    \--- net.jpountz.lz4:lz4:1.2.0
+|    |    |    |         +--- com.yammer.metrics:metrics-core:2.2.0
+|    |    |    |         |    \--- org.slf4j:slf4j-api:1.7.2 -> 1.7.12
+|    |    |    |         +--- org.scala-lang:scala-library:2.10.5
+|    |    |    |         +--- net.sf.jopt-simple:jopt-simple:3.2
+|    |    |    |         +--- org.slf4j:slf4j-log4j12:1.7.6 (*)
+|    |    |    |         \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- com.ai:ipaas-mds-comp:0.3
+|    |    |    \--- com.ai:ipaas-mds-base:0.3 (*)
+|    |    +--- com.ai:ipaas-ses:0.2.6.1
+|    |    |    +--- org.elasticsearch:elasticsearch:1.7.1
+|    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-highlighter:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-queryparser:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-sandbox:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-sandbox:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-suggest:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4 (*)
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4
+|    |    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-join:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-grouping:4.10.4
+|    |    |    |    |         +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-grouping:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-spatial:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- com.spatial4j:spatial4j:0.4.1
+|    |    |    |    +--- org.antlr:antlr-runtime:3.5
+|    |    |    |    +--- org.ow2.asm:asm:4.1
+|    |    |    |    +--- org.ow2.asm:asm-commons:4.1
+|    |    |    |    \--- org.yaml:snakeyaml:1.12
+|    |    |    +--- com.ai:ipaas-common:0.3-SNAPSHOT -> 0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.2 -> 0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.2 -> 0.3 (*)
+|    |    +--- com.ai:ipaas-idps:0.3
+|    |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    |    +--- commons-codec:commons-codec:1.9
+|    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- javax.ws.rs:javax.ws.rs-api:2.0.1
+|    |    +--- com.alibaba:fastjson:1.2.6
+|    |    +--- com.google.code.gson:gson:2.3.1 -> 2.6.2
+|    |    +--- org.aspectj:aspectjrt:1.8.5
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-beanutils:commons-beanutils:1.9.2 (*)
+|    |    +--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.apache.logging.log4j:log4j-core:2.3 (*)
+|    |    +--- org.apache.logging.log4j:log4j-jcl:2.3
+|    |    |    +--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- org.apache.logging.log4j:log4j-slf4j-impl:2.4 (*)
+|    |    +--- org.apache.commons:commons-dbcp2:2.1
+|    |    |    +--- org.apache.commons:commons-pool2:2.3 -> 2.4.2
+|    |    |    \--- commons-logging:commons-logging:1.2
+|    |    +--- com.alibaba:dubbox:2.8.3.1
+|    |    +--- org.jboss.netty:netty:3.2.10.Final
+|    |    +--- org.javassist:javassist:3.15.0-GA -> 3.19.0-GA
+|    |    +--- com.101tec:zkclient:0.5 -> 0.7 (*)
+|    |    +--- org.postgresql:postgresql:9.4-1201-jdbc41
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.sf.json-lib:json-lib:2.4
+|    |    |    +--- commons-beanutils:commons-beanutils:1.8.0 -> 1.9.2 (*)
+|    |    |    +--- commons-collections:commons-collections:3.2.1
+|    |    |    +--- commons-lang:commons-lang:2.5 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    \--- net.sf.ezmorph:ezmorph:1.0.6
+|    |    |         \--- commons-lang:commons-lang:2.3 -> 2.6
+|    |    +--- org.apache.commons:commons-email:1.4
+|    |    |    +--- com.sun.mail:javax.mail:1.5.2
+|    |    |    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    |    |    \--- javax.activation:activation:1.1.1
+|    |    +--- org.dom4j:dom4j:2.0.0
+|    |    |    \--- jaxen:jaxen:1.1.6
+|    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    +--- org.hibernate:hibernate-validator:4.2.0.Final
+|    |    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    +--- net.sourceforge.jexcelapi:jxl:2.6.12
+|    |    |    \--- log4j:log4j:1.2.14 -> 1.2.17
+|    |    +--- org.apache.poi:poi:3.13
+|    |    |    \--- commons-codec:commons-codec:1.9
+|    |    +--- org.apache.poi:poi-ooxml:3.13
+|    |    |    +--- org.apache.poi:poi:3.13 (*)
+|    |    |    \--- org.apache.poi:poi-ooxml-schemas:3.13
+|    |    |         \--- org.apache.xmlbeans:xmlbeans:2.6.0
+|    |    |              \--- stax:stax-api:1.0.1
+|    |    +--- org.apache.poi:poi-ooxml-schemas:3.13 (*)
+|    |    +--- org.apache.httpcomponents:httpclient:4.5 (*)
+|    |    +--- org.htmlparser:htmlparser:2.1
+|    |    |    \--- org.htmlparser:htmllexer:2.1
+|    |    +--- javax.servlet:javax.servlet-api:3.1.0
+|    |    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    |    +--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-client:3.0.11.Final
+|    |    |    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.12
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    |    \--- org.codehaus.jackson:jackson-xc:1.9.12
+|    |    |         +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |         \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.21
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21
+|    \--- javax.servlet:javax.servlet-api:3.1.0
++--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT (*)
+\--- com.ai.baas.citic.uac:citicuser:1.0-SNAPSHOT
+     +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+     \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+
+testCompile - Compile classpath for source set 'test'.
++--- javax.servlet:javax.servlet-api:3.1.0
++--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
++--- org.json:json:20140107
++--- commons-codec:commons-codec:1.5 -> 1.9
++--- jstl:jstl:1.2
++--- com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final
+|         +--- org.jboss.resteasy:jaxrs-api:3.0.11.Final
+|         +--- org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec:1.0.1.Final
+|         +--- javax.activation:activation:1.1 -> 1.1.1
+|         +--- org.apache.httpcomponents:httpclient:4.2.6 -> 4.5
+|         |    +--- org.apache.httpcomponents:httpcore:4.4.1
+|         |    +--- commons-logging:commons-logging:1.2
+|         |    \--- commons-codec:commons-codec:1.9
+|         +--- commons-io:commons-io:2.1 -> 2.4
+|         \--- net.jcip:jcip-annotations:1.0
++--- org.javassist:javassist:3.19.0-GA
++--- com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT
+|    +--- org.slf4j:slf4j-api:1.7.12
+|    +--- commons-logging:commons-logging:1.2
+|    +--- commons-lang:commons-lang:2.6
+|    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    +--- javax.servlet:javax.servlet-api:3.1.0
+|    +--- org.owasp.antisamy:antisamy:1.5.3
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- net.sourceforge.nekohtml:nekohtml:1.9.16
+|    |    |    \--- xerces:xercesImpl:2.9.1 -> 2.10.0
+|    |    |         \--- xml-apis:xml-apis:1.4.01
+|    |    \--- commons-httpclient:commons-httpclient:3.1
+|    |         +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    \--- com.alibaba:fastjson:1.2.6
++--- com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT
+|    \--- org.jasig.cas.client:cas-client-core:3.3.3
+|         +--- org.opensaml:opensaml:2.5.1-1
+|         |    +--- org.opensaml:openws:1.4.2-1
+|         |    |    +--- org.opensaml:xmltooling:1.3.2-1
+|         |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:log4j-over-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:jul-to-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- joda-time:joda-time:1.6.2
+|         |    |    |    +--- org.bouncycastle:bcprov-jdk15:1.45
+|         |    |    |    +--- org.apache.santuario:xmlsec:1.4.4
+|         |    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|         |    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1 (*)
+|         |    |    |    +--- net.jcip:jcip-annotations:1.0
+|         |    |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    |    \--- xalan:xalan:2.7.1
+|         |    |    |         \--- xalan:serializer:2.7.1
+|         |    |    |              \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|         |    |    +--- commons-codec:commons-codec:1.3 -> 1.9
+|         |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|         |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    \--- xalan:xalan:2.7.1 (*)
+|         |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    +--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- velocity:velocity:1.5
+|         |    |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    |    \--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- org.owasp.esapi:esapi:2.0GA
+|         |    +--- xml-apis:xml-apis:1.4.01
+|         |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    +--- xml-resolver:xml-resolver:1.2
+|         |    \--- xalan:xalan:2.7.1 (*)
+|         \--- org.slf4j:slf4j-api:1.7.1 -> 1.7.12
++--- com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT
+|    +--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT
+|    |    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    |    +--- com.zaxxer:HikariCP:2.4.0
+|    |    |    \--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- com.ai:ipaas-uac:0.3
+|    |    |    \--- com.ai:ipaas-common:0.3
+|    |    |         +--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-slf4j-impl:2.2 -> 2.4
+|    |    |         |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-1.2-api:2.2
+|    |    |         |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |         |    \--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3 (*)
+|    |    |         +--- com.google.code.gson:gson:2.6.2
+|    |    |         +--- com.esotericsoftware.kryo:kryo:2.24.0
+|    |    |         |    +--- com.esotericsoftware.minlog:minlog:1.2
+|    |    |         |    \--- org.objenesis:objenesis:2.1
+|    |    |         +--- de.javakaffee:kryo-serializers:0.27
+|    |    |         |    \--- com.esotericsoftware.kryo:kryo:2.24.0 (*)
+|    |    |         +--- commons-beanutils:commons-beanutils:1.9.2
+|    |    |         |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |         |    \--- commons-collections:commons-collections:3.2.1
+|    |    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |    |         +--- org.apache.curator:curator-client:2.7.1 -> 2.10.0
+|    |    |         |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |         |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |         |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6
+|    |    |         |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |         |    |    |    \--- log4j:log4j:1.2.17
+|    |    |         |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |         |    |    +--- jline:jline:0.9.94
+|    |    |         |    |    |    \--- junit:junit:3.8.1 -> 4.11
+|    |    |         |    |    |         \--- org.hamcrest:hamcrest-core:1.3
+|    |    |         |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |         |    \--- com.google.guava:guava:16.0.1
+|    |    |         +--- org.apache.curator:curator-framework:2.7.1 -> 2.10.0
+|    |    |         |    \--- org.apache.curator:curator-client:2.10.0 (*)
+|    |    |         +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |         +--- org.apache.commons:commons-pool2:2.2 -> 2.4.2
+|    |    |         \--- org.apache.curator:curator-recipes:2.7.1 -> 2.10.0
+|    |    |              \--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    +--- com.ai:ipaas-ccs:0.3
+|    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3
+|    |    |    |    +--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    |    |    \--- org.apache.curator:curator-recipes:2.10.0 (*)
+|    |    |    \--- com.ai:ipaas-uac:0.3 (*)
+|    |    +--- com.ai:ipaas-mcs:0.3
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3
+|    |    |    |    \--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3
+|    |    |         +--- com.ai:ipaas-common:0.3 (*)
+|    |    |         +--- redis.clients:jedis:2.8.1
+|    |    |         |    \--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         +--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mcs-comp:0.3
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3 (*)
+|    |    +--- com.ai:ipaas-dss:0.3
+|    |    |    +--- com.ai:ipaas-dss-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |    |    \--- org.mongodb:mongodb-driver:3.0.2
+|    |    |    |         +--- org.mongodb:bson:3.0.2
+|    |    |    |         \--- org.mongodb:mongodb-driver-core:3.0.2
+|    |    |    |              \--- org.mongodb:bson:3.0.2
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- redis.clients:jedis:2.8.1 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mds:0.3
+|    |    |    +--- com.ai:ipaas-mds-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    |    \--- org.apache.kafka:kafka_2.10:0.9.0.1
+|    |    |    |         +--- com.101tec:zkclient:0.7
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |    |         |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6 (*)
+|    |    |    |         |    +--- log4j:log4j:1.2.15 -> 1.2.17
+|    |    |    |         |    \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |         +--- org.apache.kafka:kafka-clients:0.9.0.1
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |    |         |    +--- org.xerial.snappy:snappy-java:1.1.1.7
+|    |    |    |         |    \--- net.jpountz.lz4:lz4:1.2.0
+|    |    |    |         +--- com.yammer.metrics:metrics-core:2.2.0
+|    |    |    |         |    \--- org.slf4j:slf4j-api:1.7.2 -> 1.7.12
+|    |    |    |         +--- org.scala-lang:scala-library:2.10.5
+|    |    |    |         +--- net.sf.jopt-simple:jopt-simple:3.2
+|    |    |    |         +--- org.slf4j:slf4j-log4j12:1.7.6 (*)
+|    |    |    |         \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- com.ai:ipaas-mds-comp:0.3
+|    |    |    \--- com.ai:ipaas-mds-base:0.3 (*)
+|    |    +--- com.ai:ipaas-ses:0.2.6.1
+|    |    |    +--- org.elasticsearch:elasticsearch:1.7.1
+|    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-highlighter:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-queryparser:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-sandbox:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-sandbox:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-suggest:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4 (*)
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4
+|    |    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-join:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-grouping:4.10.4
+|    |    |    |    |         +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-grouping:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-spatial:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- com.spatial4j:spatial4j:0.4.1
+|    |    |    |    +--- org.antlr:antlr-runtime:3.5
+|    |    |    |    +--- org.ow2.asm:asm:4.1
+|    |    |    |    +--- org.ow2.asm:asm-commons:4.1
+|    |    |    |    \--- org.yaml:snakeyaml:1.12
+|    |    |    +--- com.ai:ipaas-common:0.3-SNAPSHOT -> 0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.2 -> 0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.2 -> 0.3 (*)
+|    |    +--- com.ai:ipaas-idps:0.3
+|    |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    |    +--- commons-codec:commons-codec:1.9
+|    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- javax.ws.rs:javax.ws.rs-api:2.0.1
+|    |    +--- com.alibaba:fastjson:1.2.6
+|    |    +--- com.google.code.gson:gson:2.3.1 -> 2.6.2
+|    |    +--- org.aspectj:aspectjrt:1.8.5
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-beanutils:commons-beanutils:1.9.2 (*)
+|    |    +--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.apache.logging.log4j:log4j-core:2.3 (*)
+|    |    +--- org.apache.logging.log4j:log4j-jcl:2.3
+|    |    |    +--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- org.apache.logging.log4j:log4j-slf4j-impl:2.4 (*)
+|    |    +--- org.apache.commons:commons-dbcp2:2.1
+|    |    |    +--- org.apache.commons:commons-pool2:2.3 -> 2.4.2
+|    |    |    \--- commons-logging:commons-logging:1.2
+|    |    +--- com.alibaba:dubbox:2.8.3.1
+|    |    +--- org.jboss.netty:netty:3.2.10.Final
+|    |    +--- org.javassist:javassist:3.15.0-GA -> 3.19.0-GA
+|    |    +--- com.101tec:zkclient:0.5 -> 0.7 (*)
+|    |    +--- org.postgresql:postgresql:9.4-1201-jdbc41
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.sf.json-lib:json-lib:2.4
+|    |    |    +--- commons-beanutils:commons-beanutils:1.8.0 -> 1.9.2 (*)
+|    |    |    +--- commons-collections:commons-collections:3.2.1
+|    |    |    +--- commons-lang:commons-lang:2.5 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    \--- net.sf.ezmorph:ezmorph:1.0.6
+|    |    |         \--- commons-lang:commons-lang:2.3 -> 2.6
+|    |    +--- org.apache.commons:commons-email:1.4
+|    |    |    +--- com.sun.mail:javax.mail:1.5.2
+|    |    |    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    |    |    \--- javax.activation:activation:1.1.1
+|    |    +--- org.dom4j:dom4j:2.0.0
+|    |    |    \--- jaxen:jaxen:1.1.6
+|    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    +--- org.hibernate:hibernate-validator:4.2.0.Final
+|    |    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    +--- net.sourceforge.jexcelapi:jxl:2.6.12
+|    |    |    \--- log4j:log4j:1.2.14 -> 1.2.17
+|    |    +--- org.apache.poi:poi:3.13
+|    |    |    \--- commons-codec:commons-codec:1.9
+|    |    +--- org.apache.poi:poi-ooxml:3.13
+|    |    |    +--- org.apache.poi:poi:3.13 (*)
+|    |    |    \--- org.apache.poi:poi-ooxml-schemas:3.13
+|    |    |         \--- org.apache.xmlbeans:xmlbeans:2.6.0
+|    |    |              \--- stax:stax-api:1.0.1
+|    |    +--- org.apache.poi:poi-ooxml-schemas:3.13 (*)
+|    |    +--- org.apache.httpcomponents:httpclient:4.5 (*)
+|    |    +--- org.htmlparser:htmlparser:2.1
+|    |    |    \--- org.htmlparser:htmllexer:2.1
+|    |    +--- javax.servlet:javax.servlet-api:3.1.0
+|    |    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    |    +--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-client:3.0.11.Final
+|    |    |    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.12
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    |    \--- org.codehaus.jackson:jackson-xc:1.9.12
+|    |    |         +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |         \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.21
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21
+|    \--- javax.servlet:javax.servlet-api:3.1.0
++--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT (*)
++--- com.ai.baas.citic.uac:citicuser:1.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
++--- org.springframework:spring-test:3.2.6.RELEASE
+|    \--- org.springframework:spring-core:3.2.6.RELEASE
+|         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+\--- junit:junit:4.11 (*)
+
+testRuntime - Runtime classpath for source set 'test'.
++--- javax.servlet:javax.servlet-api:3.1.0
++--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
++--- org.json:json:20140107
++--- commons-codec:commons-codec:1.5 -> 1.9
++--- jstl:jstl:1.2
++--- com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final
+|         +--- org.jboss.resteasy:jaxrs-api:3.0.11.Final
+|         +--- org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec:1.0.1.Final
+|         +--- javax.activation:activation:1.1 -> 1.1.1
+|         +--- org.apache.httpcomponents:httpclient:4.2.6 -> 4.5
+|         |    +--- org.apache.httpcomponents:httpcore:4.4.1
+|         |    +--- commons-logging:commons-logging:1.2
+|         |    \--- commons-codec:commons-codec:1.9
+|         +--- commons-io:commons-io:2.1 -> 2.4
+|         \--- net.jcip:jcip-annotations:1.0
++--- org.javassist:javassist:3.19.0-GA
++--- com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT
+|    +--- org.slf4j:slf4j-api:1.7.12
+|    +--- commons-logging:commons-logging:1.2
+|    +--- commons-lang:commons-lang:2.6
+|    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    +--- javax.servlet:javax.servlet-api:3.1.0
+|    +--- org.owasp.antisamy:antisamy:1.5.3
+|    |    +--- org.apache.xmlgraphics:batik-css:1.7
+|    |    |    +--- org.apache.xmlgraphics:batik-ext:1.7
+|    |    |    |    \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    +--- org.apache.xmlgraphics:batik-util:1.7
+|    |    |    +--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|    |    |    \--- xml-apis:xml-apis-ext:1.3.04
+|    |    +--- net.sourceforge.nekohtml:nekohtml:1.9.16
+|    |    |    \--- xerces:xercesImpl:2.9.1 -> 2.10.0
+|    |    |         \--- xml-apis:xml-apis:1.4.01
+|    |    \--- commons-httpclient:commons-httpclient:3.1
+|    |         +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |         \--- commons-codec:commons-codec:1.2 -> 1.9
+|    \--- com.alibaba:fastjson:1.2.6
++--- com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT
+|    \--- org.jasig.cas.client:cas-client-core:3.3.3
+|         +--- org.opensaml:opensaml:2.5.1-1
+|         |    +--- org.opensaml:openws:1.4.2-1
+|         |    |    +--- org.opensaml:xmltooling:1.3.2-1
+|         |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:log4j-over-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- org.slf4j:jul-to-slf4j:1.6.1
+|         |    |    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|         |    |    |    +--- joda-time:joda-time:1.6.2
+|         |    |    |    +--- org.bouncycastle:bcprov-jdk15:1.45
+|         |    |    |    +--- org.apache.santuario:xmlsec:1.4.4
+|         |    |    |    +--- ca.juliusdavies:not-yet-commons-ssl:0.3.9
+|         |    |    |    |    \--- commons-httpclient:commons-httpclient:3.0 -> 3.1 (*)
+|         |    |    |    +--- net.jcip:jcip-annotations:1.0
+|         |    |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    |    \--- xalan:xalan:2.7.1
+|         |    |    |         \--- xalan:serializer:2.7.1
+|         |    |    |              \--- xml-apis:xml-apis:1.3.04 -> 1.4.01
+|         |    |    +--- commons-codec:commons-codec:1.3 -> 1.9
+|         |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|         |    |    +--- xml-apis:xml-apis:1.4.01
+|         |    |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    |    +--- xml-resolver:xml-resolver:1.2
+|         |    |    \--- xalan:xalan:2.7.1 (*)
+|         |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    +--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- velocity:velocity:1.5
+|         |    |    +--- commons-collections:commons-collections:3.1 -> 3.2.1
+|         |    |    \--- commons-lang:commons-lang:2.1 -> 2.6
+|         |    +--- org.owasp.esapi:esapi:2.0GA
+|         |    +--- xml-apis:xml-apis:1.4.01
+|         |    +--- xerces:xercesImpl:2.10.0 (*)
+|         |    +--- xml-resolver:xml-resolver:1.2
+|         |    \--- xalan:xalan:2.7.1 (*)
+|         \--- org.slf4j:slf4j-api:1.7.1 -> 1.7.12
++--- com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT
+|    +--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT
+|    |    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    |    +--- com.zaxxer:HikariCP:2.4.0
+|    |    |    \--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- com.ai:ipaas-uac:0.3
+|    |    |    \--- com.ai:ipaas-common:0.3
+|    |    |         +--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-slf4j-impl:2.2 -> 2.4
+|    |    |         |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    |         |    \--- org.apache.logging.log4j:log4j-api:2.4
+|    |    |         +--- org.apache.logging.log4j:log4j-1.2-api:2.2
+|    |    |         |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |         |    \--- org.apache.logging.log4j:log4j-core:2.2 -> 2.3 (*)
+|    |    |         +--- com.google.code.gson:gson:2.6.2
+|    |    |         +--- com.esotericsoftware.kryo:kryo:2.24.0
+|    |    |         |    +--- com.esotericsoftware.minlog:minlog:1.2
+|    |    |         |    \--- org.objenesis:objenesis:2.1
+|    |    |         +--- de.javakaffee:kryo-serializers:0.27
+|    |    |         |    \--- com.esotericsoftware.kryo:kryo:2.24.0 (*)
+|    |    |         +--- commons-beanutils:commons-beanutils:1.9.2
+|    |    |         |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |         |    \--- commons-collections:commons-collections:3.2.1
+|    |    |         +--- org.apache.commons:commons-lang3:3.3.2
+|    |    |         +--- org.apache.curator:curator-client:2.7.1 -> 2.10.0
+|    |    |         |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |         |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |         |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6
+|    |    |         |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |         |    |    |    \--- log4j:log4j:1.2.17
+|    |    |         |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |         |    |    +--- jline:jline:0.9.94
+|    |    |         |    |    |    \--- junit:junit:3.8.1 -> 4.11
+|    |    |         |    |    |         \--- org.hamcrest:hamcrest-core:1.3
+|    |    |         |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |         |    \--- com.google.guava:guava:16.0.1
+|    |    |         +--- org.apache.curator:curator-framework:2.7.1 -> 2.10.0
+|    |    |         |    \--- org.apache.curator:curator-client:2.10.0 (*)
+|    |    |         +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |         +--- org.apache.commons:commons-pool2:2.2 -> 2.4.2
+|    |    |         \--- org.apache.curator:curator-recipes:2.7.1 -> 2.10.0
+|    |    |              \--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    +--- com.ai:ipaas-ccs:0.3
+|    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3
+|    |    |    |    +--- org.apache.curator:curator-framework:2.10.0 (*)
+|    |    |    |    \--- org.apache.curator:curator-recipes:2.10.0 (*)
+|    |    |    \--- com.ai:ipaas-uac:0.3 (*)
+|    |    +--- com.ai:ipaas-mcs:0.3
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3
+|    |    |    |    \--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3
+|    |    |         +--- com.ai:ipaas-common:0.3 (*)
+|    |    |         +--- redis.clients:jedis:2.8.1
+|    |    |         |    \--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         +--- org.apache.commons:commons-pool2:2.4.2
+|    |    |         \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mcs-comp:0.3
+|    |    |    \--- com.ai:ipaas-mcs-base:0.3 (*)
+|    |    +--- com.ai:ipaas-dss:0.3
+|    |    |    +--- com.ai:ipaas-dss-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    |    |    \--- org.mongodb:mongodb-driver:3.0.2
+|    |    |    |         +--- org.mongodb:bson:3.0.2
+|    |    |    |         \--- org.mongodb:mongodb-driver-core:3.0.2
+|    |    |    |              \--- org.mongodb:bson:3.0.2
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    +--- redis.clients:jedis:2.8.1 (*)
+|    |    |    +--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.2 -> 2.4
+|    |    +--- com.ai:ipaas-mds:0.3
+|    |    |    +--- com.ai:ipaas-mds-base:0.3
+|    |    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    |    +--- com.ai:ipaas-zookeeper-utility:0.3 (*)
+|    |    |    |    \--- org.apache.kafka:kafka_2.10:0.9.0.1
+|    |    |    |         +--- com.101tec:zkclient:0.7
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    |    |         |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.6 (*)
+|    |    |    |         |    +--- log4j:log4j:1.2.15 -> 1.2.17
+|    |    |    |         |    \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |         +--- org.apache.kafka:kafka-clients:0.9.0.1
+|    |    |    |         |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.12
+|    |    |    |         |    +--- org.xerial.snappy:snappy-java:1.1.1.7
+|    |    |    |         |    \--- net.jpountz.lz4:lz4:1.2.0
+|    |    |    |         +--- com.yammer.metrics:metrics-core:2.2.0
+|    |    |    |         |    \--- org.slf4j:slf4j-api:1.7.2 -> 1.7.12
+|    |    |    |         +--- org.scala-lang:scala-library:2.10.5
+|    |    |    |         +--- net.sf.jopt-simple:jopt-simple:3.2
+|    |    |    |         +--- org.slf4j:slf4j-log4j12:1.7.6 (*)
+|    |    |    |         \--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- com.ai:ipaas-mds-comp:0.3
+|    |    |    \--- com.ai:ipaas-mds-base:0.3 (*)
+|    |    +--- com.ai:ipaas-ses:0.2.6.1
+|    |    |    +--- org.elasticsearch:elasticsearch:1.7.1
+|    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-highlighter:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-memory:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-queryparser:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- org.apache.lucene:lucene-sandbox:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    +--- org.apache.lucene:lucene-sandbox:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-suggest:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-analyzers-common:4.10.4 (*)
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4
+|    |    |    |    |    |    \--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-misc:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-join:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    \--- org.apache.lucene:lucene-grouping:4.10.4
+|    |    |    |    |         +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |         \--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-grouping:4.10.4 (*)
+|    |    |    |    +--- org.apache.lucene:lucene-spatial:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-core:4.10.4
+|    |    |    |    |    +--- org.apache.lucene:lucene-queries:4.10.4 (*)
+|    |    |    |    |    \--- com.spatial4j:spatial4j:0.4.1
+|    |    |    |    +--- org.antlr:antlr-runtime:3.5
+|    |    |    |    +--- org.ow2.asm:asm:4.1
+|    |    |    |    +--- org.ow2.asm:asm-commons:4.1
+|    |    |    |    \--- org.yaml:snakeyaml:1.12
+|    |    |    +--- com.ai:ipaas-common:0.3-SNAPSHOT -> 0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.2 -> 0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.2 -> 0.3 (*)
+|    |    +--- com.ai:ipaas-idps:0.3
+|    |    |    +--- commons-httpclient:commons-httpclient:3.1 (*)
+|    |    |    +--- commons-codec:commons-codec:1.9
+|    |    |    +--- com.ai:ipaas-common:0.3 (*)
+|    |    |    +--- com.ai:ipaas-uac:0.3 (*)
+|    |    |    \--- com.ai:ipaas-ccs-inner:0.3 (*)
+|    |    +--- javax.ws.rs:javax.ws.rs-api:2.0.1
+|    |    +--- com.alibaba:fastjson:1.2.6
+|    |    +--- com.google.code.gson:gson:2.3.1 -> 2.6.2
+|    |    +--- org.aspectj:aspectjrt:1.8.5
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-beanutils:commons-beanutils:1.9.2 (*)
+|    |    +--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.apache.logging.log4j:log4j-core:2.3 (*)
+|    |    +--- org.apache.logging.log4j:log4j-jcl:2.3
+|    |    |    +--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.apache.logging.log4j:log4j-api:2.3 -> 2.4
+|    |    +--- org.slf4j:slf4j-api:1.7.12
+|    |    +--- org.apache.logging.log4j:log4j-slf4j-impl:2.4 (*)
+|    |    +--- org.apache.commons:commons-dbcp2:2.1
+|    |    |    +--- org.apache.commons:commons-pool2:2.3 -> 2.4.2
+|    |    |    \--- commons-logging:commons-logging:1.2
+|    |    +--- com.alibaba:dubbox:2.8.3.1
+|    |    +--- org.jboss.netty:netty:3.2.10.Final
+|    |    +--- org.javassist:javassist:3.15.0-GA -> 3.19.0-GA
+|    |    +--- com.101tec:zkclient:0.5 -> 0.7 (*)
+|    |    +--- org.postgresql:postgresql:9.4-1201-jdbc41
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.sf.json-lib:json-lib:2.4
+|    |    |    +--- commons-beanutils:commons-beanutils:1.8.0 -> 1.9.2 (*)
+|    |    |    +--- commons-collections:commons-collections:3.2.1
+|    |    |    +--- commons-lang:commons-lang:2.5 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    \--- net.sf.ezmorph:ezmorph:1.0.6
+|    |    |         \--- commons-lang:commons-lang:2.3 -> 2.6
+|    |    +--- org.apache.commons:commons-email:1.4
+|    |    |    +--- com.sun.mail:javax.mail:1.5.2
+|    |    |    |    \--- javax.activation:activation:1.1 -> 1.1.1
+|    |    |    \--- javax.activation:activation:1.1.1
+|    |    +--- org.dom4j:dom4j:2.0.0
+|    |    |    \--- jaxen:jaxen:1.1.6
+|    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    +--- org.hibernate:hibernate-validator:4.2.0.Final
+|    |    |    +--- javax.validation:validation-api:1.0.0.GA
+|    |    |    \--- org.slf4j:slf4j-api:1.6.1 -> 1.7.12
+|    |    +--- net.sourceforge.jexcelapi:jxl:2.6.12
+|    |    |    \--- log4j:log4j:1.2.14 -> 1.2.17
+|    |    +--- org.apache.poi:poi:3.13
+|    |    |    \--- commons-codec:commons-codec:1.9
+|    |    +--- org.apache.poi:poi-ooxml:3.13
+|    |    |    +--- org.apache.poi:poi:3.13 (*)
+|    |    |    \--- org.apache.poi:poi-ooxml-schemas:3.13
+|    |    |         \--- org.apache.xmlbeans:xmlbeans:2.6.0
+|    |    |              \--- stax:stax-api:1.0.1
+|    |    +--- org.apache.poi:poi-ooxml-schemas:3.13 (*)
+|    |    +--- org.apache.httpcomponents:httpclient:4.5 (*)
+|    |    +--- org.htmlparser:htmlparser:2.1
+|    |    |    \--- org.htmlparser:htmllexer:2.1
+|    |    +--- javax.servlet:javax.servlet-api:3.1.0
+|    |    +--- javax.servlet.jsp:javax.servlet.jsp-api:2.3.1
+|    |    +--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-client:3.0.11.Final
+|    |    |    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
+|    |    +--- org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.12
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    |    \--- org.codehaus.jackson:jackson-xc:1.9.12
+|    |    |         +--- org.codehaus.jackson:jackson-core-asl:1.9.12
+|    |    |         \--- org.codehaus.jackson:jackson-mapper-asl:1.9.12 (*)
+|    |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.21
+|    |    \--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.21
+|    \--- javax.servlet:javax.servlet-api:3.1.0
++--- com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT (*)
++--- com.ai.baas.citic.uac:citicuser:1.0-SNAPSHOT
+|    +--- com.ai.opt:opt-base:1.0.1-SNAPSHOT
+|    \--- org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final (*)
++--- org.springframework:spring-test:3.2.6.RELEASE
+|    \--- org.springframework:spring-core:3.2.6.RELEASE
+|         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+\--- junit:junit:4.11 (*)
+
+(*) - dependencies omitted (listed previously)
+
+BUILD SUCCESSFUL
+
+Total time: 11.739 secs

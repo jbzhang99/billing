@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.pkgfee.dao.mapper.interfaces.DstDiscountInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfo" >
+    <id column="DISCOUNT_ID" property="discountId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_NAME" property="discountName" jdbcType="VARCHAR" />
+    <result column="PRIORITY" property="priority" jdbcType="VARCHAR" />
+    <result column="EFFECT_DATE" property="effectDate" jdbcType="TIMESTAMP" />
+    <result column="EXPIRE_DATE" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CALC_TYPE" property="calcType" jdbcType="VARCHAR" />
+    <result column="ALL_PRD_DISCOUNT" property="allPrdDiscount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DISCOUNT_ID, TENANT_ID, DISCOUNT_NAME, PRIORITY, EFFECT_DATE, EXPIRE_DATE, STATUS, 
+    CREATE_TIME, REMARK, CALC_TYPE, ALL_PRD_DISCOUNT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_discount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dst_discount_info
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dst_discount_info
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfoCriteria" >
+    delete from dst_discount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfo" >
+    insert into dst_discount_info (DISCOUNT_ID, TENANT_ID, DISCOUNT_NAME, 
+      PRIORITY, EFFECT_DATE, EXPIRE_DATE, 
+      STATUS, CREATE_TIME, REMARK, 
+      CALC_TYPE, ALL_PRD_DISCOUNT)
+    values (#{discountId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{discountName,jdbcType=VARCHAR}, 
+      #{priority,jdbcType=VARCHAR}, #{effectDate,jdbcType=TIMESTAMP}, #{expireDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{calcType,jdbcType=VARCHAR}, #{allPrdDiscount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfo" >
+    insert into dst_discount_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        DISCOUNT_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="discountName != null" >
+        DISCOUNT_NAME,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE,
+      </if>
+      <if test="expireDate != null" >
+        EXPIRE_DATE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="calcType != null" >
+        CALC_TYPE,
+      </if>
+      <if test="allPrdDiscount != null" >
+        ALL_PRD_DISCOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        #{discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountName != null" >
+        #{discountName,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="calcType != null" >
+        #{calcType,jdbcType=VARCHAR},
+      </if>
+      <if test="allPrdDiscount != null" >
+        #{allPrdDiscount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_discount_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_discount_info
+    <set >
+      <if test="record.discountId != null" >
+        DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountName != null" >
+        DISCOUNT_NAME = #{record.discountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectDate != null" >
+        EFFECT_DATE = #{record.effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireDate != null" >
+        EXPIRE_DATE = #{record.expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calcType != null" >
+        CALC_TYPE = #{record.calcType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allPrdDiscount != null" >
+        ALL_PRD_DISCOUNT = #{record.allPrdDiscount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_discount_info
+    set DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      DISCOUNT_NAME = #{record.discountName,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      EFFECT_DATE = #{record.effectDate,jdbcType=TIMESTAMP},
+      EXPIRE_DATE = #{record.expireDate,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CALC_TYPE = #{record.calcType,jdbcType=VARCHAR},
+      ALL_PRD_DISCOUNT = #{record.allPrdDiscount,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfo" >
+    update dst_discount_info
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountName != null" >
+        DISCOUNT_NAME = #{discountName,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        PRIORITY = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE = #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="calcType != null" >
+        CALC_TYPE = #{calcType,jdbcType=VARCHAR},
+      </if>
+      <if test="allPrdDiscount != null" >
+        ALL_PRD_DISCOUNT = #{allPrdDiscount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.DstDiscountInfo" >
+    update dst_discount_info
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      DISCOUNT_NAME = #{discountName,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=VARCHAR},
+      EFFECT_DATE = #{effectDate,jdbcType=TIMESTAMP},
+      EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CALC_TYPE = #{calcType,jdbcType=VARCHAR},
+      ALL_PRD_DISCOUNT = #{allPrdDiscount,jdbcType=VARCHAR}
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </update>
+</mapper>

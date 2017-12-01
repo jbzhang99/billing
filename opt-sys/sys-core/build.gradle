@@ -1,0 +1,21 @@
+dependencies {
+    compile project(":sys-api")
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+
+	compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
+	compile 'com.ai.baas.amc:amcdrbillsubject:2.0-SNAPSHOT'
+    //compile 'com.ai.opt.uac:account:2.0-SNAPSHOT'
+    compile 'com.ai.baas.bmc:baseInfo:2.0-SNAPSHOT'
+    
+    runtime 'org.mortbay.jetty:jetty-util:6.1.26'
+
+    testCompile(
+            "org.springframework:spring-test:3.2.13.RELEASE",
+            "junit:junit:4.11"
+    )
+
+}

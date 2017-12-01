@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.dst.dao.interfaces.DstCouponInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.dst.dao.mapper.bo.DstCouponInfo" >
+    <id column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="COUPON_NAME" property="couponName" jdbcType="VARCHAR" />
+    <result column="COUPON_TYPE" property="couponType" jdbcType="VARCHAR" />
+    <result column="COUPON_VALUE" property="couponValue" jdbcType="VARCHAR" />
+    <result column="COUPON_AMOUNT" property="couponAmount" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+    <result column="CONDITION_VALUE" property="conditionValue" jdbcType="VARCHAR" />
+    <result column="COUPON_CONDITION" property="couponCondition" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="COUPON_CON_TYPE" property="couponConType" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="TOP_MONEY" property="topMoney" jdbcType="VARCHAR" />
+    <result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+    <result column="CAN_APPLY_COUNT" property="canApplyCount" jdbcType="VARCHAR" />
+    <result column="APPLY_COUNT" property="applyCount" jdbcType="VARCHAR" />
+    <result column="APPLIED_COUNT" property="appliedCount" jdbcType="VARCHAR" />
+    <result column="REMAIN_COUNT" property="remainCount" jdbcType="VARCHAR" />
+    <result column="COUPON_RULE" property="couponRule" jdbcType="VARCHAR" />
+    <result column="CREATOR_ROLE" property="creatorRole" jdbcType="VARCHAR" />
+    <result column="CREATOR_NAME" property="creatorName" jdbcType="VARCHAR" />
+    <result column="CREATOR_ID" property="creatorId" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="CREATOR_ACCOUNT" property="creatorAccount" jdbcType="VARCHAR" />
+  </resultMap>
+    <resultMap id="CouponAuditInfo" type="com.ai.baas.dst.dao.mapper.bo.CouponAuditInfo">
+		<result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+		<result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+		<result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+		<result column="COUPON_NAME" property="couponName" jdbcType="VARCHAR" />
+		<result column="COUPON_AMOUNT" property="couponAmount" jdbcType="INTEGER" />
+		<result column="CONDITION_VALUE" property="conditionValue" jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CTRATOR_ID" property="channelId" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+		<result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+		<result column="CREATOR_ACCOUNT" property="channelAccount" jdbcType="VARCHAR" />
+		<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+		<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="CouponAndCode" type="com.ai.baas.dst.dao.mapper.bo.DstCouponInfoAndCode">
+  	<result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+  	<result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+  	<result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+  	<result column="COUPON_NAME" property="couponName" jdbcType="VARCHAR" />
+  	<result column="CONDITION_VALUE" property="conditionValue" jdbcType="VARCHAR" />
+  	<result column="COUPON_STATUS" property="couponStatus" jdbcType="VARCHAR" />
+  	<result column="COUPON_TYPE" property="couponType" jdbcType="VARCHAR" />
+  	<result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+  	<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+  	<result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+  	<result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+  	<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="ExportCouponAndCode" type="com.ai.baas.dst.dao.mapper.bo.DstExportCouponAndCode">
+  	<result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+  	<result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+  	<result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+  	<result column="COUPON_NAME" property="couponName" jdbcType="VARCHAR" />
+  	<result column="CONDITION_VALUE" property="conditionValue" jdbcType="VARCHAR" />
+  	<result column="COUPON_STATUS" property="couponStatus" jdbcType="VARCHAR" />
+  	<result column="COUPON_TYPE" property="couponType" jdbcType="VARCHAR" />
+  	<result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+  	<result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+  	<result column="PRODUCT_NAME" property="productName" jdbcType="VARCHAR" />
+  	<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+                
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    COUPON_ID, TENANT_ID, COUPON_NAME, COUPON_TYPE, COUPON_VALUE, COUPON_AMOUNT, CREATE_TIME, 
+    ACTIVE_TIME, INACTIVE_TIME, CONDITION_VALUE, COUPON_CONDITION, STATUS, COUPON_CON_TYPE, 
+    PRODUCT_ID, TOP_MONEY, PRODUCT_NAME, CAN_APPLY_COUNT, APPLY_COUNT, APPLIED_COUNT, 
+    REMAIN_COUNT, COUPON_RULE, CREATOR_ROLE, CREATOR_NAME, CREATOR_ID, COMMENTS, CREATOR_ACCOUNT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_coupon_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dst_coupon_info
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dst_coupon_info
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfoCriteria" >
+    delete from dst_coupon_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfo" >
+    insert into dst_coupon_info (COUPON_ID, TENANT_ID, COUPON_NAME, 
+      COUPON_TYPE, COUPON_VALUE, COUPON_AMOUNT, 
+      CREATE_TIME, ACTIVE_TIME, INACTIVE_TIME, 
+      CONDITION_VALUE, COUPON_CONDITION, STATUS, 
+      COUPON_CON_TYPE, PRODUCT_ID, TOP_MONEY, 
+      PRODUCT_NAME, CAN_APPLY_COUNT, APPLY_COUNT, 
+      APPLIED_COUNT, REMAIN_COUNT, COUPON_RULE, 
+      CREATOR_ROLE, CREATOR_NAME, CREATOR_ID, 
+      COMMENTS, CREATOR_ACCOUNT)
+    values (#{couponId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{couponName,jdbcType=VARCHAR}, 
+      #{couponType,jdbcType=VARCHAR}, #{couponValue,jdbcType=VARCHAR}, #{couponAmount,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{activeTime,jdbcType=TIMESTAMP}, #{inactiveTime,jdbcType=TIMESTAMP}, 
+      #{conditionValue,jdbcType=VARCHAR}, #{couponCondition,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{couponConType,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{topMoney,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{canApplyCount,jdbcType=VARCHAR}, #{applyCount,jdbcType=VARCHAR}, 
+      #{appliedCount,jdbcType=VARCHAR}, #{remainCount,jdbcType=VARCHAR}, #{couponRule,jdbcType=VARCHAR}, 
+      #{creatorRole,jdbcType=VARCHAR}, #{creatorName,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{comments,jdbcType=VARCHAR}, #{creatorAccount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfo" >
+    insert into dst_coupon_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        COUPON_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="couponName != null" >
+        COUPON_NAME,
+      </if>
+      <if test="couponType != null" >
+        COUPON_TYPE,
+      </if>
+      <if test="couponValue != null" >
+        COUPON_VALUE,
+      </if>
+      <if test="couponAmount != null" >
+        COUPON_AMOUNT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="activeTime != null" >
+        ACTIVE_TIME,
+      </if>
+      <if test="inactiveTime != null" >
+        INACTIVE_TIME,
+      </if>
+      <if test="conditionValue != null" >
+        CONDITION_VALUE,
+      </if>
+      <if test="couponCondition != null" >
+        COUPON_CONDITION,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="couponConType != null" >
+        COUPON_CON_TYPE,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="topMoney != null" >
+        TOP_MONEY,
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME,
+      </if>
+      <if test="canApplyCount != null" >
+        CAN_APPLY_COUNT,
+      </if>
+      <if test="applyCount != null" >
+        APPLY_COUNT,
+      </if>
+      <if test="appliedCount != null" >
+        APPLIED_COUNT,
+      </if>
+      <if test="remainCount != null" >
+        REMAIN_COUNT,
+      </if>
+      <if test="couponRule != null" >
+        COUPON_RULE,
+      </if>
+      <if test="creatorRole != null" >
+        CREATOR_ROLE,
+      </if>
+      <if test="creatorName != null" >
+        CREATOR_NAME,
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID,
+      </if>
+      <if test="comments != null" >
+        COMMENTS,
+      </if>
+      <if test="creatorAccount != null" >
+        CREATOR_ACCOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null" >
+        #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponValue != null" >
+        #{couponValue,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null" >
+        #{couponAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inactiveTime != null" >
+        #{inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conditionValue != null" >
+        #{conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="couponCondition != null" >
+        #{couponCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="couponConType != null" >
+        #{couponConType,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="topMoney != null" >
+        #{topMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="canApplyCount != null" >
+        #{canApplyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCount != null" >
+        #{applyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="appliedCount != null" >
+        #{appliedCount,jdbcType=VARCHAR},
+      </if>
+      <if test="remainCount != null" >
+        #{remainCount,jdbcType=VARCHAR},
+      </if>
+      <if test="couponRule != null" >
+        #{couponRule,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorRole != null" >
+        #{creatorRole,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorName != null" >
+        #{creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorAccount != null" >
+        #{creatorAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_coupon_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_coupon_info
+    <set >
+      <if test="record.couponId != null" >
+        COUPON_ID = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponName != null" >
+        COUPON_NAME = #{record.couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponType != null" >
+        COUPON_TYPE = #{record.couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponValue != null" >
+        COUPON_VALUE = #{record.couponValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponAmount != null" >
+        COUPON_AMOUNT = #{record.couponAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activeTime != null" >
+        ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inactiveTime != null" >
+        INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.conditionValue != null" >
+        CONDITION_VALUE = #{record.conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponCondition != null" >
+        COUPON_CONDITION = #{record.couponCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponConType != null" >
+        COUPON_CON_TYPE = #{record.couponConType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topMoney != null" >
+        TOP_MONEY = #{record.topMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null" >
+        PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.canApplyCount != null" >
+        CAN_APPLY_COUNT = #{record.canApplyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyCount != null" >
+        APPLY_COUNT = #{record.applyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appliedCount != null" >
+        APPLIED_COUNT = #{record.appliedCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remainCount != null" >
+        REMAIN_COUNT = #{record.remainCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponRule != null" >
+        COUPON_RULE = #{record.couponRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorRole != null" >
+        CREATOR_ROLE = #{record.creatorRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorName != null" >
+        CREATOR_NAME = #{record.creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null" >
+        CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null" >
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorAccount != null" >
+        CREATOR_ACCOUNT = #{record.creatorAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_coupon_info
+    set COUPON_ID = #{record.couponId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      COUPON_NAME = #{record.couponName,jdbcType=VARCHAR},
+      COUPON_TYPE = #{record.couponType,jdbcType=VARCHAR},
+      COUPON_VALUE = #{record.couponValue,jdbcType=VARCHAR},
+      COUPON_AMOUNT = #{record.couponAmount,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      CONDITION_VALUE = #{record.conditionValue,jdbcType=VARCHAR},
+      COUPON_CONDITION = #{record.couponCondition,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      COUPON_CON_TYPE = #{record.couponConType,jdbcType=VARCHAR},
+      PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      TOP_MONEY = #{record.topMoney,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{record.productName,jdbcType=VARCHAR},
+      CAN_APPLY_COUNT = #{record.canApplyCount,jdbcType=VARCHAR},
+      APPLY_COUNT = #{record.applyCount,jdbcType=VARCHAR},
+      APPLIED_COUNT = #{record.appliedCount,jdbcType=VARCHAR},
+      REMAIN_COUNT = #{record.remainCount,jdbcType=VARCHAR},
+      COUPON_RULE = #{record.couponRule,jdbcType=VARCHAR},
+      CREATOR_ROLE = #{record.creatorRole,jdbcType=VARCHAR},
+      CREATOR_NAME = #{record.creatorName,jdbcType=VARCHAR},
+      CREATOR_ID = #{record.creatorId,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      CREATOR_ACCOUNT = #{record.creatorAccount,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfo" >
+    update dst_coupon_info
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null" >
+        COUPON_NAME = #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null" >
+        COUPON_TYPE = #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponValue != null" >
+        COUPON_VALUE = #{couponValue,jdbcType=VARCHAR},
+      </if>
+      <if test="couponAmount != null" >
+        COUPON_AMOUNT = #{couponAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeTime != null" >
+        ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inactiveTime != null" >
+        INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conditionValue != null" >
+        CONDITION_VALUE = #{conditionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="couponCondition != null" >
+        COUPON_CONDITION = #{couponCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="couponConType != null" >
+        COUPON_CON_TYPE = #{couponConType,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="topMoney != null" >
+        TOP_MONEY = #{topMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="canApplyCount != null" >
+        CAN_APPLY_COUNT = #{canApplyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="applyCount != null" >
+        APPLY_COUNT = #{applyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="appliedCount != null" >
+        APPLIED_COUNT = #{appliedCount,jdbcType=VARCHAR},
+      </if>
+      <if test="remainCount != null" >
+        REMAIN_COUNT = #{remainCount,jdbcType=VARCHAR},
+      </if>
+      <if test="couponRule != null" >
+        COUPON_RULE = #{couponRule,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorRole != null" >
+        CREATOR_ROLE = #{creatorRole,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorName != null" >
+        CREATOR_NAME = #{creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorAccount != null" >
+        CREATOR_ACCOUNT = #{creatorAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponInfo" >
+    update dst_coupon_info
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      COUPON_NAME = #{couponName,jdbcType=VARCHAR},
+      COUPON_TYPE = #{couponType,jdbcType=VARCHAR},
+      COUPON_VALUE = #{couponValue,jdbcType=VARCHAR},
+      COUPON_AMOUNT = #{couponAmount,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      CONDITION_VALUE = #{conditionValue,jdbcType=VARCHAR},
+      COUPON_CONDITION = #{couponCondition,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      COUPON_CON_TYPE = #{couponConType,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      TOP_MONEY = #{topMoney,jdbcType=VARCHAR},
+      PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      CAN_APPLY_COUNT = #{canApplyCount,jdbcType=VARCHAR},
+      APPLY_COUNT = #{applyCount,jdbcType=VARCHAR},
+      APPLIED_COUNT = #{appliedCount,jdbcType=VARCHAR},
+      REMAIN_COUNT = #{remainCount,jdbcType=VARCHAR},
+      COUPON_RULE = #{couponRule,jdbcType=VARCHAR},
+      CREATOR_ROLE = #{creatorRole,jdbcType=VARCHAR},
+      CREATOR_NAME = #{creatorName,jdbcType=VARCHAR},
+      CREATOR_ID = #{creatorId,jdbcType=VARCHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      CREATOR_ACCOUNT = #{creatorAccount,jdbcType=VARCHAR}
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="queryCouponInfoAndCode" resultMap="CouponAndCode" parameterType="com.ai.baas.dst.api.coupon.params.OPCouponCodeReq">
+  	select
+  		a.COUPON_CODE,a.COUPON_ID,a.COUPON_STATUS,a.UPDATE_TIME,a.SERVICE_ID,a.ORDER_ID,c.COUPON_NAME,c.CONDITION_VALUE,c.ACTIVE_TIME,c.INACTIVE_TIME,c.COUPON_TYPE
+  	from 
+  		dst_coupon_code a left join dst_coupon_info c 
+  	on
+  		c.COUPON_ID = a.COUPON_ID
+  	where
+  			1=1
+  		<if test="null != tenantId and tenantId != ''">
+  			AND a.TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponCode and couponCode != ''">
+  			AND COUPON_CODE = #{couponCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponId and couponId != ''">
+  			AND a.COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != sysTime">
+  			AND c.INACTIVE_TIME &lt; #{sysTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != couponStatus and couponStatus != ''">
+  			AND STATUS = #{couponStatus,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != serviceId and serviceId != ''">
+  			AND SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != orderId and orderId != ''">
+  			AND ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != activeTime">
+  			AND ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != channelId and channelId != ''">
+  			AND CHANNEL_ID = #{channelId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != inactiveTime">
+  			AND INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != updateTime">
+  			AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+  		</if>
+  			AND c.STATUS != 'DEL'
+  		<if test="pageSize > 0">
+  			LIMIT #{limitStart},#{pageSize}
+  		</if>
+  </select>
+  
+  <select id="queryCouponInfoAndCodeCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+  	select
+  		count(*)
+  	from 
+  		dst_coupon_code a left join dst_coupon_info c 
+  	on
+  		c.COUPON_ID = a.COUPON_ID
+  	where
+  			1=1
+  		<if test="null != tenantId and tenantId != ''">
+  			AND a.TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponCode and couponCode != ''">
+  			AND COUPON_CODE = #{couponCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponId and couponId != ''">
+  			AND a.COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != sysTime">
+  			AND c.INACTIVE_TIME &lt; #{sysTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != couponStatus and couponStatus != ''">
+  			AND STATUS = #{couponStatus,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != serviceId and serviceId != ''">
+  			AND SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != orderId and orderId != ''">
+  			AND ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != channelId and channelId != ''">
+  			AND CHANNEL_ID = #{channelId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != activeTime">
+  			AND ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != inactiveTime">
+  			AND INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != updateTime">
+  			AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+  		</if>
+  		    AND c.STATUS != 'DEL'
+  </select>
+  
+  <select id="queryExportCouponAndCode" resultMap="ExportCouponAndCode" parameterType="com.ai.baas.dst.api.coupon.params.ChannelCodeReq">
+  	select
+  		a.COUPON_CODE,a.COUPON_ID,a.COUPON_STATUS,a.UPDATE_TIME,a.SERVICE_ID,c.PRODUCT_ID,c.PRODUCT_NAME,c.COUPON_NAME,c.CONDITION_VALUE,c.COUPON_TYPE
+  	from 
+  		dst_coupon_code a left join dst_coupon_info c 
+  	on
+  		c.COUPON_ID = a.COUPON_ID
+  	where
+  			1=1
+  		<if test="null != tenantId and tenantId != ''">
+  			AND a.TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponCode and couponCode != ''">
+  			AND COUPON_CODE = #{couponCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponId and couponId != ''">
+  			AND a.COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != sysTime">
+  			AND c.INACTIVE_TIME &lt; #{sysTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != status and status != ''">
+  			AND COUPON_STATUS = #{status,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != serviceId and serviceId != ''">
+  			AND SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != channelId and channelId != ''">
+  			AND CHANNEL_ID = #{channelId,jdbcType=VARCHAR}
+  		</if>
+  		AND c.STATUS != 'DEL'
+  </select>
+  
+  <select id="getExportCouponCode" resultMap="CouponAndCode" parameterType="com.ai.baas.dst.api.coupon.params.OPCouponCodeReq">
+  	select
+  		a.COUPON_CODE,a.COUPON_ID,a.COUPON_STATUS,a.UPDATE_TIME,a.SERVICE_ID,a.ORDER_ID,c.COUPON_NAME,c.CONDITION_VALUE,c.ACTIVE_TIME,c.INACTIVE_TIME,c.COUPON_TYPE
+  	from 
+  		dst_coupon_code a left join dst_coupon_info c 
+  	on
+  		c.COUPON_ID = a.COUPON_ID
+  	where
+  			1=1
+  		<if test="null != tenantId and tenantId != ''">
+  			AND a.TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponCode and couponCode != ''">
+  			AND COUPON_CODE = #{couponCode,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponId and couponId != ''">
+  			AND a.COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != couponStatus and couponStatus != ''">
+  			AND STATUS = #{couponStatus,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != sysTime">
+  			AND c.INACTIVE_TIME &lt; #{sysTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != serviceId and serviceId != ''">
+  			AND SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != orderId and orderId != ''">
+  			AND ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != activeTime">
+  			AND ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != channelId and channelId != ''">
+  			AND CHANNEL_ID = #{channelId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != inactiveTime">
+  			AND INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP}
+  		</if>
+  		<if test="null != updateTime">
+  			AND UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+  		</if>
+  		AND c.STATUS != 'DEL'
+  </select>
+   <select id="selectCouponAuditInfo" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponAuditInfo"
+		resultMap="CouponAuditInfo">
+
+		SELECT info.coupon_id,info.coupon_name,info.coupon_type,
+		info.coupon_amount,
+		CONDITION_VALUE,
+		ACTIVE_TIME,INACTIVE_TIME,info.STATUS,info.product_id,info.product_name,info.creator_id,info.creator_name,info.creator_account
+		from dst_coupon_info info
+		WHERE info.TENANT_ID=#{tenantId}
+		and info.status != 'DEL'
+		and info.CREATOR_ROLE = 'QD'
+		<if test="couponId!=null">
+			and info.coupon_id=#{couponId}
+		</if>
+		<if test="couponName!=null">
+			and info.coupon_name like '%'+#{couponName}+'%'
+		</if>
+		
+		<if test="status!=null and status == 'INVALID'.toString()">
+			and INACTIVE_TIME &lt; now() 
+		</if>
+		<if test="status!=null and status != 'INVALID'.toString()">
+			and info.status =#{status}
+		</if>
+		
+		<if test="startTime!=null and endTime!=null">
+			and info.CREATE_TIME >= #{startTime} and info.CREATE_TIME &lt;= #{endTime}
+		</if>
+		<if test="startTime!=null and endTime==null">
+			and info.CREATE_TIME >= #{startTime}
+		</if>
+		<if test="startTime==null and endTime!=null">
+			and info.CREATE_TIME &lt;= #{endTime}
+		</if>
+		GROUP BY info.COUPON_ID
+		
+		<if test="limitStart != null and limitStart>=0">
+			limit #{limitStart} , #{limitEnd}
+		</if>
+	</select>
+	
+	<select id="getCouponAuditCount" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponAuditInfo"
+		resultType="java.lang.Integer">
+	SELECT count(*) from (
+		SELECT info.coupon_id,info.coupon_name,info.coupon_type,
+		info.coupon_amount,
+		CONDITION_VALUE,
+		ACTIVE_TIME,INACTIVE_TIME,info.STATUS,info.product_id,info.product_name,info.creator_id,info.creator_name,info.creator_account
+		from dst_coupon_info info
+		WHERE info.TENANT_ID=#{tenantId}
+		and info.status != 'DEL'
+		and info.CREATOR_ROLE = 'QD'
+		<if test="couponId!=null">
+			and info.coupon_id=#{couponId}
+		</if>
+		<if test="couponName!=null">
+			and info.coupon_name like '%'+#{couponName}+'%'
+		</if>
+		
+		<if test="status!=null and status == 'INVALID'.toString()">
+			and INACTIVE_TIME &lt; now() 
+		</if>
+		<if test="status!=null and status != 'INVALID'.toString()">
+			and info.status =#{status}
+		</if>
+		
+		<if test="startTime!=null and endTime!=null">
+			and info.CREATE_TIME >= #{startTime} and info.CREATE_TIME &lt;= #{endTime}
+		</if>
+		<if test="startTime!=null and endTime==null">
+			and info.CREATE_TIME >= #{startTime}
+		</if>
+		<if test="startTime==null and endTime!=null">
+			and info.CREATE_TIME &lt;= #{endTime}
+		</if>
+		GROUP BY info.COUPON_ID ) t
+	</select>
+</mapper>

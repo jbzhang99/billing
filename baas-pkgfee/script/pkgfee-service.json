@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pkgfee",
+    "namespace": "unit-test"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10896,
+          "targetPort": 10896,
+          "nodePort":30896
+      }],
+      "selector": {
+           "app": "pkgfee-pod"
+      },
+      "type":"NodePort"
+  }
+}

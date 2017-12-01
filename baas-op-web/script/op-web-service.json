@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "op-web",
+    "namespace": "unit-test"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10770,
+          "targetPort": 8080,
+          "nodePort":30770
+      }],
+      "selector": {
+           "app": "op-web-pod"
+      },
+      "type":"NodePort"
+  }
+}

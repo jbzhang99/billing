@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.ccp.dao.mapper.interfaces.OmcUrgeInterfaceMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.ccp.dao.mapper.bo.OmcUrgeInterface" >
+    <result column="serial_no" property="serialNo" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+    <result column="owner_type" property="ownerType" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="VARCHAR" />
+    <result column="urge_info" property="urgeInfo" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="retry_times" property="retryTimes" jdbcType="INTEGER" />
+    <result column="deal_flag" property="dealFlag" jdbcType="INTEGER" />
+    <result column="deal_time" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    serial_no, tenant_id, system_id, owner_type, owner_id, urge_info, insert_time, retry_times, 
+    deal_flag, deal_time, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcUrgeInterfaceCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from omc_urge_interface
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcUrgeInterfaceCriteria" >
+    delete from omc_urge_interface
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcUrgeInterface" >
+    insert into omc_urge_interface (serial_no, tenant_id, system_id, 
+      owner_type, owner_id, urge_info, 
+      insert_time, retry_times, deal_flag, 
+      deal_time, remark)
+    values (#{serialNo,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, 
+      #{ownerType,jdbcType=VARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{urgeInfo,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{retryTimes,jdbcType=INTEGER}, #{dealFlag,jdbcType=INTEGER}, 
+      #{dealTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcUrgeInterface" >
+    insert into omc_urge_interface
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="ownerType != null" >
+        owner_type,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="urgeInfo != null" >
+        urge_info,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="retryTimes != null" >
+        retry_times,
+      </if>
+      <if test="dealFlag != null" >
+        deal_flag,
+      </if>
+      <if test="dealTime != null" >
+        deal_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerType != null" >
+        #{ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="urgeInfo != null" >
+        #{urgeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retryTimes != null" >
+        #{retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="dealFlag != null" >
+        #{dealFlag,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcUrgeInterfaceCriteria" resultType="java.lang.Integer" >
+    select count(*) from omc_urge_interface
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update omc_urge_interface
+    <set >
+      <if test="record.serialNo != null" >
+        serial_no = #{record.serialNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemId != null" >
+        system_id = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerType != null" >
+        owner_type = #{record.ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerId != null" >
+        owner_id = #{record.ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgeInfo != null" >
+        urge_info = #{record.urgeInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.retryTimes != null" >
+        retry_times = #{record.retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealFlag != null" >
+        deal_flag = #{record.dealFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealTime != null" >
+        deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update omc_urge_interface
+    set serial_no = #{record.serialNo,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      system_id = #{record.systemId,jdbcType=VARCHAR},
+      owner_type = #{record.ownerType,jdbcType=VARCHAR},
+      owner_id = #{record.ownerId,jdbcType=VARCHAR},
+      urge_info = #{record.urgeInfo,jdbcType=VARCHAR},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      retry_times = #{record.retryTimes,jdbcType=INTEGER},
+      deal_flag = #{record.dealFlag,jdbcType=INTEGER},
+      deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

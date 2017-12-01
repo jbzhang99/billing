@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "ccp",
+    "namespace": "unit-test"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10772,
+          "targetPort": 10772,
+          "nodePort":30772
+      }],
+      "selector": {
+           "app": "ccp-pod"
+      },
+      "type":"NodePort"
+  }
+}

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.prd.dao.mapper.interfaces.PmCategoryInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="CATEGORY_NAME" property="categoryName" jdbcType="VARCHAR" />
+    <result column="CATEGORY_LEVEL" property="categoryLevel" jdbcType="VARCHAR" />
+    <result column="CATEGORY_TYPE" property="categoryType" jdbcType="VARCHAR" />
+    <result column="CATEGORY_ID" property="categoryId" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="MEMBERS" property="members" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TENANT_ID, CATEGORY_NAME, CATEGORY_LEVEL, CATEGORY_TYPE, CATEGORY_ID, PARENT_ID, 
+    MEMBERS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from pm_category_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pm_category_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from pm_category_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfoCriteria" >
+    delete from pm_category_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfo" >
+    insert into pm_category_info (ID, TENANT_ID, CATEGORY_NAME, 
+      CATEGORY_LEVEL, CATEGORY_TYPE, CATEGORY_ID, 
+      PARENT_ID, MEMBERS)
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{categoryLevel,jdbcType=VARCHAR}, #{categoryType,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{members,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfo" >
+    insert into pm_category_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="categoryName != null" >
+        CATEGORY_NAME,
+      </if>
+      <if test="categoryLevel != null" >
+        CATEGORY_LEVEL,
+      </if>
+      <if test="categoryType != null" >
+        CATEGORY_TYPE,
+      </if>
+      <if test="categoryId != null" >
+        CATEGORY_ID,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="members != null" >
+        MEMBERS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryLevel != null" >
+        #{categoryLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryType != null" >
+        #{categoryType,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="members != null" >
+        #{members,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from pm_category_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pm_category_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryName != null" >
+        CATEGORY_NAME = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryLevel != null" >
+        CATEGORY_LEVEL = #{record.categoryLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryType != null" >
+        CATEGORY_TYPE = #{record.categoryType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null" >
+        CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.members != null" >
+        MEMBERS = #{record.members,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pm_category_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      CATEGORY_NAME = #{record.categoryName,jdbcType=VARCHAR},
+      CATEGORY_LEVEL = #{record.categoryLevel,jdbcType=VARCHAR},
+      CATEGORY_TYPE = #{record.categoryType,jdbcType=VARCHAR},
+      CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      MEMBERS = #{record.members,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfo" >
+    update pm_category_info
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null" >
+        CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryLevel != null" >
+        CATEGORY_LEVEL = #{categoryLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryType != null" >
+        CATEGORY_TYPE = #{categoryType,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="members != null" >
+        MEMBERS = #{members,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCategoryInfo" >
+    update pm_category_info
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      CATEGORY_NAME = #{categoryName,jdbcType=VARCHAR},
+      CATEGORY_LEVEL = #{categoryLevel,jdbcType=VARCHAR},
+      CATEGORY_TYPE = #{categoryType,jdbcType=VARCHAR},
+      CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      MEMBERS = #{members,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.batch.client.dao.interfaces.PmBasedataCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCode" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="param_type" property="paramType" jdbcType="VARCHAR" />
+    <result column="param_code" property="paramCode" jdbcType="VARCHAR" />
+    <result column="param_name" property="paramName" jdbcType="VARCHAR" />
+    <result column="price_type" property="priceType" jdbcType="VARCHAR" />
+    <result column="default_value" property="defaultValue" jdbcType="VARCHAR" />
+    <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+    <result column="subject_type" property="subjectType" jdbcType="VARCHAR" />
+    <result column="billing_type" property="billingType" jdbcType="VARCHAR" />
+    <result column="is_free" property="isFree" jdbcType="VARCHAR" />
+    <result column="can_buy_period" property="canBuyPeriod" jdbcType="VARCHAR" />
+    <result column="comments" property="comments" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tenant_id, param_type, param_code, param_name, price_type, default_value, parent_code, 
+    subject_type, billing_type, is_free, can_buy_period, comments
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCodeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pm_basedata_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pm_basedata_code
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from pm_basedata_code
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCodeCriteria" >
+    delete from pm_basedata_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCode" >
+    insert into pm_basedata_code (id, tenant_id, param_type, 
+      param_code, param_name, price_type, 
+      default_value, parent_code, subject_type, 
+      billing_type, is_free, can_buy_period, 
+      comments)
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{paramType,jdbcType=VARCHAR}, 
+      #{paramCode,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}, #{priceType,jdbcType=VARCHAR}, 
+      #{defaultValue,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, #{subjectType,jdbcType=VARCHAR}, 
+      #{billingType,jdbcType=VARCHAR}, #{isFree,jdbcType=VARCHAR}, #{canBuyPeriod,jdbcType=VARCHAR}, 
+      #{comments,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCode" >
+    insert into pm_basedata_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="paramType != null" >
+        param_type,
+      </if>
+      <if test="paramCode != null" >
+        param_code,
+      </if>
+      <if test="paramName != null" >
+        param_name,
+      </if>
+      <if test="priceType != null" >
+        price_type,
+      </if>
+      <if test="defaultValue != null" >
+        default_value,
+      </if>
+      <if test="parentCode != null" >
+        parent_code,
+      </if>
+      <if test="subjectType != null" >
+        subject_type,
+      </if>
+      <if test="billingType != null" >
+        billing_type,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+      <if test="canBuyPeriod != null" >
+        can_buy_period,
+      </if>
+      <if test="comments != null" >
+        comments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null" >
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramCode != null" >
+        #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null" >
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="priceType != null" >
+        #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultValue != null" >
+        #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null" >
+        #{subjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="billingType != null" >
+        #{billingType,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=VARCHAR},
+      </if>
+      <if test="canBuyPeriod != null" >
+        #{canBuyPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCodeCriteria" resultType="java.lang.Integer" >
+    select count(*) from pm_basedata_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pm_basedata_code
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramType != null" >
+        param_type = #{record.paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramCode != null" >
+        param_code = #{record.paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramName != null" >
+        param_name = #{record.paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceType != null" >
+        price_type = #{record.priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultValue != null" >
+        default_value = #{record.defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentCode != null" >
+        parent_code = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectType != null" >
+        subject_type = #{record.subjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billingType != null" >
+        billing_type = #{record.billingType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFree != null" >
+        is_free = #{record.isFree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.canBuyPeriod != null" >
+        can_buy_period = #{record.canBuyPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null" >
+        comments = #{record.comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pm_basedata_code
+    set id = #{record.id,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      param_type = #{record.paramType,jdbcType=VARCHAR},
+      param_code = #{record.paramCode,jdbcType=VARCHAR},
+      param_name = #{record.paramName,jdbcType=VARCHAR},
+      price_type = #{record.priceType,jdbcType=VARCHAR},
+      default_value = #{record.defaultValue,jdbcType=VARCHAR},
+      parent_code = #{record.parentCode,jdbcType=VARCHAR},
+      subject_type = #{record.subjectType,jdbcType=VARCHAR},
+      billing_type = #{record.billingType,jdbcType=VARCHAR},
+      is_free = #{record.isFree,jdbcType=VARCHAR},
+      can_buy_period = #{record.canBuyPeriod,jdbcType=VARCHAR},
+      comments = #{record.comments,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCode" >
+    update pm_basedata_code
+    <set >
+      <if test="tenantId != null" >
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null" >
+        param_type = #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramCode != null" >
+        param_code = #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null" >
+        param_name = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="priceType != null" >
+        price_type = #{priceType,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultValue != null" >
+        default_value = #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectType != null" >
+        subject_type = #{subjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="billingType != null" >
+        billing_type = #{billingType,jdbcType=VARCHAR},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=VARCHAR},
+      </if>
+      <if test="canBuyPeriod != null" >
+        can_buy_period = #{canBuyPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        comments = #{comments,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.batch.client.dao.mapper.bo.PmBasedataCode" >
+    update pm_basedata_code
+    set tenant_id = #{tenantId,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=VARCHAR},
+      param_code = #{paramCode,jdbcType=VARCHAR},
+      param_name = #{paramName,jdbcType=VARCHAR},
+      price_type = #{priceType,jdbcType=VARCHAR},
+      default_value = #{defaultValue,jdbcType=VARCHAR},
+      parent_code = #{parentCode,jdbcType=VARCHAR},
+      subject_type = #{subjectType,jdbcType=VARCHAR},
+      billing_type = #{billingType,jdbcType=VARCHAR},
+      is_free = #{isFree,jdbcType=VARCHAR},
+      can_buy_period = #{canBuyPeriod,jdbcType=VARCHAR},
+      comments = #{comments,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

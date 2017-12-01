@@ -1,0 +1,11 @@
+
+INSERT INTO `amc_dr_bill_subject_map` (`TENANT_ID`, `DR_SUBJECT`, `BILL_SUBJECT`) VALUES ('ECITIC', 'NAT01', '300028');   
+INSERT INTO `amc_dr_bill_subject_map` (`TENANT_ID`, `DR_SUBJECT`, `BILL_SUBJECT`) VALUES ('ECITIC', 'SHARE01', '300029');  
+INSERT INTO `amc_deduct_rule` (`TENANT_ID`, `FUND_SUBJECT`, `FEE_SUBJECT`) VALUES ('ECITIC', '100001', '300028');
+INSERT INTO `amc_deduct_rule` (`TENANT_ID`, `FUND_SUBJECT`, `FEE_SUBJECT`) VALUES ('ECITIC', '100001', '300029');
+-- 中信银行九恒星  ，  邦网络数字营销设计服务
+INSERT INTO `amc_dr_bill_subject_map` (`TENANT_ID`, `DR_SUBJECT`, `BILL_SUBJECT`) VALUES ('ECITIC', 'MBS01', '300030');   
+INSERT INTO `amc_dr_bill_subject_map` (`TENANT_ID`, `DR_SUBJECT`, `BILL_SUBJECT`) VALUES ('ECITIC', 'DESIGN01', '300031');  
+INSERT INTO `amc_deduct_rule` (`TENANT_ID`, `FUND_SUBJECT`, `FEE_SUBJECT`) VALUES ('ECITIC', '100001', '300030');
+INSERT INTO `amc_deduct_rule` (`TENANT_ID`, `FUND_SUBJECT`, `FEE_SUBJECT`) VALUES ('ECITIC', '100001', '300031');
+commit;

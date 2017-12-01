@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcChargeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcCharge" >
+    <result column="CHARGE_SEQ" property="chargeSeq" jdbcType="BIGINT" />
+    <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="SUBS_ID" property="subsId" jdbcType="BIGINT" />
+    <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+    <result column="SUBJECT_ID" property="subjectId" jdbcType="BIGINT" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="BIGINT" />
+    <result column="ADJUST_AFTERWARDS" property="adjustAfterwards" jdbcType="BIGINT" />
+    <result column="DISC_TOTAL_AMOUNT" property="discTotalAmount" jdbcType="BIGINT" />
+    <result column="BALANCE" property="balance" jdbcType="BIGINT" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="BIGINT" />
+    <result column="LAST_PAY_DATE" property="lastPayDate" jdbcType="TIMESTAMP" />
+    <result column="CUST_ID" property="custId" jdbcType="BIGINT" />
+    <result column="CUST_TYPE" property="custType" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="AMC_BILL_MONTH" property="billMonth" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <sql id="Example_Where_Clause_Charge" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and a.${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and a.${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and a.${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and a.${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CHARGE_SEQ, ACCT_ID, SUBS_ID, SERVICE_ID, SUBJECT_ID, TOTAL_AMOUNT, ADJUST_AFTERWARDS, 
+    DISC_TOTAL_AMOUNT, BALANCE, PAY_STATUS, LAST_PAY_DATE, CUST_ID, CUST_TYPE, TENANT_ID
+  </sql>
+  <sql id="Base_Column_List_For_Bill" >
+    ACCT_ID, SUBJECT_ID, SUM(TOTAL_AMOUNT) AS TOTAL_AMOUNT, SUM(BALANCE) AS BALANCE, CUST_ID, TENANT_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_charge_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" >
+    delete from amc_charge_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_charge_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectByExampleForBill" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List_For_Bill" />
+    from amc_charge_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    GROUP BY ACCT_ID, SUBJECT_ID, CUST_ID, TENANT_ID
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="countByExampleForBill" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" resultType="java.lang.Integer" >
+    select count(*) from
+    (SELECT
+    <include refid="Base_Column_List_For_Bill" />
+    from amc_charge_${tableMonth}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    GROUP BY ACCT_ID, SUBJECT_ID, CUST_ID, TENANT_ID) bill
+  </select>
+ 
+  <select id="selectByExampleAndMonthsForBill" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    a.*
+    from 
+    <foreach item="item" collection="billMonths" separator="union all" open="(" close=")" index="">  
+      (select <include refid="Base_Column_List_For_Bill" />,${item} AMC_BILL_MONTH from amc_charge_${item} GROUP BY ACCT_ID, SUBJECT_ID, CUST_ID, TENANT_ID)
+    </foreach>
+    a
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause_Charge" />
+    </if>
+    <if test="orderByClause != null" >
+      order by a.${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="countByExampleAndMonthsForBill" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcChargeCriteria" resultType="java.lang.Integer" >
+    select count(*) from
+    (SELECT
+    a.*
+    from 
+    <foreach item="item" collection="billMonths" separator="union all" open="(" close=")" index="">  
+      (select <include refid="Base_Column_List_For_Bill" />,${item} AMC_BILL_MONTH from amc_charge_${item} GROUP BY ACCT_ID, SUBJECT_ID, CUST_ID, TENANT_ID)
+    </foreach>
+    a
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause_Charge" />
+    </if>
+    GROUP BY a.ACCT_ID, a.SUBJECT_ID, a.CUST_ID, a.TENANT_ID) bill
+  </select>
+</mapper>

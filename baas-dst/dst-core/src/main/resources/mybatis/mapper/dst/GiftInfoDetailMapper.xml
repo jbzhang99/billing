@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.dst.dao.interfaces.GiftInfoDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetail" >
+    <id column="DISCOUNT_ID" property="discountId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="ACTIVE_MODE" property="activeMode" jdbcType="VARCHAR" />
+    <result column="BUSINESS_PERIOD" property="businessPeriod" jdbcType="VARCHAR" />
+    <result column="EFFECT_DATE" property="effectDate" jdbcType="TIMESTAMP" />
+    <result column="CASH_AMOUNT" property="cashAmount" jdbcType="VARCHAR" />
+    <result column="VIRTUAL_COINS_NUM" property="virtualCoinsNum" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="OPERATOR_ID" property="operatorId" jdbcType="VARCHAR" />
+    <result column="GIFT_TYPE" property="giftType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DISCOUNT_ID, TENANT_ID, ACTIVE_MODE, BUSINESS_PERIOD, EFFECT_DATE, CASH_AMOUNT, VIRTUAL_COINS_NUM, 
+    STATUS, CREATE_TIME, OPERATOR_ID, GIFT_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetailCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_gift_info_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dst_gift_info_detail
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dst_gift_info_detail
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetailCriteria" >
+    delete from dst_gift_info_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetail" >
+    insert into dst_gift_info_detail (DISCOUNT_ID, TENANT_ID, ACTIVE_MODE, 
+      BUSINESS_PERIOD, EFFECT_DATE, CASH_AMOUNT, 
+      VIRTUAL_COINS_NUM, STATUS, CREATE_TIME, 
+      OPERATOR_ID, GIFT_TYPE)
+    values (#{discountId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{activeMode,jdbcType=VARCHAR}, 
+      #{businessPeriod,jdbcType=VARCHAR}, #{effectDate,jdbcType=TIMESTAMP}, #{cashAmount,jdbcType=VARCHAR}, 
+      #{virtualCoinsNum,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{operatorId,jdbcType=VARCHAR}, #{giftType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetail" >
+    insert into dst_gift_info_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        DISCOUNT_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="activeMode != null" >
+        ACTIVE_MODE,
+      </if>
+      <if test="businessPeriod != null" >
+        BUSINESS_PERIOD,
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE,
+      </if>
+      <if test="cashAmount != null" >
+        CASH_AMOUNT,
+      </if>
+      <if test="virtualCoinsNum != null" >
+        VIRTUAL_COINS_NUM,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="operatorId != null" >
+        OPERATOR_ID,
+      </if>
+      <if test="giftType != null" >
+        GIFT_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="discountId != null" >
+        #{discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="activeMode != null" >
+        #{activeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPeriod != null" >
+        #{businessPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashAmount != null" >
+        #{cashAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualCoinsNum != null" >
+        #{virtualCoinsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="giftType != null" >
+        #{giftType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetailCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_gift_info_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_gift_info_detail
+    <set >
+      <if test="record.discountId != null" >
+        DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activeMode != null" >
+        ACTIVE_MODE = #{record.activeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessPeriod != null" >
+        BUSINESS_PERIOD = #{record.businessPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectDate != null" >
+        EFFECT_DATE = #{record.effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cashAmount != null" >
+        CASH_AMOUNT = #{record.cashAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualCoinsNum != null" >
+        VIRTUAL_COINS_NUM = #{record.virtualCoinsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operatorId != null" >
+        OPERATOR_ID = #{record.operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giftType != null" >
+        GIFT_TYPE = #{record.giftType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_gift_info_detail
+    set DISCOUNT_ID = #{record.discountId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      ACTIVE_MODE = #{record.activeMode,jdbcType=VARCHAR},
+      BUSINESS_PERIOD = #{record.businessPeriod,jdbcType=VARCHAR},
+      EFFECT_DATE = #{record.effectDate,jdbcType=TIMESTAMP},
+      CASH_AMOUNT = #{record.cashAmount,jdbcType=VARCHAR},
+      VIRTUAL_COINS_NUM = #{record.virtualCoinsNum,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      OPERATOR_ID = #{record.operatorId,jdbcType=VARCHAR},
+      GIFT_TYPE = #{record.giftType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetail" >
+    update dst_gift_info_detail
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="activeMode != null" >
+        ACTIVE_MODE = #{activeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPeriod != null" >
+        BUSINESS_PERIOD = #{businessPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="effectDate != null" >
+        EFFECT_DATE = #{effectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashAmount != null" >
+        CASH_AMOUNT = #{cashAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualCoinsNum != null" >
+        VIRTUAL_COINS_NUM = #{virtualCoinsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="giftType != null" >
+        GIFT_TYPE = #{giftType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.dst.dao.mapper.bo.GiftInfoDetail" >
+    update dst_gift_info_detail
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      ACTIVE_MODE = #{activeMode,jdbcType=VARCHAR},
+      BUSINESS_PERIOD = #{businessPeriod,jdbcType=VARCHAR},
+      EFFECT_DATE = #{effectDate,jdbcType=TIMESTAMP},
+      CASH_AMOUNT = #{cashAmount,jdbcType=VARCHAR},
+      VIRTUAL_COINS_NUM = #{virtualCoinsNum,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      OPERATOR_ID = #{operatorId,jdbcType=VARCHAR},
+      GIFT_TYPE = #{giftType,jdbcType=VARCHAR}
+    where DISCOUNT_ID = #{discountId,jdbcType=VARCHAR}
+  </update>
+</mapper>

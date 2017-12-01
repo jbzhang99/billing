@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.ccp.dao.mapper.interfaces.OmcScoutStatusYyyymmMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.ccp.dao.mapper.bo.OmcScoutStatusYyyymm" >
+    <result column="sco_seq" property="scoSeq" jdbcType="BIGINT" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+    <result column="subs_id" property="subsId" jdbcType="VARCHAR" />
+    <result column="acct_id" property="acctId" jdbcType="VARCHAR" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
+    <result column="business_code" property="businessCode" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="last_status" property="lastStatus" jdbcType="VARCHAR" />
+    <result column="status_time" property="statusTime" jdbcType="TIMESTAMP" />
+    <result column="notify_time" property="notifyTime" jdbcType="TIMESTAMP" />
+    <result column="notify_times" property="notifyTimes" jdbcType="INTEGER" />
+    <result column="notify_status" property="notifyStatus" jdbcType="VARCHAR" />
+    <result column="notify_type" property="notifyType" jdbcType="VARCHAR" />
+    <result column="scout_info" property="scoutInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sco_seq, tenant_id, system_id, subs_id, acct_id, cust_id, business_code, status, 
+    last_status, status_time, notify_time, notify_times, notify_status, notify_type, 
+    scout_info
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutStatusYyyymmCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from omc_scout_status_${yyyymm}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutStatusYyyymmCriteria" >
+    delete from omc_scout_status_${yyyymm}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutStatusYyyymm" >
+    insert into omc_scout_status_${yyyymm} (sco_seq, tenant_id, system_id, 
+      subs_id, acct_id, cust_id, 
+      business_code, status, last_status, 
+      status_time, notify_time, notify_times, 
+      notify_status, notify_type, scout_info
+      )
+    values (#{scoSeq,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, 
+      #{subsId,jdbcType=VARCHAR}, #{acctId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{businessCode,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{lastStatus,jdbcType=VARCHAR}, 
+      #{statusTime,jdbcType=TIMESTAMP}, #{notifyTime,jdbcType=TIMESTAMP}, #{notifyTimes,jdbcType=INTEGER}, 
+      #{notifyStatus,jdbcType=VARCHAR}, #{notifyType,jdbcType=VARCHAR}, #{scoutInfo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutStatusYyyymm" >
+    insert into omc_scout_status_${yyyymm}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoSeq != null" >
+        sco_seq,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="subsId != null" >
+        subs_id,
+      </if>
+      <if test="acctId != null" >
+        acct_id,
+      </if>
+      <if test="custId != null" >
+        cust_id,
+      </if>
+      <if test="businessCode != null" >
+        business_code,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastStatus != null" >
+        last_status,
+      </if>
+      <if test="statusTime != null" >
+        status_time,
+      </if>
+      <if test="notifyTime != null" >
+        notify_time,
+      </if>
+      <if test="notifyTimes != null" >
+        notify_times,
+      </if>
+      <if test="notifyStatus != null" >
+        notify_status,
+      </if>
+      <if test="notifyType != null" >
+        notify_type,
+      </if>
+      <if test="scoutInfo != null" >
+        scout_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoSeq != null" >
+        #{scoSeq,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="subsId != null" >
+        #{subsId,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="businessCode != null" >
+        #{businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastStatus != null" >
+        #{lastStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="statusTime != null" >
+        #{statusTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyTime != null" >
+        #{notifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyTimes != null" >
+        #{notifyTimes,jdbcType=INTEGER},
+      </if>
+      <if test="notifyStatus != null" >
+        #{notifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyType != null" >
+        #{notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="scoutInfo != null" >
+        #{scoutInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutStatusYyyymmCriteria" resultType="java.lang.Integer" >
+    select count(*) from omc_scout_status_${yyyymm}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update omc_scout_status_${yyyymm}
+    <set >
+      <if test="record.scoSeq != null" >
+        sco_seq = #{record.scoSeq,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemId != null" >
+        system_id = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subsId != null" >
+        subs_id = #{record.subsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctId != null" >
+        acct_id = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        cust_id = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessCode != null" >
+        business_code = #{record.businessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastStatus != null" >
+        last_status = #{record.lastStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statusTime != null" >
+        status_time = #{record.statusTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.notifyTime != null" >
+        notify_time = #{record.notifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.notifyTimes != null" >
+        notify_times = #{record.notifyTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.notifyStatus != null" >
+        notify_status = #{record.notifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notifyType != null" >
+        notify_type = #{record.notifyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoutInfo != null" >
+        scout_info = #{record.scoutInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update omc_scout_status_${yyyymm}
+    set sco_seq = #{record.scoSeq,jdbcType=BIGINT},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      system_id = #{record.systemId,jdbcType=VARCHAR},
+      subs_id = #{record.subsId,jdbcType=VARCHAR},
+      acct_id = #{record.acctId,jdbcType=VARCHAR},
+      cust_id = #{record.custId,jdbcType=VARCHAR},
+      business_code = #{record.businessCode,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      last_status = #{record.lastStatus,jdbcType=VARCHAR},
+      status_time = #{record.statusTime,jdbcType=TIMESTAMP},
+      notify_time = #{record.notifyTime,jdbcType=TIMESTAMP},
+      notify_times = #{record.notifyTimes,jdbcType=INTEGER},
+      notify_status = #{record.notifyStatus,jdbcType=VARCHAR},
+      notify_type = #{record.notifyType,jdbcType=VARCHAR},
+      scout_info = #{record.scoutInfo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

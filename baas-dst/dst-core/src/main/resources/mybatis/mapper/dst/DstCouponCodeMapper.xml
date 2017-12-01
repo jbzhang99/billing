@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.dst.dao.interfaces.DstCouponCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.dst.dao.mapper.bo.DstCouponCode" >
+    <id column="CODE_ID" property="codeId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+    <result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+    <result column="COUPON_STATUS" property="couponStatus" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ID" property="channelId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CHANNEL_NAME" property="channelName" jdbcType="VARCHAR" />
+    <result column="USE_TIME" property="useTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="GET_RESOURCE" property="getResource" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ACCOUNT" property="channelAccount" jdbcType="VARCHAR" />
+    <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+     <result column="APPLY_COUNT" property="applyCount" jdbcType="INTEGER" />
+  </resultMap>
+   <resultMap id="BaseResultMap1" type="com.ai.baas.dst.dao.mapper.bo.CouponCode" >
+    <id column="CODE_ID" property="codeId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+    <result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+    <result column="COUPON_STATUS" property="couponStatus" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ID" property="channelId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CHANNEL_NAME" property="channelName" jdbcType="VARCHAR" />
+    <result column="USE_TIME" property="useTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="GET_RESOURCE" property="getResource" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ACCOUNT" property="channelAccount" jdbcType="VARCHAR" />
+    <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+     <result column="APPLY_COUNT" property="applyCount" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="MyOwnInfoAndCode" type="com.ai.baas.dst.dao.mapper.bo.DstMyOwnCouponCodeInfo" >
+    <id column="CODE_ID" property="codeId" jdbcType="VARCHAR" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+    <result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+    <result column="COUPON_STATUS" property="couponStatus" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="CONDITION_VALUE" property="conditionValue" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ID" property="channelId" jdbcType="VARCHAR" />
+    <result column="CHANNEL_NAME" property="channelName" jdbcType="VARCHAR" />
+	<result column="COUPON_NAME" property="couponName" jdbcType="VARCHAR" />
+    <result column="CHANNEL_ACCOUNT" property="channelAccount" jdbcType="VARCHAR" />
+    <result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+	<result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  	<resultMap id="BaseResultMap2" type="com.ai.baas.dst.dao.mapper.bo.QDCouponCodes">
+		<id column="CODE_ID" property="codeId" jdbcType="VARCHAR" />
+		<result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+		<result column="COUPON_CODE" property="couponCode" jdbcType="VARCHAR" />
+		<result column="COUPON_ID" property="couponId" jdbcType="VARCHAR" />
+		<result column="COUPON_NAME" property="couponName" jdbcType="VARCHAR" />
+		<result column="COUPON_COUNT" property="couponCount" jdbcType="INTEGER" />
+		<result column="CONDITION_VALUE" property="conditionValue" jdbcType="VARCHAR" />
+		
+		<result column="COUPON_STATUS" property="couponStatus"
+			jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status"
+			jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="CHANNEL_ID" property="channelId" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CHANNEL_NAME" property="channelName" jdbcType="VARCHAR" />
+		<result column="USE_TIME" property="useTime" jdbcType="TIMESTAMP" />
+		<result column="USED_COUNT" property="usedCount" jdbcType="INTEGER" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+		<result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+		<result column="GET_RESOURCE" property="getResource" jdbcType="VARCHAR" />
+		<result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+		<result column="CHANNEL_ACCOUNT" property="channelAccount"
+			jdbcType="VARCHAR" />
+		<result column="SERVICE_ID" property="serviceId" jdbcType="VARCHAR" />
+		<result column="APPLY_COUNT" property="applyCount" jdbcType="INTEGER" />
+	</resultMap>
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CODE_ID, TENANT_ID, COUPON_CODE, COUPON_ID, COUPON_STATUS, ORDER_ID, CHANNEL_ID, 
+    CREATE_TIME, CHANNEL_NAME, USE_TIME, UPDATE_TIME, GET_RESOURCE, COMMENTS, CHANNEL_ACCOUNT, 
+    SERVICE_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCodeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dst_coupon_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dst_coupon_code
+    where CODE_ID = #{codeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dst_coupon_code
+    where CODE_ID = #{codeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCodeCriteria" >
+    delete from dst_coupon_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCode" >
+    insert into dst_coupon_code (CODE_ID, TENANT_ID, COUPON_CODE, 
+      COUPON_ID, COUPON_STATUS, ORDER_ID, 
+      CHANNEL_ID, CREATE_TIME, CHANNEL_NAME, 
+      USE_TIME, UPDATE_TIME, GET_RESOURCE, 
+      COMMENTS, CHANNEL_ACCOUNT, SERVICE_ID
+      )
+    values (#{codeId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, #{couponCode,jdbcType=VARCHAR}, 
+      #{couponId,jdbcType=VARCHAR}, #{couponStatus,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{channelId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{channelName,jdbcType=VARCHAR}, 
+      #{useTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{getResource,jdbcType=VARCHAR}, 
+      #{comments,jdbcType=VARCHAR}, #{channelAccount,jdbcType=VARCHAR}, #{serviceId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCode" >
+    insert into dst_coupon_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="codeId != null" >
+        CODE_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="couponCode != null" >
+        COUPON_CODE,
+      </if>
+      <if test="couponId != null" >
+        COUPON_ID,
+      </if>
+      <if test="couponStatus != null" >
+        COUPON_STATUS,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="channelName != null" >
+        CHANNEL_NAME,
+      </if>
+      <if test="useTime != null" >
+        USE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="getResource != null" >
+        GET_RESOURCE,
+      </if>
+      <if test="comments != null" >
+        COMMENTS,
+      </if>
+      <if test="channelAccount != null" >
+        CHANNEL_ACCOUNT,
+      </if>
+      <if test="serviceId != null" >
+        SERVICE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="codeId != null" >
+        #{codeId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponCode != null" >
+        #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStatus != null" >
+        #{couponStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null" >
+        #{useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getResource != null" >
+        #{getResource,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="channelAccount != null" >
+        #{channelAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCodeCriteria" resultType="java.lang.Integer" >
+    select count(*) from dst_coupon_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dst_coupon_code
+    <set >
+      <if test="record.codeId != null" >
+        CODE_ID = #{record.codeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponCode != null" >
+        COUPON_CODE = #{record.couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponId != null" >
+        COUPON_ID = #{record.couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponStatus != null" >
+        COUPON_STATUS = #{record.couponStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelId != null" >
+        CHANNEL_ID = #{record.channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.channelName != null" >
+        CHANNEL_NAME = #{record.channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useTime != null" >
+        USE_TIME = #{record.useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.getResource != null" >
+        GET_RESOURCE = #{record.getResource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null" >
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelAccount != null" >
+        CHANNEL_ACCOUNT = #{record.channelAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceId != null" >
+        SERVICE_ID = #{record.serviceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dst_coupon_code
+    set CODE_ID = #{record.codeId,jdbcType=VARCHAR},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      COUPON_CODE = #{record.couponCode,jdbcType=VARCHAR},
+      COUPON_ID = #{record.couponId,jdbcType=VARCHAR},
+      COUPON_STATUS = #{record.couponStatus,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      CHANNEL_ID = #{record.channelId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CHANNEL_NAME = #{record.channelName,jdbcType=VARCHAR},
+      USE_TIME = #{record.useTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      GET_RESOURCE = #{record.getResource,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      CHANNEL_ACCOUNT = #{record.channelAccount,jdbcType=VARCHAR},
+      SERVICE_ID = #{record.serviceId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCode" >
+    update dst_coupon_code
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponCode != null" >
+        COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null" >
+        COUPON_ID = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStatus != null" >
+        COUPON_STATUS = #{couponStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        CHANNEL_ID = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelName != null" >
+        CHANNEL_NAME = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null" >
+        USE_TIME = #{useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getResource != null" >
+        GET_RESOURCE = #{getResource,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="channelAcount != null" >
+        CHANNEL_ACCOUNT = #{channelAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceId != null" >
+        SERVICE_ID = #{serviceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CODE_ID = #{codeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.dst.dao.mapper.bo.DstCouponCode" >
+    update dst_coupon_code
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      COUPON_CODE = #{couponCode,jdbcType=VARCHAR},
+      COUPON_ID = #{couponId,jdbcType=VARCHAR},
+      COUPON_STATUS = #{couponStatus,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      CHANNEL_ID = #{channelId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CHANNEL_NAME = #{channelName,jdbcType=VARCHAR},
+      USE_TIME = #{useTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      GET_RESOURCE = #{getResource,jdbcType=VARCHAR},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      CHANNEL_ACCOUNT = #{channelAccount,jdbcType=VARCHAR},
+      SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+    where CODE_ID = #{codeId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="selectAggreByExample"  resultMap="BaseResultMap1" parameterType="com.ai.baas.dst.dao.mapper.bo.OPCouponCode" >
+
+    select channel_name,channel_id,COUPON_ID,COUPON_CODE,COUNT(*) as APPLY_COUNT,CREATE_TIME,channel_account
+
+    from dst_coupon_code
+   
+    where  TENANT_ID=#{tenantId}
+    
+    and COUPON_ID=#{couponId} 
+    <if test="channelId!=null">
+    
+      and CHANNEL_ID=#{channelId}
+      
+    </if>
+    <if test="channelAccount!=null">
+    
+      and CHANNEL_ACCOUNT=#{channelAccount}
+      
+    </if> 
+      <if test="applyTime!=null">
+    
+      and CREATE_TIME=#{applyTime}
+      
+    </if>  
+    
+    GROUP BY CHANNEL_ID
+     <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+   
+  </select>
+  <select id="countByAgreeExample" parameterType="com.ai.baas.dst.dao.mapper.bo.OPCouponCode" resultType="java.lang.Integer" >
+   
+    select count(*) from
+    (
+     select channel_name,channel_id,COUPON_ID,COUPON_CODE,COUNT(*) as APPLY_COUNT,CREATE_TIME,channel_account
+
+    from dst_coupon_code
+   
+    where TENANT_ID=#{tenantId}
+    
+    and COUPON_ID=#{couponId} 
+    
+    <if test="channelId!=null">
+    
+      and CHANNEL_ID=#{channelId}
+      
+    </if> 
+     <if test="channelAccount!=null">
+    
+      and CHANNEL_ACCOUNT=#{channelAccount}
+      
+    </if> 
+    
+      <if test="applyTime!=null">
+    
+      and CREATE_TIME=#{applyTime}
+      
+    </if> 
+    
+    GROUP BY CHANNEL_ID 
+   
+    ) as coupon_code_count;
+    
+    
+  </select>
+  
+  <select id="getMyOwnCouponCode" resultMap="MyOwnInfoAndCode" parameterType="com.ai.baas.dst.api.coupon.params.MyOwnCodeReq">
+  	select
+  		a.CODE_ID,a.TENANT_ID,a.COUPON_CODE,a.COUPON_ID,a.COUPON_STATUS,a.ORDER_ID,a.CHANNEL_ID,a.CHANNEL_NAME,a.CHANNEL_ACCOUNT,a.SERVICE_ID,c.COUPON_NAME,c.CONDITION_VALUE,c.ACTIVE_TIME,c.INACTIVE_TIME
+  	from 
+  		dst_coupon_code a left join dst_coupon_info c 
+  	on
+  		c.COUPON_ID = a.COUPON_ID
+  	where
+  			1=1
+  		<if test="null != serviceId and serviceId != ''">
+  			AND SERVICE_ID = #{serviceId,jdbcType=VARCHAR}
+  		</if>
+  		<if test="null != tenantId and tenantId != ''">
+  			AND a.TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+  		</if>
+  </select>
+  
+  	<select id="getExistsCouponCode" parameterType="com.ai.baas.dst.dao.mapper.bo.QDCouponCode"
+		resultMap="BaseResultMap2">
+
+		SELECT info.coupon_id,info.coupon_name,info.coupon_type,count(*) AS
+		coupon_count,
+		CONDITION_VALUE,count(CASE when codes.COUPON_STATUS='USED' then COUPON_STATUS END) AS
+		used_count,
+		ACTIVE_TIME,INACTIVE_TIME,info.STATUS,codes.COMMENTS,info.product_id,info.product_name
+		from dst_coupon_info info,dst_coupon_code codes
+		WHERE info.COUPON_ID=codes.COUPON_ID
+		and codes.CHANNEL_ID=#{channelId}
+		<if test="couponId!=null">
+			codes.coupon_id=#{couponId}
+		</if>
+		<if test="couponName!=null">
+			codes.coupon_name like '%'+#{couponName}+'%'
+		</if>
+		
+		<if test="status!=null">
+			info.status =#{status}
+		</if>
+		<if test="getResource!=null">
+			info.get_resource =#{getResource}
+		</if>
+		
+		GROUP BY COUPON_ID
+		
+		<if test="limitStart != null and limitStart>=0">
+			limit #{limitStart} , #{limitEnd}
+		</if>
+	</select>
+	
+	
+	<select id="getExistsCouponCodeCount" parameterType="com.ai.baas.dst.dao.mapper.bo.QDCouponCode"
+		resultType="java.lang.Integer">
+      select count(*) from 
+		(SELECT info.coupon_id,info.coupon_name,info.coupon_type,count(*) AS
+		coupon_count,
+		CONDITION_VALUE,count(CASE when codes.COUPON_STATUS='USED' then COUPON_STATUS END) AS
+		used_count,
+		ACTIVE_TIME,INACTIVE_TIME,info.STATUS,codes.COMMENTS
+		from dst_coupon_info info,dst_coupon_code codes
+		WHERE info.COUPON_ID=codes.COUPON_ID
+		and codes.CHANNEL_ID=#{channelId}
+		<if test="couponId!=null">
+			codes.coupon_id=#{couponId}
+		</if>
+		<if test="couponName!=null">
+			codes.coupon_name like '%'+#{couponName}+'%'
+		</if>
+		
+		<if test="status!=null">
+			info.status =#{status}
+		</if>
+		<if test="getResource!=null">
+			info.get_resource =#{getResource}
+		</if>
+		
+		GROUP BY COUPON_ID) as codes;
+		
+	</select>
+	
+	<select id="selectChannelInfoByExample"  resultMap="BaseResultMap1" parameterType="com.ai.baas.dst.dao.mapper.bo.OPCouponCode" >
+
+	    select channel_name,channel_id,COUPON_ID,COUPON_CODE,COUNT(*) as APPLY_COUNT,CREATE_TIME,channel_account
+	
+	    from dst_coupon_code
+	   
+	    where  TENANT_ID=#{tenantId}
+	    
+	    and COUPON_ID=#{couponId} 
+	    <if test="channelId!=null">
+	      and CHANNEL_ID=#{channelId}
+	    </if>
+	    <if test="channelAccount!=null">
+	      and CHANNEL_ACCOUNT=#{channelAccount}
+	    </if> 
+	    <if test="applyTime!=null">
+	      and CREATE_TIME=#{applyTime}
+	    </if>  
+	    GROUP BY CHANNEL_ID
+	 </select>
+	
+	<select id="getExistsCouponCodeList" parameterType="com.ai.baas.dst.dao.mapper.bo.QDCouponCode"
+		resultMap="BaseResultMap2">
+
+		SELECT info.coupon_id,info.coupon_name,info.coupon_type,count(*) AS
+		coupon_count,
+		CONDITION_VALUE,count(CASE when codes.COUPON_STATUS='USED' then COUPON_STATUS END) AS
+		used_count,
+		ACTIVE_TIME,INACTIVE_TIME,info.STATUS,codes.COMMENTS,info.product_id,info.product_name,info.coupon_con_type
+		from dst_coupon_info info,dst_coupon_code codes
+		WHERE info.COUPON_ID=codes.COUPON_ID
+		and codes.CHANNEL_ID=#{channelId}
+		and TENANT_ID=#{tenantId}
+		<if test="couponId!=null">
+			and codes.coupon_id=#{couponId}
+		</if>
+		<if test="couponName!=null">
+			and codes.coupon_name like '%'+#{couponName}+'%'
+		</if>
+		
+		<if test="status!=null">
+			and info.status =#{status}
+		</if>
+		<if test="getResource!=null">
+			and info.get_resource =#{getResource}
+		</if>
+		GROUP BY COUPON_ID
+	</select>
+</mapper>

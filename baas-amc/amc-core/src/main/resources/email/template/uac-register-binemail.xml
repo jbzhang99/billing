@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-body>
+	<html>
+		<head>
+
+		</head>
+
+		<body link="blue" vlink="purple"
+			style="tab-interval:21.0pt;text-justify-trim:
+punctuation">
+
+			<div style='layout-grid:21.15pt'>
+
+				<p>
+					<span
+						style='font-family:宋体;mso-ascii-font-family:Cambria;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:宋体;mso-fareast-theme-font:
+minor-fareast;mso-hansi-font-family:Cambria;mso-hansi-theme-font:minor-latin'>您已{0}</span>
+				</p>
+
+			</div>
+
+		</body>
+
+	</html>
+
+
+</xml-body>

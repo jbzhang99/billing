@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.runner.center.mmp.dao.interfaces.SgipSrcGsmMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.runner.center.mmp.dao.mapper.bo.SgipSrcGsm" >
+    <result column="src_name" property="srcName" jdbcType="VARCHAR" />
+    <result column="template_id" property="templateId" jdbcType="BIGINT" />
+    <result column="servicetype" property="servicetype" jdbcType="VARCHAR" />
+    <result column="verifyid" property="verifyid" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="gsmcontent" property="gsmcontent" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="Priority" property="priority" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    src_name, template_id, servicetype, verifyid, phone, gsmcontent, flag, Priority, 
+    create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.runner.center.mmp.dao.mapper.bo.SgipSrcGsmCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sgip_src_gsm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.runner.center.mmp.dao.mapper.bo.SgipSrcGsmCriteria" >
+    delete from sgip_src_gsm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.runner.center.mmp.dao.mapper.bo.SgipSrcGsm" >
+    insert into sgip_src_gsm (src_name, template_id, servicetype, 
+      verifyid, phone, gsmcontent, 
+      flag, Priority, create_time
+      )
+    values (#{srcName,jdbcType=VARCHAR}, #{templateId,jdbcType=BIGINT}, #{servicetype,jdbcType=VARCHAR}, 
+      #{verifyid,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{gsmcontent,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.runner.center.mmp.dao.mapper.bo.SgipSrcGsm" >
+    insert into sgip_src_gsm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="srcName != null" >
+        src_name,
+      </if>
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="servicetype != null" >
+        servicetype,
+      </if>
+      <if test="verifyid != null" >
+        verifyid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="gsmcontent != null" >
+        gsmcontent,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="priority != null" >
+        Priority,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="srcName != null" >
+        #{srcName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=BIGINT},
+      </if>
+      <if test="servicetype != null" >
+        #{servicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyid != null" >
+        #{verifyid,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gsmcontent != null" >
+        #{gsmcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.runner.center.mmp.dao.mapper.bo.SgipSrcGsmCriteria" resultType="java.lang.Integer" >
+    select count(*) from sgip_src_gsm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sgip_src_gsm
+    <set >
+      <if test="record.srcName != null" >
+        src_name = #{record.srcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        template_id = #{record.templateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.servicetype != null" >
+        servicetype = #{record.servicetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifyid != null" >
+        verifyid = #{record.verifyid,jdbcType=BIGINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gsmcontent != null" >
+        gsmcontent = #{record.gsmcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.priority != null" >
+        Priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sgip_src_gsm
+    set src_name = #{record.srcName,jdbcType=VARCHAR},
+      template_id = #{record.templateId,jdbcType=BIGINT},
+      servicetype = #{record.servicetype,jdbcType=VARCHAR},
+      verifyid = #{record.verifyid,jdbcType=BIGINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      gsmcontent = #{record.gsmcontent,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=INTEGER},
+      Priority = #{record.priority,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

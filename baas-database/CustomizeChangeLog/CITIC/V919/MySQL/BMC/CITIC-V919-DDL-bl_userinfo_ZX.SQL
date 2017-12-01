@@ -1,0 +1,1 @@
+ALTER TABLE  `bl_userinfo_zx`  ADD COLUMN `PRODUCT_ID` varchar(1024) NULL ;

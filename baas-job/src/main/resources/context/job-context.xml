@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:task="http://www.springframework.org/schema/task" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+       http://www.springframework.org/schema/task    
+  	   http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+    
+    
+  <!--   <context:property-placeholder location="classpath:context/jdbc.properties"/>
+    
+    Mysql数据源
+    <bean id="mysqlDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${mysql.jdbc.driver}"/>
+        <property name="url" value="${mysql.jdbc.url}"/>
+        <property name="username" value="${mysql.jdbc.username}"/>
+        <property name="password" value="${mysql.jdbc.password}"/>
+        <property name="defaultAutoCommit" value="true" />
+    </bean>
+	<bean id="mysqlJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="mysqlDataSource" />
+	</bean> -->
+	<!--需要将定时任务的配置加载进来   -->
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
+		<constructor-arg name="dataSourceName" value="opt-bmc-db" />
+	</bean>
+	<bean id="seqDataSourceLoader"
+		class="com.ai.opt.sdk.components.sequence.datasource.SeqDataSourceLoader"
+		init-method="init">
+		<property name="ds" ref="dataSource" />
+	</bean>
+	<!-- 配置myBatis的sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:mybatis/mapper/job/*.xml" />
+	</bean>
+	<!-- 配置SqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<!-- 事务配置     -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+	</bean>
+	 <!-- 使用annotation注解方式配置事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+	 <!-- 启动注解扫描 -->
+    <context:annotation-config/>
+    <!-- 设定注解扫描基础包 -->
+    <context:component-scan base-package="com.ai.baas.job"/>
+    
+<!--     <task:executor id="executor" pool-size="5" />   -->
+<!--     <task:scheduler id="scheduler" pool-size="10" />   -->
+<!--     <task:annotation-driven executor="executor" scheduler="scheduler" />  -->
+    
+	 <bean id="priceStep" class="com.ai.baas.job.query.impl.PriceStepImpl">  
+	</bean>
+	<bean id="statictisSum" class="com.ai.baas.job.statictis.impl.StatictisSumImpl">  
+	</bean>
+	<bean id="insertStatic" class="com.ai.baas.job.thread.ThreadMain" />
+
+    <!-- Enables the Spring Task @Scheduled programming model -->  
+   
+
+</beans>

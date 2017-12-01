@@ -1,0 +1,54 @@
+{
+"apiVersion": "v1",
+"kind": "ReplicationController",
+"metadata":{
+    "name": "omc-rc",
+    "namespace": "unit-test"
+},
+"spec":{
+  "replicas": 1,
+  "selector":{
+        "app": "omc-pod"
+    },
+  "template":{
+    "metadata":{
+          "name": "omc",
+          "labels":{
+                "app": "omc-pod"
+            }
+     },
+    "spec":{
+      "containers":[{
+        "name": "omc",
+        "image": "biu-bj-baas-app3:5000/baas-omc:1.0",
+        "imagePullPolicy": "IfNotPresent",
+        "ports":[{
+             "containerPort": 10773
+          }],
+         "env":[{
+             "name": "REST_REGISTRY_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "REST_PORT",
+             "value":"30773"
+         },{
+             "name": "CONTEXT_PATH",
+             "value":"baas-omc"
+         },{
+             "name": "PROTOCOL",
+             "value":"rest"
+         },{
+             "name": "CCS_NAME",
+             "value":"aiopt-baas-omc"
+         },{
+             "name": "ZK_ADDR",
+             "value":"10.1.234.160:28381"
+         },{
+             "name": "SDK_MODE",
+             "value":"1"
+         }]
+        }]
+      }
+    }
+}
+}

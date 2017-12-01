@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "cust",
+    "namespace": "wocloud"
+  },
+  "spec": {
+      "ports": [{
+          "port": 10774,
+          "targetPort": 10774,
+          "nodePort":30774
+      }],
+      "selector": {
+           "app": "cust-pod"
+      },
+      "type":"NodePort"
+  }
+}

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.bmc.dao.interfaces.CiticDrRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.bmc.dao.mapper.bo.CiticDrRecord" >
+    <id column="row_key" property="rowKey" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="cust_id" property="custId" jdbcType="VARCHAR" />
+    <result column="subs_id" property="subsId" jdbcType="VARCHAR" />
+    <result column="acct_id" property="acctId" jdbcType="VARCHAR" />
+    <result column="service_id" property="serviceId" jdbcType="VARCHAR" />
+    <result column="instance_id" property="instanceId" jdbcType="VARCHAR" />
+    <result column="usage_amount" property="usageAmount" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="VARCHAR" />
+    <result column="record_type" property="recordType" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="service_type" property="serviceType" jdbcType="VARCHAR" />
+    <result column="bsn" property="bsn" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="account_period" property="accountPeriod" jdbcType="VARCHAR" />
+    <result column="fee1" property="fee1" jdbcType="VARCHAR" />
+    <result column="subject1" property="subject1" jdbcType="VARCHAR" />
+    <!-- <result column="product_id" property="productId" jdbcType="VARCHAR" /> -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    row_key, create_date, cust_id, subs_id, acct_id, service_id, instance_id, usage_amount, 
+    start_time, region_id, record_type, tenant_id, service_type, bsn, sn, account_period,
+    fee1, subject1
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.bmc.dao.mapper.bo.CiticDrRecordCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ${tableName}
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ${tableName}
+    where row_key = #{rowKey,jdbcType=VARCHAR}
+  </select>
+  <select id="countByExample" parameterType="com.ai.baas.bmc.dao.mapper.bo.CiticDrRecordCriteria" resultType="java.lang.Integer" >
+    select count(*) from ecitic_ecs_dr_201610
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="getTableNum" resultType="java.lang.Integer" parameterType="String" >
+    select count(1) from (
+    select TABLE_NAME from INFORMATION_SCHEMA.TABLES where
+    TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+    ) a
+  </select>
+</mapper>

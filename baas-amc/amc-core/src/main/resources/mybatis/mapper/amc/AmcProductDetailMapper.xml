@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.amc.dao.mapper.interfaces.AmcProductDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.amc.dao.mapper.bo.AmcProductDetail" >
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="PRIORITY" property="priority" jdbcType="VARCHAR" />
+    <result column="BILL_SUBJECT_ID" property="billSubjectId" jdbcType="VARCHAR" />
+    <result column="REF_SUBJECT_ID" property="refSubjectId" jdbcType="VARCHAR" />
+    <result column="NEW_SUBJECT_ID" property="newSubjectId" jdbcType="VARCHAR" />
+    <result column="CALC_CONDITION" property="calcCondition" jdbcType="VARCHAR" />
+    <result column="CALC_TYPE" property="calcType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TENANT_ID, PRODUCT_ID, PRIORITY, BILL_SUBJECT_ID, REF_SUBJECT_ID, NEW_SUBJECT_ID, 
+    CALC_CONDITION, CALC_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcProductDetailCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from amc_product_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcProductDetailCriteria" >
+    delete from amc_product_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcProductDetail" >
+    insert into amc_product_detail (TENANT_ID, PRODUCT_ID, PRIORITY, 
+      BILL_SUBJECT_ID, REF_SUBJECT_ID, NEW_SUBJECT_ID, 
+      CALC_CONDITION, CALC_TYPE)
+    values (#{tenantId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{priority,jdbcType=VARCHAR}, 
+      #{billSubjectId,jdbcType=VARCHAR}, #{refSubjectId,jdbcType=VARCHAR}, #{newSubjectId,jdbcType=VARCHAR}, 
+      #{calcCondition,jdbcType=VARCHAR}, #{calcType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcProductDetail" >
+    insert into amc_product_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="billSubjectId != null" >
+        BILL_SUBJECT_ID,
+      </if>
+      <if test="refSubjectId != null" >
+        REF_SUBJECT_ID,
+      </if>
+      <if test="newSubjectId != null" >
+        NEW_SUBJECT_ID,
+      </if>
+      <if test="calcCondition != null" >
+        CALC_CONDITION,
+      </if>
+      <if test="calcType != null" >
+        CALC_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="billSubjectId != null" >
+        #{billSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="refSubjectId != null" >
+        #{refSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="newSubjectId != null" >
+        #{newSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="calcCondition != null" >
+        #{calcCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="calcType != null" >
+        #{calcType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.amc.dao.mapper.bo.AmcProductDetailCriteria" resultType="java.lang.Integer" >
+    select count(*) from amc_product_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update amc_product_detail
+    <set >
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billSubjectId != null" >
+        BILL_SUBJECT_ID = #{record.billSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refSubjectId != null" >
+        REF_SUBJECT_ID = #{record.refSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newSubjectId != null" >
+        NEW_SUBJECT_ID = #{record.newSubjectId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calcCondition != null" >
+        CALC_CONDITION = #{record.calcCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calcType != null" >
+        CALC_TYPE = #{record.calcType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update amc_product_detail
+    set TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=VARCHAR},
+      BILL_SUBJECT_ID = #{record.billSubjectId,jdbcType=VARCHAR},
+      REF_SUBJECT_ID = #{record.refSubjectId,jdbcType=VARCHAR},
+      NEW_SUBJECT_ID = #{record.newSubjectId,jdbcType=VARCHAR},
+      CALC_CONDITION = #{record.calcCondition,jdbcType=VARCHAR},
+      CALC_TYPE = #{record.calcType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

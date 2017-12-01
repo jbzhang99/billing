@@ -1,0 +1,39 @@
+# Pull base image
+#FROM 10.1.234.164:5000/crontab:test2
+FROM centos:7
+MAINTAINER gucl<gucl@asiainfo.com>
+RUN yum install -y java-1.8.0-openjdk
+# deploy user dubbo service
+
+##set local time
+RUN cd /etc && rm -f localtime && ln -s  /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo "Etc/UTC+8" >/etc/timezone
+COPY ./build/libs /baas-batch-order-client/libs/
+COPY ./build/config /baas-batch-order-client/config/
+COPY ./TestDate.class /
+COPY ./clock /
+#mkdir logs path
+RUN cd /baas-batch-order-client && mkdir logs && cd /baas-batch-order-client/logs && mkdir opt-baas-logs
+
+## copy start script
+COPY ./script/baas-batch-order-client.sh /baas-batch-order-client.sh
+COPY ./script/batch.sh /batch.sh
+COPY ./script/batch-dubbo-start.sh /batch-dubbo-start.sh
+COPY ./script/setEnv.sh /setEnv.sh
+COPY ./script/baas-batch-amount-client.sh /baas-batch-amount-client.sh
+COPY ./script/batch-dubbo-start-docker.sh /batch-dubbo-start-docker.sh
+RUN chmod 755 /baas-batch-order-client.sh
+RUN chmod 755 /baas-batch-amount-client.sh
+RUN chmod 755 /batch.sh
+RUN chmod 755 /batch-dubbo-start.sh
+RUN chmod 755 /setEnv.sh
+RUN chmod 755 /batch-dubbo-start-docker.sh
+# set start parameter for dubbo service
+ENV COMMON_LIB_HOME /baas-batch-order-client
+
+# Expose ports.
+EXPOSE 11221
+
+# Define default command.
+WORKDIR /
+CMD service cron restart && ./batch-dubbo-start.sh start

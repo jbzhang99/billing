@@ -1,0 +1,4 @@
+#Dubbo Registry Cache
+#Tue Jul 05 14:02:15 CST 2016
+com.ai.baas.citic.uac.api.citicuser.interfaces.ILoginSV=empty\://192.168.0.1\:18881/citic-uac/com.ai.baas.citic.uac.api.citicuser.interfaces.ILoginSV?accepts\=500&anyhost\=true&application\=baas-citic-uac&category\=configurators&check\=false&dubbo\=2.8.3&generic\=false&interface\=com.ai.baas.citic.uac.api.citicuser.interfaces.ILoginSV&methods\=queryUserByUserName&pid\=12600&server\=tomcat&side\=provider&threads\=500&timestamp\=1467698534480
+com.ai.baas.citic.uac.api.citicuser.interfaces.IUserQuerySV=empty\://192.168.0.1\:18881/citic-uac/com.ai.baas.citic.uac.api.citicuser.interfaces.IUserQuerySV?accepts\=500&anyhost\=true&application\=baas-citic-uac&category\=configurators&check\=false&dubbo\=2.8.3&generic\=false&interface\=com.ai.baas.citic.uac.api.citicuser.interfaces.IUserQuerySV&methods\=queryBaseInfo&pid\=12600&server\=tomcat&side\=provider&threads\=500&timestamp\=1467698535589

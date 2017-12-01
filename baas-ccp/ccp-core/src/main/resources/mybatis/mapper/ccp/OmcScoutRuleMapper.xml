@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.ccp.dao.mapper.interfaces.OmcScoutRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.ccp.dao.mapper.bo.OmcScoutRule" >
+    <result column="rule_id" property="ruleId" jdbcType="BIGINT" />
+    <result column="policyId" property="policyid" jdbcType="BIGINT" />
+    <result column="scout_rule" property="scoutRule" jdbcType="VARCHAR" />
+    <result column="scout_type" property="scoutType" jdbcType="VARCHAR" />
+    <result column="balance_floor" property="balanceFloor" jdbcType="BIGINT" />
+    <result column="balance_ceil" property="balanceCeil" jdbcType="BIGINT" />
+    <result column="owe_maxdays" property="oweMaxdays" jdbcType="INTEGER" />
+    <result column="owe_mindays" property="oweMindays" jdbcType="INTEGER" />
+    <result column="charge_ceil" property="chargeCeil" jdbcType="BIGINT" />
+    <result column="charge_floor" property="chargeFloor" jdbcType="BIGINT" />
+    <result column="cust_type" property="custType" jdbcType="VARCHAR" />
+    <result column="acct_type" property="acctType" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="cust_level" property="custLevel" jdbcType="VARCHAR" />
+    <result column="tenant_id" property="tenantId" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+    <result column="section_type" property="sectionType" jdbcType="VARCHAR" />
+    <result column="rule_type" property="ruleType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rule_id, policyId, scout_rule, scout_type, balance_floor, balance_ceil, owe_maxdays, 
+    owe_mindays, charge_ceil, charge_floor, cust_type, acct_type, user_type, cust_level, 
+    tenant_id, system_id, section_type, rule_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutRuleCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from omc_scout_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutRuleCriteria" >
+    delete from omc_scout_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutRule" >
+    insert into omc_scout_rule (rule_id, policyId, scout_rule, 
+      scout_type, balance_floor, balance_ceil, 
+      owe_maxdays, owe_mindays, charge_ceil, 
+      charge_floor, cust_type, acct_type, 
+      user_type, cust_level, tenant_id, 
+      system_id, section_type, rule_type
+      )
+    values (#{ruleId,jdbcType=BIGINT}, #{policyid,jdbcType=BIGINT}, #{scoutRule,jdbcType=VARCHAR}, 
+      #{scoutType,jdbcType=VARCHAR}, #{balanceFloor,jdbcType=BIGINT}, #{balanceCeil,jdbcType=BIGINT}, 
+      #{oweMaxdays,jdbcType=INTEGER}, #{oweMindays,jdbcType=INTEGER}, #{chargeCeil,jdbcType=BIGINT}, 
+      #{chargeFloor,jdbcType=BIGINT}, #{custType,jdbcType=VARCHAR}, #{acctType,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{custLevel,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}, 
+      #{systemId,jdbcType=VARCHAR}, #{sectionType,jdbcType=VARCHAR}, #{ruleType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutRule" >
+    insert into omc_scout_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ruleId != null" >
+        rule_id,
+      </if>
+      <if test="policyid != null" >
+        policyId,
+      </if>
+      <if test="scoutRule != null" >
+        scout_rule,
+      </if>
+      <if test="scoutType != null" >
+        scout_type,
+      </if>
+      <if test="balanceFloor != null" >
+        balance_floor,
+      </if>
+      <if test="balanceCeil != null" >
+        balance_ceil,
+      </if>
+      <if test="oweMaxdays != null" >
+        owe_maxdays,
+      </if>
+      <if test="oweMindays != null" >
+        owe_mindays,
+      </if>
+      <if test="chargeCeil != null" >
+        charge_ceil,
+      </if>
+      <if test="chargeFloor != null" >
+        charge_floor,
+      </if>
+      <if test="custType != null" >
+        cust_type,
+      </if>
+      <if test="acctType != null" >
+        acct_type,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="custLevel != null" >
+        cust_level,
+      </if>
+      <if test="tenantId != null" >
+        tenant_id,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="sectionType != null" >
+        section_type,
+      </if>
+      <if test="ruleType != null" >
+        rule_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ruleId != null" >
+        #{ruleId,jdbcType=BIGINT},
+      </if>
+      <if test="policyid != null" >
+        #{policyid,jdbcType=BIGINT},
+      </if>
+      <if test="scoutRule != null" >
+        #{scoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="scoutType != null" >
+        #{scoutType,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceFloor != null" >
+        #{balanceFloor,jdbcType=BIGINT},
+      </if>
+      <if test="balanceCeil != null" >
+        #{balanceCeil,jdbcType=BIGINT},
+      </if>
+      <if test="oweMaxdays != null" >
+        #{oweMaxdays,jdbcType=INTEGER},
+      </if>
+      <if test="oweMindays != null" >
+        #{oweMindays,jdbcType=INTEGER},
+      </if>
+      <if test="chargeCeil != null" >
+        #{chargeCeil,jdbcType=BIGINT},
+      </if>
+      <if test="chargeFloor != null" >
+        #{chargeFloor,jdbcType=BIGINT},
+      </if>
+      <if test="custType != null" >
+        #{custType,jdbcType=VARCHAR},
+      </if>
+      <if test="acctType != null" >
+        #{acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="custLevel != null" >
+        #{custLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionType != null" >
+        #{sectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleType != null" >
+        #{ruleType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.ccp.dao.mapper.bo.OmcScoutRuleCriteria" resultType="java.lang.Integer" >
+    select count(*) from omc_scout_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update omc_scout_rule
+    <set >
+      <if test="record.ruleId != null" >
+        rule_id = #{record.ruleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.policyid != null" >
+        policyId = #{record.policyid,jdbcType=BIGINT},
+      </if>
+      <if test="record.scoutRule != null" >
+        scout_rule = #{record.scoutRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoutType != null" >
+        scout_type = #{record.scoutType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balanceFloor != null" >
+        balance_floor = #{record.balanceFloor,jdbcType=BIGINT},
+      </if>
+      <if test="record.balanceCeil != null" >
+        balance_ceil = #{record.balanceCeil,jdbcType=BIGINT},
+      </if>
+      <if test="record.oweMaxdays != null" >
+        owe_maxdays = #{record.oweMaxdays,jdbcType=INTEGER},
+      </if>
+      <if test="record.oweMindays != null" >
+        owe_mindays = #{record.oweMindays,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeCeil != null" >
+        charge_ceil = #{record.chargeCeil,jdbcType=BIGINT},
+      </if>
+      <if test="record.chargeFloor != null" >
+        charge_floor = #{record.chargeFloor,jdbcType=BIGINT},
+      </if>
+      <if test="record.custType != null" >
+        cust_type = #{record.custType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctType != null" >
+        acct_type = #{record.acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custLevel != null" >
+        cust_level = #{record.custLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null" >
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemId != null" >
+        system_id = #{record.systemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sectionType != null" >
+        section_type = #{record.sectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleType != null" >
+        rule_type = #{record.ruleType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update omc_scout_rule
+    set rule_id = #{record.ruleId,jdbcType=BIGINT},
+      policyId = #{record.policyid,jdbcType=BIGINT},
+      scout_rule = #{record.scoutRule,jdbcType=VARCHAR},
+      scout_type = #{record.scoutType,jdbcType=VARCHAR},
+      balance_floor = #{record.balanceFloor,jdbcType=BIGINT},
+      balance_ceil = #{record.balanceCeil,jdbcType=BIGINT},
+      owe_maxdays = #{record.oweMaxdays,jdbcType=INTEGER},
+      owe_mindays = #{record.oweMindays,jdbcType=INTEGER},
+      charge_ceil = #{record.chargeCeil,jdbcType=BIGINT},
+      charge_floor = #{record.chargeFloor,jdbcType=BIGINT},
+      cust_type = #{record.custType,jdbcType=VARCHAR},
+      acct_type = #{record.acctType,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      cust_level = #{record.custLevel,jdbcType=VARCHAR},
+      tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      system_id = #{record.systemId,jdbcType=VARCHAR},
+      section_type = #{record.sectionType,jdbcType=VARCHAR},
+      rule_type = #{record.ruleType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pay-web",
+    "namespace": "unit-test"
+  },
+  "spec": {
+      "ports": [{
+          "port": 14110,
+          "targetPort": 8080,
+          "nodePort":34110
+      }],
+      "selector": {
+           "app": "pay-web-pod"
+      },
+      "type":"NodePort"
+  }
+}

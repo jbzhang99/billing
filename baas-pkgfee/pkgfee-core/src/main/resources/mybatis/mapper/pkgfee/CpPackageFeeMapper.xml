@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.pkgfee.dao.mapper.interfaces.CpPackageFeeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" >
+    <id column="PACKAGE_ID" property="packageId" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="PRICE_CODE" property="priceCode" jdbcType="VARCHAR" />
+    <result column="PRICE_VALUE" property="priceValue" jdbcType="DOUBLE" />
+    <result column="ACTIVE_TIME" property="activeTime" jdbcType="TIMESTAMP" />
+    <result column="INACTIVE_TIME" property="inactiveTime" jdbcType="TIMESTAMP" />
+    <result column="PURCHASE_NUM" property="purchaseNum" jdbcType="VARCHAR" />
+    <result column="PURCHASE_UNIT" property="purchaseUnit" jdbcType="CHAR" />
+    <result column="CYCLE_TYPE" property="cycleType" jdbcType="VARCHAR" />
+    <result column="CYCLE_INTERVAL" property="cycleInterval" jdbcType="BIGINT" />
+    <result column="CAL_EXPR" property="calExpr" jdbcType="VARCHAR" />
+    <result column="FACTOR_CODE" property="factorCode" jdbcType="VARCHAR" />
+    <result column="EXT_CODE" property="extCode" jdbcType="VARCHAR" />
+    <result column="SUBJECT_CODE" property="subjectCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TYPE" property="createType" jdbcType="TIMESTAMP" />
+    <result column="AUTO_RENEW" property="autoRenew" jdbcType="CHAR" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="DEDUCT_MODE" property="deductMode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" extends="BaseResultMap" >
+    <result column="FEE_LIST" property="feeList" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PACKAGE_ID, TENANT_ID, PRICE_CODE, PRICE_VALUE, ACTIVE_TIME, INACTIVE_TIME, PURCHASE_NUM, 
+    PURCHASE_UNIT, CYCLE_TYPE, CYCLE_INTERVAL, CAL_EXPR, FACTOR_CODE, EXT_CODE, SUBJECT_CODE, 
+    CREATE_TYPE, AUTO_RENEW, UPDATE_DATE, DEDUCT_MODE
+  </sql>
+  <sql id="Blob_Column_List" >
+    FEE_LIST
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFeeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cp_package_fee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFeeCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cp_package_fee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cp_package_fee
+    where PACKAGE_ID = #{packageId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from cp_package_fee
+    where PACKAGE_ID = #{packageId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFeeCriteria" >
+    delete from cp_package_fee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" >
+    insert into cp_package_fee (PACKAGE_ID, TENANT_ID, PRICE_CODE, 
+      PRICE_VALUE, ACTIVE_TIME, INACTIVE_TIME, 
+      PURCHASE_NUM, PURCHASE_UNIT, CYCLE_TYPE, 
+      CYCLE_INTERVAL, CAL_EXPR, FACTOR_CODE, 
+      EXT_CODE, SUBJECT_CODE, CREATE_TYPE, 
+      AUTO_RENEW, UPDATE_DATE, DEDUCT_MODE, 
+      FEE_LIST)
+    values (#{packageId,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{priceCode,jdbcType=VARCHAR}, 
+      #{priceValue,jdbcType=DOUBLE}, #{activeTime,jdbcType=TIMESTAMP}, #{inactiveTime,jdbcType=TIMESTAMP}, 
+      #{purchaseNum,jdbcType=VARCHAR}, #{purchaseUnit,jdbcType=CHAR}, #{cycleType,jdbcType=VARCHAR}, 
+      #{cycleInterval,jdbcType=BIGINT}, #{calExpr,jdbcType=VARCHAR}, #{factorCode,jdbcType=VARCHAR}, 
+      #{extCode,jdbcType=VARCHAR}, #{subjectCode,jdbcType=VARCHAR}, #{createType,jdbcType=TIMESTAMP}, 
+      #{autoRenew,jdbcType=CHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{deductMode,jdbcType=VARCHAR}, 
+      #{feeList,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" >
+    insert into cp_package_fee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="packageId != null" >
+        PACKAGE_ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="priceCode != null" >
+        PRICE_CODE,
+      </if>
+      <if test="priceValue != null" >
+        PRICE_VALUE,
+      </if>
+      <if test="activeTime != null" >
+        ACTIVE_TIME,
+      </if>
+      <if test="inactiveTime != null" >
+        INACTIVE_TIME,
+      </if>
+      <if test="purchaseNum != null" >
+        PURCHASE_NUM,
+      </if>
+      <if test="purchaseUnit != null" >
+        PURCHASE_UNIT,
+      </if>
+      <if test="cycleType != null" >
+        CYCLE_TYPE,
+      </if>
+      <if test="cycleInterval != null" >
+        CYCLE_INTERVAL,
+      </if>
+      <if test="calExpr != null" >
+        CAL_EXPR,
+      </if>
+      <if test="factorCode != null" >
+        FACTOR_CODE,
+      </if>
+      <if test="extCode != null" >
+        EXT_CODE,
+      </if>
+      <if test="subjectCode != null" >
+        SUBJECT_CODE,
+      </if>
+      <if test="createType != null" >
+        CREATE_TYPE,
+      </if>
+      <if test="autoRenew != null" >
+        AUTO_RENEW,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="deductMode != null" >
+        DEDUCT_MODE,
+      </if>
+      <if test="feeList != null" >
+        FEE_LIST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="packageId != null" >
+        #{packageId,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCode != null" >
+        #{priceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceValue != null" >
+        #{priceValue,jdbcType=DOUBLE},
+      </if>
+      <if test="activeTime != null" >
+        #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inactiveTime != null" >
+        #{inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseNum != null" >
+        #{purchaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseUnit != null" >
+        #{purchaseUnit,jdbcType=CHAR},
+      </if>
+      <if test="cycleType != null" >
+        #{cycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleInterval != null" >
+        #{cycleInterval,jdbcType=BIGINT},
+      </if>
+      <if test="calExpr != null" >
+        #{calExpr,jdbcType=VARCHAR},
+      </if>
+      <if test="factorCode != null" >
+        #{factorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="extCode != null" >
+        #{extCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null" >
+        #{createType,jdbcType=TIMESTAMP},
+      </if>
+      <if test="autoRenew != null" >
+        #{autoRenew,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deductMode != null" >
+        #{deductMode,jdbcType=VARCHAR},
+      </if>
+      <if test="feeList != null" >
+        #{feeList,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFeeCriteria" resultType="java.lang.Integer" >
+    select count(*) from cp_package_fee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cp_package_fee
+    <set >
+      <if test="record.packageId != null" >
+        PACKAGE_ID = #{record.packageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceCode != null" >
+        PRICE_CODE = #{record.priceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceValue != null" >
+        PRICE_VALUE = #{record.priceValue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.activeTime != null" >
+        ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inactiveTime != null" >
+        INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.purchaseNum != null" >
+        PURCHASE_NUM = #{record.purchaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseUnit != null" >
+        PURCHASE_UNIT = #{record.purchaseUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.cycleType != null" >
+        CYCLE_TYPE = #{record.cycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cycleInterval != null" >
+        CYCLE_INTERVAL = #{record.cycleInterval,jdbcType=BIGINT},
+      </if>
+      <if test="record.calExpr != null" >
+        CAL_EXPR = #{record.calExpr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factorCode != null" >
+        FACTOR_CODE = #{record.factorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extCode != null" >
+        EXT_CODE = #{record.extCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectCode != null" >
+        SUBJECT_CODE = #{record.subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createType != null" >
+        CREATE_TYPE = #{record.createType,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.autoRenew != null" >
+        AUTO_RENEW = #{record.autoRenew,jdbcType=CHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deductMode != null" >
+        DEDUCT_MODE = #{record.deductMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeList != null" >
+        FEE_LIST = #{record.feeList,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cp_package_fee
+    set PACKAGE_ID = #{record.packageId,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      PRICE_CODE = #{record.priceCode,jdbcType=VARCHAR},
+      PRICE_VALUE = #{record.priceValue,jdbcType=DOUBLE},
+      ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      PURCHASE_NUM = #{record.purchaseNum,jdbcType=VARCHAR},
+      PURCHASE_UNIT = #{record.purchaseUnit,jdbcType=CHAR},
+      CYCLE_TYPE = #{record.cycleType,jdbcType=VARCHAR},
+      CYCLE_INTERVAL = #{record.cycleInterval,jdbcType=BIGINT},
+      CAL_EXPR = #{record.calExpr,jdbcType=VARCHAR},
+      FACTOR_CODE = #{record.factorCode,jdbcType=VARCHAR},
+      EXT_CODE = #{record.extCode,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{record.subjectCode,jdbcType=VARCHAR},
+      CREATE_TYPE = #{record.createType,jdbcType=TIMESTAMP},
+      AUTO_RENEW = #{record.autoRenew,jdbcType=CHAR},
+      UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+      DEDUCT_MODE = #{record.deductMode,jdbcType=VARCHAR},
+      FEE_LIST = #{record.feeList,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cp_package_fee
+    set PACKAGE_ID = #{record.packageId,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      PRICE_CODE = #{record.priceCode,jdbcType=VARCHAR},
+      PRICE_VALUE = #{record.priceValue,jdbcType=DOUBLE},
+      ACTIVE_TIME = #{record.activeTime,jdbcType=TIMESTAMP},
+      INACTIVE_TIME = #{record.inactiveTime,jdbcType=TIMESTAMP},
+      PURCHASE_NUM = #{record.purchaseNum,jdbcType=VARCHAR},
+      PURCHASE_UNIT = #{record.purchaseUnit,jdbcType=CHAR},
+      CYCLE_TYPE = #{record.cycleType,jdbcType=VARCHAR},
+      CYCLE_INTERVAL = #{record.cycleInterval,jdbcType=BIGINT},
+      CAL_EXPR = #{record.calExpr,jdbcType=VARCHAR},
+      FACTOR_CODE = #{record.factorCode,jdbcType=VARCHAR},
+      EXT_CODE = #{record.extCode,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{record.subjectCode,jdbcType=VARCHAR},
+      CREATE_TYPE = #{record.createType,jdbcType=TIMESTAMP},
+      AUTO_RENEW = #{record.autoRenew,jdbcType=CHAR},
+      UPDATE_DATE = #{record.updateDate,jdbcType=TIMESTAMP},
+      DEDUCT_MODE = #{record.deductMode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" >
+    update cp_package_fee
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="priceCode != null" >
+        PRICE_CODE = #{priceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priceValue != null" >
+        PRICE_VALUE = #{priceValue,jdbcType=DOUBLE},
+      </if>
+      <if test="activeTime != null" >
+        ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inactiveTime != null" >
+        INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purchaseNum != null" >
+        PURCHASE_NUM = #{purchaseNum,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseUnit != null" >
+        PURCHASE_UNIT = #{purchaseUnit,jdbcType=CHAR},
+      </if>
+      <if test="cycleType != null" >
+        CYCLE_TYPE = #{cycleType,jdbcType=VARCHAR},
+      </if>
+      <if test="cycleInterval != null" >
+        CYCLE_INTERVAL = #{cycleInterval,jdbcType=BIGINT},
+      </if>
+      <if test="calExpr != null" >
+        CAL_EXPR = #{calExpr,jdbcType=VARCHAR},
+      </if>
+      <if test="factorCode != null" >
+        FACTOR_CODE = #{factorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="extCode != null" >
+        EXT_CODE = #{extCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createType != null" >
+        CREATE_TYPE = #{createType,jdbcType=TIMESTAMP},
+      </if>
+      <if test="autoRenew != null" >
+        AUTO_RENEW = #{autoRenew,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deductMode != null" >
+        DEDUCT_MODE = #{deductMode,jdbcType=VARCHAR},
+      </if>
+      <if test="feeList != null" >
+        FEE_LIST = #{feeList,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PACKAGE_ID = #{packageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" >
+    update cp_package_fee
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      PRICE_CODE = #{priceCode,jdbcType=VARCHAR},
+      PRICE_VALUE = #{priceValue,jdbcType=DOUBLE},
+      ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      PURCHASE_NUM = #{purchaseNum,jdbcType=VARCHAR},
+      PURCHASE_UNIT = #{purchaseUnit,jdbcType=CHAR},
+      CYCLE_TYPE = #{cycleType,jdbcType=VARCHAR},
+      CYCLE_INTERVAL = #{cycleInterval,jdbcType=BIGINT},
+      CAL_EXPR = #{calExpr,jdbcType=VARCHAR},
+      FACTOR_CODE = #{factorCode,jdbcType=VARCHAR},
+      EXT_CODE = #{extCode,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR},
+      CREATE_TYPE = #{createType,jdbcType=TIMESTAMP},
+      AUTO_RENEW = #{autoRenew,jdbcType=CHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      DEDUCT_MODE = #{deductMode,jdbcType=VARCHAR},
+      FEE_LIST = #{feeList,jdbcType=LONGVARCHAR}
+    where PACKAGE_ID = #{packageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.pkgfee.dao.mapper.bo.CpPackageFee" >
+    update cp_package_fee
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      PRICE_CODE = #{priceCode,jdbcType=VARCHAR},
+      PRICE_VALUE = #{priceValue,jdbcType=DOUBLE},
+      ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+      INACTIVE_TIME = #{inactiveTime,jdbcType=TIMESTAMP},
+      PURCHASE_NUM = #{purchaseNum,jdbcType=VARCHAR},
+      PURCHASE_UNIT = #{purchaseUnit,jdbcType=CHAR},
+      CYCLE_TYPE = #{cycleType,jdbcType=VARCHAR},
+      CYCLE_INTERVAL = #{cycleInterval,jdbcType=BIGINT},
+      CAL_EXPR = #{calExpr,jdbcType=VARCHAR},
+      FACTOR_CODE = #{factorCode,jdbcType=VARCHAR},
+      EXT_CODE = #{extCode,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR},
+      CREATE_TYPE = #{createType,jdbcType=TIMESTAMP},
+      AUTO_RENEW = #{autoRenew,jdbcType=CHAR},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      DEDUCT_MODE = #{deductMode,jdbcType=VARCHAR}
+    where PACKAGE_ID = #{packageId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.baas.prd.dao.mapper.interfaces.PmCatalogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <result column="MAIN_PRODUCT_ID" property="mainProductId" jdbcType="VARCHAR" />
+    <result column="MAIN_PRODUCT_NAME" property="mainProductName" jdbcType="VARCHAR" />
+    <result column="CATEGORY_ID" property="categoryId" jdbcType="VARCHAR" />
+    <result column="BILLING_CYCLE" property="billingCycle" jdbcType="VARCHAR" />
+    <result column="SPEC_TYPE_NAME" property="specTypeName" jdbcType="VARCHAR" />
+    <result column="SPEC_TYPE_ID" property="specTypeId" jdbcType="VARCHAR" />
+    <result column="SPEC_DETAIL_ID" property="specDetailId" jdbcType="VARCHAR" />
+    <result column="PRICE_POLICY" property="pricePolicy" jdbcType="VARCHAR" />
+    <result column="TRADE_CODE" property="tradeCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TENANT_ID, MAIN_PRODUCT_ID, MAIN_PRODUCT_NAME, CATEGORY_ID, BILLING_CYCLE, SPEC_TYPE_NAME, 
+    SPEC_TYPE_ID, SPEC_DETAIL_ID, PRICE_POLICY, TRADE_CODE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pm_catalog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pm_catalog_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from pm_catalog_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfoCriteria" >
+    delete from pm_catalog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfo" >
+    insert into pm_catalog_info (ID, TENANT_ID, MAIN_PRODUCT_ID, 
+      MAIN_PRODUCT_NAME, CATEGORY_ID, BILLING_CYCLE, 
+      SPEC_TYPE_NAME, SPEC_TYPE_ID, SPEC_DETAIL_ID, 
+      PRICE_POLICY, TRADE_CODE)
+    values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=VARCHAR}, #{mainProductId,jdbcType=VARCHAR}, 
+      #{mainProductName,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, #{billingCycle,jdbcType=VARCHAR}, 
+      #{specTypeName,jdbcType=VARCHAR}, #{specTypeId,jdbcType=VARCHAR}, #{specDetailId,jdbcType=VARCHAR}, 
+      #{pricePolicy,jdbcType=VARCHAR}, #{tradeCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfo" >
+    insert into pm_catalog_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="mainProductId != null" >
+        MAIN_PRODUCT_ID,
+      </if>
+      <if test="mainProductName != null" >
+        MAIN_PRODUCT_NAME,
+      </if>
+      <if test="categoryId != null" >
+        CATEGORY_ID,
+      </if>
+      <if test="billingCycle != null" >
+        BILLING_CYCLE,
+      </if>
+      <if test="specTypeName != null" >
+        SPEC_TYPE_NAME,
+      </if>
+      <if test="specTypeId != null" >
+        SPEC_TYPE_ID,
+      </if>
+      <if test="specDetailId != null" >
+        SPEC_DETAIL_ID,
+      </if>
+      <if test="pricePolicy != null" >
+        PRICE_POLICY,
+      </if>
+      <if test="tradeCode != null" >
+        TRADE_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProductId != null" >
+        #{mainProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProductName != null" >
+        #{mainProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="billingCycle != null" >
+        #{billingCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="specTypeName != null" >
+        #{specTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="specTypeId != null" >
+        #{specTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specDetailId != null" >
+        #{specDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePolicy != null" >
+        #{pricePolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeCode != null" >
+        #{tradeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from pm_catalog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pm_catalog_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainProductId != null" >
+        MAIN_PRODUCT_ID = #{record.mainProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainProductName != null" >
+        MAIN_PRODUCT_NAME = #{record.mainProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null" >
+        CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billingCycle != null" >
+        BILLING_CYCLE = #{record.billingCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specTypeName != null" >
+        SPEC_TYPE_NAME = #{record.specTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specTypeId != null" >
+        SPEC_TYPE_ID = #{record.specTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specDetailId != null" >
+        SPEC_DETAIL_ID = #{record.specDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pricePolicy != null" >
+        PRICE_POLICY = #{record.pricePolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeCode != null" >
+        TRADE_CODE = #{record.tradeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pm_catalog_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      MAIN_PRODUCT_ID = #{record.mainProductId,jdbcType=VARCHAR},
+      MAIN_PRODUCT_NAME = #{record.mainProductName,jdbcType=VARCHAR},
+      CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      BILLING_CYCLE = #{record.billingCycle,jdbcType=VARCHAR},
+      SPEC_TYPE_NAME = #{record.specTypeName,jdbcType=VARCHAR},
+      SPEC_TYPE_ID = #{record.specTypeId,jdbcType=VARCHAR},
+      SPEC_DETAIL_ID = #{record.specDetailId,jdbcType=VARCHAR},
+      PRICE_POLICY = #{record.pricePolicy,jdbcType=VARCHAR},
+      TRADE_CODE = #{record.tradeCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfo" >
+    update pm_catalog_info
+    <set >
+      <if test="tenantId != null" >
+        TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProductId != null" >
+        MAIN_PRODUCT_ID = #{mainProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProductName != null" >
+        MAIN_PRODUCT_NAME = #{mainProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null" >
+        CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="billingCycle != null" >
+        BILLING_CYCLE = #{billingCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="specTypeName != null" >
+        SPEC_TYPE_NAME = #{specTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="specTypeId != null" >
+        SPEC_TYPE_ID = #{specTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="specDetailId != null" >
+        SPEC_DETAIL_ID = #{specDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePolicy != null" >
+        PRICE_POLICY = #{pricePolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeCode != null" >
+        TRADE_CODE = #{tradeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfo" >
+    update pm_catalog_info
+    set TENANT_ID = #{tenantId,jdbcType=VARCHAR},
+      MAIN_PRODUCT_ID = #{mainProductId,jdbcType=VARCHAR},
+      MAIN_PRODUCT_NAME = #{mainProductName,jdbcType=VARCHAR},
+      CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      BILLING_CYCLE = #{billingCycle,jdbcType=VARCHAR},
+      SPEC_TYPE_NAME = #{specTypeName,jdbcType=VARCHAR},
+      SPEC_TYPE_ID = #{specTypeId,jdbcType=VARCHAR},
+      SPEC_DETAIL_ID = #{specDetailId,jdbcType=VARCHAR},
+      PRICE_POLICY = #{pricePolicy,jdbcType=VARCHAR},
+      TRADE_CODE = #{tradeCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getAllSpecByTradeType" resultMap="BaseResultMap" parameterType="com.ai.baas.prd.dao.mapper.bo.PmCatalogInfoCriteria" >
+    select
+    <include refid="Base_Column_List" />
+    from pm_catalog_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    GROUP BY TENANT_ID,SPEC_TYPE_ID
+  </select>
+</mapper>
